@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\SeanceRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -23,6 +25,17 @@ class Seance
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date = null;
+
+    /**
+     * @var Collection<int, ExosMusculation>
+     */
+    #[ORM\OneToMany(targetEntity: ExosMusculation::class, mappedBy: 'seance', orphanRemoval: true)]
+    private Collection $exosMusculations;
+
+    public function __construct()
+    {
+        $this->exosMusculations = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -61,6 +74,36 @@ class Seance
     public function setDate(\DateTimeInterface $date): static
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ExosMusculation>
+     */
+    public function getExosMusculations(): Collection
+    {
+        return $this->exosMusculations;
+    }
+
+    public function addExosMusculation(ExosMusculation $exosMusculation): static
+    {
+        if (!$this->exosMusculations->contains($exosMusculation)) {
+            $this->exosMusculations->add($exosMusculation);
+            $exosMusculation->setSeance($this);
+        }
+
+        return $this;
+    }
+
+    public function removeExosMusculation(ExosMusculation $exosMusculation): static
+    {
+        if ($this->exosMusculations->removeElement($exosMusculation)) {
+            // set the owning side to null (unless already changed)
+            if ($exosMusculation->getSeance() === $this) {
+                $exosMusculation->setSeance(null);
+            }
+        }
 
         return $this;
     }
