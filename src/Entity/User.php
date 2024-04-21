@@ -51,10 +51,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Seance::class, mappedBy: 'user', orphanRemoval: true)]
     private Collection $seances;
 
+    /**
+     * @var Collection<int, Sujet>
+     */
+    #[ORM\OneToMany(targetEntity: Sujet::class, mappedBy: 'user', orphanRemoval: true)]
+    private Collection $sujets;
+
     public function __construct()
     {
         $this->evaluations = new ArrayCollection();
         $this->seances = new ArrayCollection();
+        $this->sujets = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -210,6 +217,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($seance->getUser() === $this) {
                 $seance->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Sujet>
+     */
+    public function getSujets(): Collection
+    {
+        return $this->sujets;
+    }
+
+    public function addSujet(Sujet $sujet): static
+    {
+        if (!$this->sujets->contains($sujet)) {
+            $this->sujets->add($sujet);
+            $sujet->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSujet(Sujet $sujet): static
+    {
+        if ($this->sujets->removeElement($sujet)) {
+            // set the owning side to null (unless already changed)
+            if ($sujet->getUser() === $this) {
+                $sujet->setUser(null);
             }
         }
 
