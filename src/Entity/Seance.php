@@ -32,9 +32,16 @@ class Seance
     #[ORM\OneToMany(targetEntity: ExosMusculation::class, mappedBy: 'seance', orphanRemoval: true)]
     private Collection $exosMusculations;
 
+    /**
+     * @var Collection<int, ExosCardio>
+     */
+    #[ORM\OneToMany(targetEntity: ExosCardio::class, mappedBy: 'seances', orphanRemoval: true)]
+    private Collection $exosCardios;
+
     public function __construct()
     {
         $this->exosMusculations = new ArrayCollection();
+        $this->exosCardios = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -102,6 +109,36 @@ class Seance
             // set the owning side to null (unless already changed)
             if ($exosMusculation->getSeance() === $this) {
                 $exosMusculation->setSeance(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ExosCardio>
+     */
+    public function getExosCardios(): Collection
+    {
+        return $this->exosCardios;
+    }
+
+    public function addExosCardio(ExosCardio $exosCardio): static
+    {
+        if (!$this->exosCardios->contains($exosCardio)) {
+            $this->exosCardios->add($exosCardio);
+            $exosCardio->setSeances($this);
+        }
+
+        return $this;
+    }
+
+    public function removeExosCardio(ExosCardio $exosCardio): static
+    {
+        if ($this->exosCardios->removeElement($exosCardio)) {
+            // set the owning side to null (unless already changed)
+            if ($exosCardio->getSeances() === $this) {
+                $exosCardio->setSeances(null);
             }
         }
 
