@@ -14,8 +14,15 @@ import 'bootstrap/dist/js/bootstrap.bundle';
 // Gestion Menu Burger
 const menuBurger = document.querySelector('#burger')
 const header = document.querySelector('header')
+const menu = document.querySelector('#menu')
+const menuA = document.querySelectorAll('#menu a')
 
 menuBurger.addEventListener('click',()=>{
     header.classList.toggle('menuOpened')
+    menu.classList.toggle('menuOpened')
+})
+
+menuA.forEach(()=>{
+    menu.classList.remove('menuOpened')
 })
 

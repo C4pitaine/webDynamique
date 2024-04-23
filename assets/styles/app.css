@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 /* Header */
-header,footer{
+header{
     width:100%;
-    min-height:100px;
+    height:100px;
     background-color: #000000;
 }
 
@@ -81,6 +81,10 @@ header div nav ul li ul li a{
     line-height: 80px;
 }
 
+header nav a:hover{
+    color: #EE2525;
+}
+
 /* Menu Burger */
 #burger{
     width: 50px;
@@ -111,6 +115,12 @@ header.menuOpened .bar:last-child{
 
 
 /* Footer */
+footer{
+    width:100%;
+    min-height:100px;
+    background-color: #000000;
+}
+
 .footerContainer{
     justify-content: space-between;
 }
@@ -130,6 +140,10 @@ header.menuOpened .bar:last-child{
     margin: 0 10px;
 }
 
+.footerContainer a:hover{
+    color: #EE2525;
+}
+
 .footerContainer div a{
     text-decoration: none;
 }
@@ -138,6 +152,40 @@ header.menuOpened .bar:last-child{
     margin: 0 10px;
     font-size: 2.5rem;
     line-height: 100px;
+}
+
+/* Slide */
+.slide{
+    min-height:100vh;
+    background-color: #1A1717;
+    width: 100%;
+}
+
+/* Menu */
+#menu{
+    background-color: rgba(0, 0, 0,50%);
+    position: absolute;
+    display: none;
+}
+
+#menu.menuOpened{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#menu a{
+    text-decoration: none;
+    color: white;
+    font-size: 24px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+#menu a:hover{
+    color: #EE2525;
 }
 
 /* Media queries */
@@ -155,6 +203,9 @@ header.menuOpened .bar:last-child{
     }
     nav ul{
         display: none !important; 
+    }
+    footer img{
+        margin-top: 20px;
     }
     .footerContainer{
         flex-direction: column;
