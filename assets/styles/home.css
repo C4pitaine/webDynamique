@@ -100,3 +100,19 @@
 #home .scrollTop i{
     color: white;
 }
+
+/* MediaQueries */
+
+@media all and (max-width:800px){
+    #home .wrapper{
+        flex-direction: column;
+    }
+    #home .wrapper #homeD{
+        width:100%;
+        order:1;
+    }
+    #home .wrapper #homeG{
+        width:100%;
+        order:2;
+    }
+}
