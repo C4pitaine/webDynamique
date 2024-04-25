@@ -3,7 +3,25 @@
 {% block title %}Accueil{% endblock %}
 
 {% block body %}
-    <div class="slide">
-        
+    <div class="slide" id="home">
+        <div class="wrapper">
+            <div id="homeG">
+                <h2>Force.</h2>
+                <h3>Détermination.</h2>
+                <h4>Progression.</h2>
+                <h5>Chaque séance,</h3>
+                <h6>vous rapproche de vos objectifs.</h6>
+                <button><a href="">Contactez-moi</a></button>
+            </div>
+            <div id="homeD"></div>
+        </div>
+        <div class="scrollTop">
+            <i class="fa-solid fa-chevron-up"></i>
+            <i class="fa-solid fa-chevron-up"></i>
+        </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('home') }}
 {% endblock %}

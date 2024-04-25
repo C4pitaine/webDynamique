@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
+
 /* Header */
 header{
     width:100%;
@@ -50,7 +51,7 @@ header div nav ul li a{
 
 header div nav ul li #iconUser{
     color:white;
-    line-height: 80px;
+    line-height: 100px;
     font-size: 1.6rem;
 }
 

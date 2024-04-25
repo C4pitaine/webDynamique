@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+/* Slide Homme accueil */ 
+
+#home{
+    position: relative;
+}
+
+#home .wrapper{
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+}
+
+/* côté gauche */
+
+#home .wrapper #homeG{
+    width:50%;
+    min-height:100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#home .wrapper #homeG h2,#home .wrapper #homeG h3,#home .wrapper #homeG h4{
+    font-size: 45px;
+    font-family: "Roboto Condensed", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: bold;
+    font-style: normal;
+    color: #EE2525;
+}
+
+#home .wrapper #homeG h5,#home .wrapper #homeG h6{
+    font-size: 35px;
+    font-family: "Roboto Condensed", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: normal;
+    font-style: normal;
+}
+
+#home .wrapper #homeG h3,#home .wrapper #homeG h5,#home .wrapper #homeG h6{
+    color: white;
+}
+
+#home .wrapper #homeG h5{
+    margin-top: 20px;
+}
+
+#home .wrapper #homeG button{
+    width:185px;
+    height:50px;
+    border-radius: 10px;
+    background-color: #EE2525;
+    border: none;
+    margin-top: 30px;
+}
+
+#home .wrapper #homeG button a{
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 22px;
+    color: white;
+    text-decoration: none;
+}
+
+/* Bouton hover */
+#home .wrapper #homeG button:hover{
+    background-color: white;
+}
+#home .wrapper #homeG button:hover a{
+    color: #EE2525;
+}
+
+/* Côté droit */
+
+#home .wrapper #homeD{
+    width:50%;
+    min-height:100vh;
+    background-image: url(../../public/images/QTaccueil.png);
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+/* Bouton pour scroll au début du site */
+#home .scrollTop{
+    width:55px;
+    height:60px;
+    background-color: #EE2525;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    right:15px;
+    bottom:15px;
+    cursor: pointer;
+}
+
+#home .scrollTop i{
+    color: white;
+}
