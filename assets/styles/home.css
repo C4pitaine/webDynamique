@@ -3,10 +3,6 @@
 
 /* Slide Homme accueil */ 
 
-#home{
-    position: relative;
-}
-
 #home .wrapper{
     width: 80%;
     margin: 0 auto;
@@ -95,7 +91,7 @@
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    position: absolute;
+    position: fixed;
     right:15px;
     bottom:15px;
     cursor: pointer;
