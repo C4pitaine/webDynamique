@@ -62,7 +62,7 @@ class AdminServicesController extends AbstractController
     }
 
     /**
-     * Modifier un service
+     * Modification d'un service
      *
      * @param Service $service
      * @param Request $request
@@ -88,5 +88,22 @@ class AdminServicesController extends AbstractController
             'service' => $service,
             'myForm' => $form->createView()
         ]);
+    }
+
+    /**
+     * Suppression d'un service
+     *
+     * @param Service $service
+     * @param EntityManagerInterface $manager
+     * @return void
+     */
+    #[Route('admin/services/{id}/delete',name:'admin_services_delete')]
+    public function delete(Service $service,EntityManagerInterface $manager){
+        $this->addFlash('danger','Le service '.$service->getTitle().' a bien été supprimé');
+
+        $manager->remove($service);
+        $manager->flush();
+
+        return $this->redirectToRoute('admin_services_index');
     }
 }

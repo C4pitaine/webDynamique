@@ -27,7 +27,7 @@
                             <td>{{service.logo}}</td>
                             <td class="text-center"> 
                                 <a href="{{path('admin_services_update',{'id':service.id})}}" class="btn btn-warning mb-2"><i class="fas fa-edit"></i></a>
-                                <a href="" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                                <a href="{{path('admin_services_delete',{'id':service.id})}}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
                             </td>
                         </tr>
                     {% endfor %}
