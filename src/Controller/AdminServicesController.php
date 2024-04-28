@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 class AdminServicesController extends AbstractController
 {
@@ -39,7 +40,7 @@ class AdminServicesController extends AbstractController
      * @param EntityManagerInterface $manager
      * @return Response
      */
-    #[Route('admin/services/new',name:'admin_services_new')]
+    #[Route('admin/services/create', name: "admin_services_new")]
     public function create(Request $request,EntityManagerInterface $manager):Response
     {
         $service = new Service();
@@ -47,6 +48,25 @@ class AdminServicesController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
+
+            //gestion de l'image
+            $file = $form['logo']->getData(); // récupère les information de l'image
+            if(!empty($file))
+            {
+                $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename); // permet avec le premier paramètre de donner des informations sur comment gérer mes éléments, Any-Latin enlève les caractères spéciaux
+                $newFilename = $safeFilename."-".uniqid().'.'.$file->guessExtension();
+                try{
+                    $file->move(
+                        $this->getParameter('uploads_directory'), //où on va l'envoyer
+                        $newFilename // qui on envoit
+                    );
+                }catch(FileException $e)
+                {
+                    return $e->getMessage();
+                }
+                $service->setLogo($newFilename);
+            }
             $manager->persist($service);
             $manager->flush();
 
