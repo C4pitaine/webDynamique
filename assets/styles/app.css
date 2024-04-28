@@ -189,6 +189,32 @@ footer{
     color: #EE2525;
 }
 
+/* Admin formulaire */
+.slideAdmin{
+    min-height:100vh;
+    width:100%;
+    background-color: white;
+}
+
+.slideAdmin .wrapper{
+    width: 80%;
+    margin:0 auto;
+}
+
+.slideAdmin .wrapper .form .titleBack h2{
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
+.slideAdmin .wrapper .form .titleBack a{
+    margin-bottom: 30px;
+}
+
+.slideAdmin .wrapper .form textarea{
+    resize: none;
+    min-height:300px;
+}
+
 /* Media queries */
 
 @media all and (max-width:1200px){

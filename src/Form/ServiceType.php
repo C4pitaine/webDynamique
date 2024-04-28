@@ -16,9 +16,9 @@ class ServiceType extends ApplicationType
     {
         $builder
             ->add('title',TextType::class,$this->getConfiguration('Title',"Titre du service"))
-            ->add('description',TextareaType::class,$this->getConfiguration('Description',"description du service"))
+            ->add('description',TextareaType::class,$this->getConfiguration('Description',"Description du service"))
             ->add('logo', FileType::class, [
-                'label' => "Avatar(jpg,png, gif)",
+                'label' => "Logo (jpg, png, gif) ",
                 'required' => true
             ])
         ;

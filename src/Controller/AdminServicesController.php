@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Service;
+use App\Form\ServiceType;
 use App\Service\PaginationService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,8 +32,31 @@ class AdminServicesController extends AbstractController
         ]);
     }
 
+    /**
+     * Ajout d'un service
+     *
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @return Response
+     */
+    #[Route('admin/services/new',name:'admin_services_new')]
     public function create(Request $request,EntityManagerInterface $manager):Response
     {
-        
+        $service = new Service();
+        $form = $this->createForm(ServiceType::class,$service);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $manager->persist($service);
+            $manager->flush();
+
+            $this->addFlash('success','Le service a bien été ajouté');
+
+            return $this->redirectToRoute('admin_services_index');
+        }
+
+        return $this->render('admin/services/new.html.twig',[
+            'myForm' => $form->createView()
+        ]);
     }
 }
