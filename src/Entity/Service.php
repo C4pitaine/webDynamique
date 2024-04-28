@@ -24,8 +24,7 @@ class Service
     private ?string $description = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\Image(mimeTypes:['image/png','image/jpeg', 'image/jpg', 'image/gif'], mimeTypesMessage:"Vous devez upload un fichier jpg, jpeg, png ou gif")]
-    #[Assert\File(maxSize:"1024k", maxSizeMessage: "La taille du fichier est trop grande")]
+    #[Assert\Length(min:4,max:255,minMessage:"Le titre doit dépasser 4 caractères",maxMessage:"Le titre ne doit pas dépasser 255 caractères")]
     private ?string $logo = null;
 
     public function getId(): ?int

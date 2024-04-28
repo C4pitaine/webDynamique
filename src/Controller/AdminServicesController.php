@@ -48,25 +48,6 @@ class AdminServicesController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
-
-            //gestion de l'image
-            $file = $form['logo']->getData(); // récupère les information de l'image
-            if(!empty($file))
-            {
-                $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename); // permet avec le premier paramètre de donner des informations sur comment gérer mes éléments, Any-Latin enlève les caractères spéciaux
-                $newFilename = $safeFilename."-".uniqid().'.'.$file->guessExtension();
-                try{
-                    $file->move(
-                        $this->getParameter('uploads_directory'), //où on va l'envoyer
-                        $newFilename // qui on envoit
-                    );
-                }catch(FileException $e)
-                {
-                    return $e->getMessage();
-                }
-                $service->setLogo($newFilename);
-            }
             $manager->persist($service);
             $manager->flush();
 
@@ -76,6 +57,35 @@ class AdminServicesController extends AbstractController
         }
 
         return $this->render('admin/services/new.html.twig',[
+            'myForm' => $form->createView()
+        ]);
+    }
+
+    /**
+     * Modifier un service
+     *
+     * @param Service $service
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @return void
+     */
+    #[Route('/admin/services/{id}/update',name:'admin_services_update')]
+    public function update(Service $service,Request $request,EntityManagerInterface $manager)
+    {
+        $form = $this->createForm(ServiceType::class,$service);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $manager->persist($service);
+            $manager->flush();
+
+            $this->addFlash('warning','Le service '.$service->getTitle().' a bien été mis à jour');
+
+            return $this->redirectToRoute('admin_services_index');
+        }
+
+        return $this->render('admin/services/update.html.twig',[
+            'service' => $service,
             'myForm' => $form->createView()
         ]);
     }

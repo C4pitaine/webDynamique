@@ -1,0 +1,20 @@
+{% extends "admin/base.html.twig" %}
+
+{% block title %}Modification du service : {{service.title}}{% endblock %}
+
+{% block body %}
+    <div class="slideAdmin">
+        <div class="wrapper">
+            <div class="form">
+                <div class="titleBack">
+                    <h2>Modification du service : {{service.title}}</h2>
+                    <a href="{{path('admin_services_index')}}" class="btn btn-secondary">Retour</a>
+                </div>
+                {{form_start(myForm)}}
+                {{form_widget(myForm)}}
+                <button type="submit" class="btn btn-warning">Modifier</button>
+            {{form_end(myForm)}}
+            </div>
+        </div>
+    </div>
+{% endblock %}

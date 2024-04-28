@@ -4,34 +4,36 @@
 
 
 {% block body %}
-    <div class="container-fluid full">
-        <h1 class="my-5">Gestion des services</h1>
-        <a href="{{path('admin_services_new')}}" class="btn btn-success mb-5">Ajout d'un service</a>
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Title</th>
-                    <th>Description</th>
-                    <th>Logo</th>
-                    <th class="text-center">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for service in pagination.data %}
+    <div class="container-fluid full slideAdmin">
+        <div class="wrapper">
+            <h1 class="my-5">Gestion des services</h1>
+            <a href="{{path('admin_services_new')}}" class="btn btn-success mb-5">Ajout d'un service</a>
+            <table class="table table-hover">
+                <thead>
                     <tr>
-                        <td>{{service.id}}</td>
-                        <td>{{service.title}}</td>
-                        <td>{{service.description}}</td>
-                        <td>{{service.logo}}</td>
-                        <td class="text-center"> 
-                            <a href="" class="btn btn-warning mb-2"><i class="fas fa-edit"></i></a>
-                            <a href="" class="btn btn-danger"><i class="fas fa-trash"></i></a>
-                        </td>
+                        <th>Id</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Logo</th>
+                        <th class="text-center">Action</th>
                     </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        {{pagination.display}}
+                </thead>
+                <tbody>
+                    {% for service in pagination.data %}
+                        <tr>
+                            <td>{{service.id}}</td>
+                            <td>{{service.title}}</td>
+                            <td>{{service.description}}</td>
+                            <td>{{service.logo}}</td>
+                            <td class="text-center"> 
+                                <a href="{{path('admin_services_update',{'id':service.id})}}" class="btn btn-warning mb-2"><i class="fas fa-edit"></i></a>
+                                <a href="" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {{pagination.display}}
+        </div>
     </div>
 {% endblock %}

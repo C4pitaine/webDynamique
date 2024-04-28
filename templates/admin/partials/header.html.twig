@@ -31,3 +31,14 @@
     <a href="">Contact</a>-
     <a href="">Déconnexion</a>
 </div>
+
+
+{% for label, messages in app.flashes %}
+    <div class="container mt-3">
+        <div class="alert alert-{{label}}">
+            {% for message in messages %}
+                <p>{{ message | raw }}</p>
+            {% endfor %}
+        </div>
+    </div>
+{% endfor %}
