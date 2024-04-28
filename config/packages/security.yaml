@@ -22,7 +22,7 @@ security:
                 check_path: admin_account_login
             logout: 
                 path: admin_account_logout
-                target: account_login
+                target: admin_account_login
             login_throttling:
                 max_attempts: 3
                 interval: '15 minutes'
