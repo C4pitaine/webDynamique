@@ -42,6 +42,30 @@
             </div>
         </div>
     </div>
+    <div class="slide" id="services">
+        <div class="wrapper">
+            <h3>Je vous <strong>suivrai</strong> jusqu'à ce que vous vous <strong>surpassiez</strong></h3>
+            <div class="services">
+                {% for service in services %}
+                    <div class="service">
+                        <i class="fa solid {{service.logo}}"></i>
+                        <h4>{{service.title}}</h4>
+                        <p>{{service.description}}</p>
+                    </div>
+                {% endfor %}
+            </div>
+            <h3>Ce que l'on dit sur <strong>moi</strong></h3>
+            <div class="evaluations">
+                {% for evaluation in evaluations %}
+                    <div class="evaluation">
+                        <h4>{{evaluation.user.username}}</h4>
+                        {% include "partials/rating.html.twig" with {'rating':evaluation.note} %}
+                        <p>{{evaluation.avis}}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 {% block javascripts %}

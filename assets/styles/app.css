@@ -26,6 +26,7 @@ header div nav{
     height:100%;
     display: flex;
     justify-content: end;
+    z-index:200;
 }
 
 header div nav ul{
