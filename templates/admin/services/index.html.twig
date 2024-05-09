@@ -30,15 +30,7 @@
                                 <div class="btn btn-danger deleteButton"><i class="fas fa-trash"></i></div>
                             </td>
                         </tr>
-                        <div class="alertDelete">
-                            <div class="containerDelete">
-                                <h4>Êtes vous sûr de vouloir supprimer le service : {{service.title}}</h4>
-                                <div class="deleteChoice">
-                                    <a href="{{path('admin_services_delete',{'id':service.id})}}" class="btn btn-danger me-2">Supprimer</a>
-                                    <div class="btn btn-primary annulerDelete ms-2">Annuler</div>
-                                </div>
-                            </div>
-                        </div>
+                        {% include "admin/partials/deleteAlert.html.twig" with {'title':service.title, 'id':service.id, 'route':'admin_services_delete'} %}
                     {% endfor %}
                 </tbody>
             </table>
