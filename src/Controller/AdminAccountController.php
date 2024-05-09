@@ -51,6 +51,6 @@ class AdminAccountController extends AbstractController
     #[Route('/admin/logout',name: 'admin_account_logout')]
     public function logout():void
     {
-
+        
     }
 }
