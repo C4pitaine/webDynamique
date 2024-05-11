@@ -2,6 +2,8 @@
 
 {% block title %}Accueil{% endblock %}
 
+{% form_theme formContact _self %}
+
 {% block body %}
     <div class="scrollTop">
         <i class="fa-solid fa-chevron-up"></i>
@@ -66,7 +68,54 @@
             </div>
         </div>
     </div>
+    <div class="slide" id="contact">
+        <div class="wrapper">
+        {% for label, messages in app.flashes %}
+            <div class="container mt-3">
+                <div class="alert alert-{{label}}">
+                    {% for message in messages %}
+                        <p>{{ message | raw }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+            <div id="contactG">
+                <h5>Contactez-<strong>moi</strong></h5>
+                {{form_start(formContact)}}
+                    {{form_widget(formContact)}}
+                    <button class="contact">Contactez-moi</button>
+                {{form_end(formContact)}}
+            </div>
+            <div id="contactD">
+                <img src="/logo/logoQT.png" alt="Logo Quentin Coaching Sportif">
+                <div class="contact">
+                    <div id="tel">
+                        <p>Numéro de téléphone</p>
+                        <p>0468218868</p>
+                    </div>
+                    <div id="email">
+                        <p>Adresse e-mail</p>
+                        <p>quentin.testaert@icloud.com</p>
+                    </div>
+                    <div id="contactSocialMedia">
+                        <p>Réseaux sociaux</p>
+                        <div class="contactSocialMedia">
+                            <a href=""><i class="fa-brands fa-instagram"></i></a>
+                            <a href=""><i class="fa-brands fa-square-facebook"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
+
+{% block form_row %}
+    <div class="contactField">
+        {{form_widget(form)}}
+    </div>
+{% endblock %}
+
 
 {% block javascripts %}
     {{ encore_entry_script_tags('home') }}

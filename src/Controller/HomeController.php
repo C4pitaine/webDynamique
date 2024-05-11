@@ -2,20 +2,36 @@
 
 namespace App\Controller;
 
-use App\Repository\EvaluationRepository;
+use App\Entity\Contact;
+use App\Form\ContactType;
 use App\Repository\ServiceRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\EvaluationRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'homepage')]
-    public function index(ServiceRepository $servicesRepo,EvaluationRepository $evalRepo): Response
+    public function index(ServiceRepository $servicesRepo,EvaluationRepository $evalRepo,Request $request,EntityManagerInterface $manager): Response
     {
+        $contact = new Contact();
+        $form = $this->createForm(ContactType::class,$contact);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $manager->persist($contact);
+            $manager->flush();
+
+            $this->addFlash('success','votre message a bien été envoyé');
+        }
+
         return $this->render('home.html.twig', [
             'services' => $servicesRepo->findAll(),
-            'evaluations' => $evalRepo->findBy([],null,3,null)
+            'evaluations' => $evalRepo->findBy([],null,3,null),
+            'formContact' => $form->createView()
         ]);
     }
 }
