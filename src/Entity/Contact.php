@@ -20,19 +20,19 @@ class Contact
     private ?string $lastName = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Length(min:2,max:255,minMessage:"Le prénom doit dépasser 2 caractères",maxMessage:"Le prénom ne doit pas dépasser 255 caractères")]
+    private ?string $firstName = null;
+
+    #[ORM\Column(length: 255)]
     #[Assert\Email]
     private ?string $email = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    #[Assert\Length(min:10,max:1000,minMessage:"Le message doit dépasser 2 caractères",maxMessage:"Le message ne doit pas dépasser 1000 caractères")]
+    #[Assert\Length(min:10,max:1000,minMessage:"Le message doit dépasser 10 caractères",maxMessage:"Le message ne doit pas dépasser 1000 caractères")]
     private ?string $message = null;
 
     #[ORM\Column]
     private ?bool $status = null;
-
-    #[ORM\Column(length: 255)]
-    #[Assert\Length(min:2,max:255,minMessage:"Le prénom doit dépasser 2 caractères",maxMessage:"Le prénom ne doit pas dépasser 255 caractères")]
-    private ?string $firstName = null;
 
     public function getId(): ?int
     {
@@ -97,5 +97,10 @@ class Contact
         $this->firstName = $firstName;
 
         return $this;
+    }
+
+    public function getFullName(): string
+    {
+        return $this->firstName." ".$this->lastName;
     }
 }

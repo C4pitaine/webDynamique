@@ -20,12 +20,12 @@ class HomeController extends AbstractController
         $contact = new Contact();
         $form = $this->createForm(ContactType::class,$contact);
         $form->handleRequest($request);
-
+        $contact->setStatus(false);
+        
         if($form->isSubmitted() && $form->isValid()){
             $manager->persist($contact);
             $manager->flush();
-
-            $this->addFlash('success','votre message a bien été envoyé');
+            $this->addFlash('success','Votre message a bien été envoyé');
         }
 
         return $this->render('home.html.twig', [
