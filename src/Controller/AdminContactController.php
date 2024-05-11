@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Contact;
 use App\Repository\ContactRepository;
 use App\Service\PaginationService;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -43,8 +44,12 @@ class AdminContactController extends AbstractController
      * @return Response
      */
     #[Route('/admin/contact/{id}/show',name: 'admin_contact_show')]
-    public function show(Contact $contact): Response
+    public function show(Contact $contact, EntityManagerInterface $manager): Response
     {
+        $contact->setStatus(true);
+        $manager->persist($contact);
+        $manager->flush();
+
         return $this->render('admin/contact/show.html.twig',[
             'contact'=>$contact
         ]);
