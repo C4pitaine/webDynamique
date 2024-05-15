@@ -5,12 +5,10 @@ namespace App\Controller;
 use App\Entity\Contact;
 use App\Repository\ContactRepository;
 use App\Service\PaginationService;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Validator\Constraints\Length;
 
 class AdminContactController extends AbstractController
 {
@@ -22,17 +20,35 @@ class AdminContactController extends AbstractController
      * @return Response
      */
     #[Route('/admin/contact/{page<\d+>?1}', name: 'admin_contact_index')]
-    public function index(PaginationService $pagination,int $page,ContactRepository $repo): Response
+    public function index(int $page,ContactRepository $repo): Response
     {
-        $pagination->setEntityClass(Contact::class)
-                ->setPage($page)
-                ->setLimit(10);
+        $limit = 1;
+        $start = $page * $limit - $limit;
+        $total = count($repo->findAll());
+        $pages = ceil($total / $limit);
+        $contact = $repo->findBy([],[],$limit,$start);
         $messageNotSeen = $repo->findBy(['status'=>false]);
-        
-
-
+        if($pages > 5){
+            if($page == 1){
+                $pageMax = 3;
+                $pageMin = $page;
+            }elseif($page == $pages){
+                $pageMax = $pages;
+                $pageMin = $page - 2;
+            }else{
+                $pageMax = ($page + 1);
+                $pageMin = $page - 1;
+            }
+        }else{
+            $pageMin = 1;
+            $pageMax = 5;
+        }
         return $this->render('admin/contact/index.html.twig', [
-            'pagination' => $pagination,
+            'contacts' => $contact,
+            'pagination' => $pages,
+            'pageMin' => $pageMin,
+            'pageMax' => $pageMax,
+            'page' => $page,
             'notSeen' => Count($messageNotSeen)
         ]);
     }
