@@ -1,0 +1,17 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Page introuvable{% endblock %}
+
+{% block body %}
+    <div class="slide erreur">
+        <div class="wrapper errorPage text-white">
+            <div class="w-100 d-flex justify-content-center mt-5"><img src="/logo/logoQT.png" alt="Logo QuentinCoachingSportif"></div>
+            <h1>Erreur 404</h1>
+            <h2>La page recherchée n'existe pas ou plus</h2>
+            <div class="alert alert-danger mb-5">
+                <p>La page que vous voulez atteindre n'est pas ou plus disponible</p>
+                <a href="{{path('homepage')}}" class="btn btn-primary">Retour à l'accueil</a>
+            </div>
+        </div>  
+    </div>
+{% endblock %}
