@@ -1,3 +1,17 @@
 {% extends "admin/base.html.twig" %}
 
 {% block title %}Dashboard{% endblock %}
+
+{% block body %}
+    <div class="container-fluid full slideAdmin">
+        <div class="wrapper">
+            <h1 class="mt-5 mb-5">Dashboard</h1>
+            <div class="d-flex justify-content-between w-50 alert alert-danger">
+                <h4>Vous avez {{messageNotSeen}} non vus</h2>
+                <div>
+                    <a href="{{path('admin_contact_index')}}" class="btn btn-info block">Voir les messages</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
