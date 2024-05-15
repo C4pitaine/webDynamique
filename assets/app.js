@@ -23,8 +23,12 @@ menuBurger.addEventListener('click',()=>{
     menu.classList.toggle('menuOpened')
 })
 
-menuA.forEach(()=>{
+menuA.forEach((menuA)=>{
     menu.classList.remove('menuOpened')
+    menuA.addEventListener('click',()=>{
+        menu.classList.remove('menuOpened')
+        header.classList.remove('menuOpened')
+    })
 })
 
 // Gestion Alerte de suppresion
