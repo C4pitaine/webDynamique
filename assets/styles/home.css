@@ -320,8 +320,8 @@
     margin: 10px 0 50px;
 }
 
-#contact .wrapper #contactG div .contactField input:focus{
-    outline:none !important;
+.form-control:focus{
+    box-shadow: none !important;
 }
 
 #contact .wrapper #contactG div .contactField input::placeholder{
