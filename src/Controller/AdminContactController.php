@@ -12,21 +12,22 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AdminContactController extends AbstractController
 {
+    
     /**
-     * Permet de récupérer et afficher les messages de contact
+     * Permet d'afficher les message avec une pagination
      *
-     * @param PaginationService $pagination
      * @param integer $page
+     * @param ContactRepository $repo
      * @return Response
      */
     #[Route('/admin/contact/{page<\d+>?1}', name: 'admin_contact_index')]
     public function index(int $page,ContactRepository $repo): Response
     {
-        $limit = 1;
+        $limit = 10;
         $start = $page * $limit - $limit;
         $total = count($repo->findAll());
         $pages = ceil($total / $limit);
-        $contact = $repo->findBy([],[],$limit,$start);
+        $contact = $repo->findBy([],['status'=>'ASC'],$limit,$start);
         $messageNotSeen = $repo->findBy(['status'=>false]);
         if($pages > 5){
             if($page == 1){
@@ -43,6 +44,7 @@ class AdminContactController extends AbstractController
             $pageMin = 1;
             $pageMax = 5;
         }
+
         return $this->render('admin/contact/index.html.twig', [
             'contacts' => $contact,
             'pagination' => $pages,
