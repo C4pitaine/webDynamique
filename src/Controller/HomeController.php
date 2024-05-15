@@ -10,6 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
@@ -26,8 +27,9 @@ class HomeController extends AbstractController
             $manager->persist($contact);
             $manager->flush();
             $this->addFlash('success','Votre message a bien été envoyé');
+            return new RedirectResponse($this->generateUrl('homepage').'#contact');
         }
-
+        
         return $this->render('home.html.twig', [
             'services' => $servicesRepo->findAll(),
             'evaluations' => $evalRepo->findBy([],null,3,null),

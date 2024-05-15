@@ -320,6 +320,10 @@
     margin: 10px 0 50px;
 }
 
+#contact .wrapper #contactG div .contactField input:focus{
+    outline:none !important;
+}
+
 #contact .wrapper #contactG div .contactField input::placeholder{
     color: white;
 }
@@ -398,7 +402,7 @@
 
 #contact .wrapper #contactD .contact #contactSocialMedia .contactSocialMedia i{
     color:white;
-    font-size: 3em;
+    font-size: 2em;
     margin-left: 30px;
 }
 
@@ -413,6 +417,7 @@
     font-weight: 400;
     font-style: normal;
     font-size: 18px;
+    color:#ff0000;
 }
 
 

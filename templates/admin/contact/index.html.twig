@@ -41,7 +41,7 @@
                                 <div class="btn btn-danger deleteButton"><i class="fas fa-trash"></i></div>
                             </td>
                         </tr>
-                        {% include "admin/partials/deleteAlert.html.twig" with {'type':'messages','title':"Le message de ",'id':contact.id, 'route':'admin_contact_delete'} %}
+                        {% include "admin/partials/deleteAlert.html.twig" with {'type':'','title': "Le message de " ~ contact.lastName ~" "~ contact.firstname,'id':contact.id, 'route':'admin_contact_delete'} %}
                     {% endfor %}
                 </tbody>
             </table>
