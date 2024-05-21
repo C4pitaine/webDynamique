@@ -21,36 +21,16 @@ class AdminContactController extends AbstractController
      * @return Response
      */
     #[Route('/admin/contact/{page<\d+>?1}', name: 'admin_contact_index')]
-    public function index(int $page,ContactRepository $repo): Response
+    public function index(PaginationService $pagination,int $page,ContactRepository $repo): Response
     {
-        $limit = 10;
-        $start = $page * $limit - $limit;
-        $total = count($repo->findAll());
-        $pages = ceil($total / $limit);
-        $contact = $repo->findBy([],['status'=>'ASC'],$limit,$start);
+        $pagination->setEntityClass(Contact::class)
+                    ->setOrder(['status'=>'ASC'])
+                    ->setPage($page)
+                    ->setLimit(10);
         $messageNotSeen = $repo->findBy(['status'=>false]);
-        if($pages > 5){
-            if($page == 1){
-                $pageMax = 3;
-                $pageMin = $page;
-            }elseif($page == $pages){
-                $pageMax = $pages;
-                $pageMin = $page - 2;
-            }else{
-                $pageMax = ($page + 1);
-                $pageMin = $page - 1;
-            }
-        }else{
-            $pageMin = 1;
-            $pageMax = 5;
-        }
-
+    
         return $this->render('admin/contact/index.html.twig', [
-            'contacts' => $contact,
-            'pagination' => $pages,
-            'pageMin' => $pageMin,
-            'pageMax' => $pageMax,
-            'page' => $page,
+            'pagination' => $pagination,
             'notSeen' => Count($messageNotSeen)
         ]);
     }

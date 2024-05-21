@@ -229,10 +229,30 @@ class PaginationService{
      */
     public function display(): void
     {
+        $pages = $this->getPages();
+        $page = $this->currentPage;
+        if($pages > 5){
+            if($page == 1){
+                $pageMax = 3;
+                $pageMin = $page;
+            }elseif($page == $pages){
+                $pageMax = $pages;
+                $pageMin = $page - 2;
+            }else{
+                $pageMax = ($page + 1);
+                $pageMin = $page - 1;
+            }
+        }else{
+            $pageMin = 1;
+            $pageMax = 5;
+        }
+
         $this->twig->display($this->templatePath, [
-            'page' => $this->currentPage,
-            'pages' => $this->getPages(),
-            'route'=>$this->route
+            'page' => $page,
+            'pages' => $pages,
+            'route'=>$this->route,
+            'pageMin' => $pageMin,
+            'pageMax' => $pageMax
         ]);
     }
 

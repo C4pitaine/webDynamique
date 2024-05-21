@@ -24,7 +24,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for contact in contacts %}
+                    {% for contact in pagination.data %}
                         <tr>
                             <td>{{contact.id}}</td>
                             <td>{{contact.lastName}}</td>
@@ -45,7 +45,7 @@
                     {% endfor %}
                 </tbody>
             </table>
-            {% include "admin/partials/_pagination.html.twig" with {'pages':pagination,'route':'admin_contact_index','pageMin':pageMin, 'pageMax':pageMax} %}
+            {{pagination.display}}
         </div>
     </div>
 {% endblock %}
