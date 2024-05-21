@@ -277,6 +277,7 @@ footer{
     text-decoration: none !important;
 }
 
+/* Bouton Show/hide mdp */
 .toggle-password-button{
     position: relative !important;
     top:0 !important;

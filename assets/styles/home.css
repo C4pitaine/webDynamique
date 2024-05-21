@@ -389,6 +389,19 @@
     font-size: 22px;
 }
 
+#contact .wrapper #contactD .contact a{
+    color:white;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 22px;
+    text-decoration: none;
+}
+
+#contact .wrapper #contactD .contact a:hover{
+    color:#EE2525;
+}
+
 #contact .wrapper #contactD .contact{
     width: 90%;
 }
