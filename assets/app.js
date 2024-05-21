@@ -33,7 +33,6 @@ menuA.forEach((menuA)=>{
 })
 
 // Gestion Alerte de suppresion
-
 const deleteButtons = document.querySelectorAll('.deleteButton')
 const alertDelete = document.querySelectorAll('.alertDelete')
 const annulerDelete = document.querySelectorAll('.annulerDelete')

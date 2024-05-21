@@ -29,7 +29,7 @@ class HomeController extends AbstractController
             $this->addFlash('success','Votre message a bien été envoyé');
             return new RedirectResponse($this->generateUrl('homepage').'#contact');
         }
-    
+        
         return $this->render('home.html.twig', [
             'services' => $servicesRepo->findAll(),
             'evaluations' => $evalRepo->findBy([],null,3,null),

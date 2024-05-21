@@ -82,7 +82,7 @@
                     </div>
                 {% endfor %}
                 <div>
-                    {{form_start(formContact)}}
+                    {{form_start(formContact,{"action":path('homepage',{"_fragment":"contact"}),"method":"POST"})}}
                         {{form_widget(formContact)}}
                         <div class="d-flex justify-content-center">
                             <button class="contact">Envoyer</button>

@@ -31,7 +31,19 @@
                 {% endif %}
                 <form method="POST">
                     <div class="form-group my-3"><label for="username">Email</label><input type="text" class="form-control" placeholder="Adresse email..." name="_username" id="username" value={{username}}></div>
-                    <div class="form-group my-3"><label for="password">Password</label><input type="password" class="form-control" placeholder="Mot de passe..." name="_password" id="password"></div>
+                    <div class="form-group my-3">
+                        <label for="password">Password</label>
+                        <input 
+                            type="password" 
+                            class="form-control" 
+                            placeholder="Mot de passe..." 
+                            name="_password" 
+                            id="password"
+                            {{ stimulus_controller('symfony/ux-toggle-password/toggle-password', {
+                                buttonClasses: ['toggle-password-button'],
+                            }) }}
+                            >
+                    </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary my-3"><i class="fas fa-lock-open"></i> Connexion</button>
                         <a href="{{ path('homepage')}}" class="btn btn-link">

@@ -277,6 +277,11 @@ footer{
     text-decoration: none !important;
 }
 
+.toggle-password-button{
+    position: relative !important;
+    top:0 !important;
+}
+
 /* Media queries */
 
 @media all and (max-width:1200px){
