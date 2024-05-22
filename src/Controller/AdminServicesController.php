@@ -40,7 +40,7 @@ class AdminServicesController extends AbstractController
      * @param EntityManagerInterface $manager
      * @return Response
      */
-    #[Route('admin/services/create', name: "admin_services_new")]
+    #[Route('admin/services/create', name: "admin_services_create")]
     public function create(Request $request,EntityManagerInterface $manager):Response
     {
         $service = new Service();
