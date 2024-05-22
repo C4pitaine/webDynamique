@@ -14,42 +14,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AdminContactController extends AbstractController
 {
-    
-    /**
-     * Permet d'afficher les messages avec ou sans recherche en étant paginé
-     *
-     * @param PaginationService $pagination
-     * @param integer $page
-     * @param ContactRepository $repo
-     * @param Request $request
-     * @param string $recherche
-     * @return Response
-     */
-    #[Route('/admin/contact/{page<\d+>?1}/{recherche}', name: 'admin_contact_index')]
-    public function index(PaginationService $pagination,int $page,ContactRepository $repo,Request $request,string $recherche = ""): Response
-    {
-        $pagination->setEntityClass(Contact::class)
-                    ->setSearch($recherche)
-                    ->setOrder(['status'=>'ASC'])
-                    ->setPage($page)
-                    ->setLimit(2);
-        $messageNotSeen = $repo->findBy(['status'=>false]);
-        $form = $this->createForm(SearchType::class);
-        $form->handleRequest($request);
-
-        if($form->isSubmitted() && $form->isValid()){
-            $recherche = $form->get('search')->getData();
-            $pagination->setSearch($recherche)
-                        ->setPage(1);
-        }
-    
-        return $this->render('admin/contact/index.html.twig', [
-            'pagination' => $pagination,
-            'notSeen' => Count($messageNotSeen),
-            'formSearch' => $form->createView(),
-        ]);
-    }
-
     /**
      * Permet d'afficher un message
      *
@@ -83,6 +47,43 @@ class AdminContactController extends AbstractController
         $manager->flush();
 
         return $this->redirectToRoute('admin_contact_index');
+    }
+
+    /**
+     * Permet d'afficher les messages avec ou sans recherche en étant paginé
+     *
+     * @param PaginationService $pagination
+     * @param integer $page
+     * @param ContactRepository $repo
+     * @param Request $request
+     * @param string $recherche
+     * @return Response
+     */
+    #[Route('/admin/contact/{page<\d+>?1}/{recherche}', name: 'admin_contact_index')]
+    public function index(PaginationService $pagination,int $page,ContactRepository $repo,Request $request,string $recherche = ""): Response
+    {
+        $pagination->setEntityClass(Contact::class)
+                    ->setSearch($recherche)
+                    ->setOrder(['status'=>'ASC'])
+                    ->setPage($page)
+                    ->setLimit(2);
+        $messageNotSeen = $repo->findBy(['status'=>false]);
+        $form = $this->createForm(SearchType::class);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $recherche = $form->get('search')->getData();
+            if($recherche !== null){
+                $pagination->setSearch($recherche)
+                        ->setPage(1);
+            }
+        }
+    
+        return $this->render('admin/contact/index.html.twig', [
+            'pagination' => $pagination,
+            'notSeen' => Count($messageNotSeen),
+            'formSearch' => $form->createView(),
+        ]);
     }
 
 }

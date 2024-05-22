@@ -10,7 +10,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 class AdminServicesController extends AbstractController
 {
@@ -26,7 +25,8 @@ class AdminServicesController extends AbstractController
     {
         $pagination->setEntityClass(Service::class)
                   ->setPage($page)
-                  ->setLimit(10);
+                  ->setLimit(1)
+                  ->setSearch("");
 
         return $this->render('admin/services/index.html.twig', [
             'pagination' => $pagination

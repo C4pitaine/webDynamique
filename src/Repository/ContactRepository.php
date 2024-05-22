@@ -37,6 +37,7 @@ class ContactRepository extends ServiceEntityRepository
                     ->setParameter('search','%'.$search.'%')
                     ->setMaxResults($limit)
                     ->setFirstResult($offset)
+                    ->orderBy('c.status','ASC')
                     ->getQuery()
                     ->getResult();
     }
