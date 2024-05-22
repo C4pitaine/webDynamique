@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Contact;
-use App\Repository\ContactRepository;
+use App\Form\SearchType;
 use App\Service\PaginationService;
+use App\Repository\ContactRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,17 +23,32 @@ class AdminContactController extends AbstractController
      * @return Response
      */
     #[Route('/admin/contact/{page<\d+>?1}', name: 'admin_contact_index')]
-    public function index(PaginationService $pagination,int $page,ContactRepository $repo): Response
+    public function index(PaginationService $pagination,int $page,ContactRepository $repo,Request $request,EntityManagerInterface $manager): Response
     {
         $pagination->setEntityClass(Contact::class)
                     ->setOrder(['status'=>'ASC'])
                     ->setPage($page)
                     ->setLimit(10);
         $messageNotSeen = $repo->findBy(['status'=>false]);
+        $searchedMessage = '';
+        $form = $this->createForm(SearchType::class);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $recherche = $form->get('search')->getData();
+            if($recherche == null){
+                $searchedMessage = $repo->search("");
+            }else{
+                $searchedMessage = $repo->search($recherche);
+            }
+            
+        }
     
         return $this->render('admin/contact/index.html.twig', [
             'pagination' => $pagination,
-            'notSeen' => Count($messageNotSeen)
+            'notSeen' => Count($messageNotSeen),
+            'formSearch' => $form->createView(),
+            'searchedMessage' => $searchedMessage
         ]);
     }
 

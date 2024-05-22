@@ -6,12 +6,21 @@
 {% block body %}
     <div class="container-fluid full slideAdmin">
         <div class="wrapper">
-            <h1 class="my-5">Gestion des contact</h1>
+            <h1 class="mt-5 mb-3">Gestion des contact</h1>
             {% if notSeen == 1 %}
                 <h3 class="alert alert-success">Vous avez {{notSeen}} nouveau message</h3>
                 {% elseif notSeen > 0 %}
                 <h3 class="alert alert-success">Vous avez {{notSeen}} nouveaux messages</h3>
             {% endif %}
+            <div>
+                {{form_start(formSearch)}}
+                    <div class="d-flex">
+                        {{form_widget(formSearch.search)}}
+                        <button type="submit" class="btn btn-primary ms-4">Rechercher</button>
+                    </div>
+                {{form_end(formSearch)}}
+            </div>
+            {{dump(searchedMessage)}}
             <table class="table table-hover">
                 <thead>
                     <tr>

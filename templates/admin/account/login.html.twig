@@ -10,6 +10,24 @@
     <title>Connexion à l'administration</title>
 </head>
 <body>
+<header>
+    <div>
+        <img src="/logo/logoQT.png" alt="Logo Quentin Coaching Sportif">
+        <nav>
+            <ul>
+                <li><a href="{{path('homepage')}}#home">Retour au site</a></li>
+            </ul>
+            <div id="burger">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        </nav>
+    </div>
+</header>
+<div class="slide" id="menu">
+    <a href="{{path('homepage')}}#home">Retour au site</a>
+</div>
    <div class="col-md-4 offset-md-4 mt-5">
      <div class="card bg-light mt-5">
             <div class="card-header">
@@ -31,7 +49,7 @@
                 {% endif %}
                 <form method="POST">
                     <div class="form-group my-3"><label for="username">Email</label><input type="text" class="form-control" placeholder="Adresse email..." name="_username" id="username" value={{username}}></div>
-                    <div class="form-group my-3">
+                    <div class="form-group my-3" id="passwordLogin">
                         <label for="password">Password</label>
                         <input 
                             type="password" 

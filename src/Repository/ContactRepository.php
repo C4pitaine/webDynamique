@@ -21,6 +21,18 @@ class ContactRepository extends ServiceEntityRepository
         parent::__construct($registry, Contact::class);
     }
 
+    public function search(string $search): ?array
+    {
+        $search = htmlspecialchars($search);
+
+        return $this->createQueryBuilder('c')
+                    ->select('c as contact','c.lastName,c.firstName, c.message, c.status')
+                    ->where('c.lastName LIKE :search OR c.firstName LIKE :search')
+                    ->setParameter('search','%'.$search.'%')
+                    ->getQuery()
+                    ->getResult();
+    }
+
     //    /**
     //     * @return Contact[] Returns an array of Contact objects
     //     */
