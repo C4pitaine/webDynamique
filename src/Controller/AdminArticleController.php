@@ -3,16 +3,18 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Form\ArticleType;
 use App\Service\PaginationService;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AdminArticleController extends AbstractController
 {
-    #[Route('/admin/article', name: 'admin_article_index')]
+    #[Route('/admin/article/{page<\d+>?1}', name: 'admin_article_index')]
     public function index(ArticleRepository $repo,PaginationService $pagination,int $page): Response
     {
         $pagination->setEntityClass(Article::class)
@@ -36,6 +38,18 @@ class AdminArticleController extends AbstractController
     public function create(Request $request,EntityManagerInterface $manager):Response
     {
         $article = new Article();
+
+        $form = $this->createForm(ArticleType::class,$article);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+
+        }
+
+        return $this->render('/admin/article/new.html.twig',[
+            'formArticle' => $form->createView()
+        ]);
     }
 
     /**
