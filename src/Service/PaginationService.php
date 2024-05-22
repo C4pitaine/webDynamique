@@ -240,6 +240,9 @@ class PaginationService{
         }else{
             $total = count($this->manager->getRepository($this->entityClass)->search($this->search));
         }
+        if($total === 0){
+            $total = $total+1;
+        }
   
         return ceil($total / $this->limit);;
     }

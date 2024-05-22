@@ -25,7 +25,7 @@ class AdminServicesController extends AbstractController
     {
         $pagination->setEntityClass(Service::class)
                   ->setPage($page)
-                  ->setLimit(1)
+                  ->setLimit(10)
                   ->setSearch("");
 
         return $this->render('admin/services/index.html.twig', [
