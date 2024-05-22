@@ -76,6 +76,9 @@ class AdminContactController extends AbstractController
             if($recherche !== null){
                 $pagination->setSearch($recherche)
                         ->setPage(1);
+            }else{
+                $pagination->setSearch("")
+                        ->setPage(1);
             }
         }
     
