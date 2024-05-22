@@ -21,6 +21,12 @@ class ContactRepository extends ServiceEntityRepository
         parent::__construct($registry, Contact::class);
     }
 
+    /**
+     * Permet de faire une recherche sur les noms / prénoms pour les messages
+     *
+     * @param string $search
+     * @return array|null
+     */
     public function search(string $search): ?array
     {
         $search = htmlspecialchars($search);
