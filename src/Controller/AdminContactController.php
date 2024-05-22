@@ -16,39 +16,37 @@ class AdminContactController extends AbstractController
 {
     
     /**
-     * Permet d'afficher les message avec une pagination
+     * Permet d'afficher les messages avec ou sans recherche en étant paginé
      *
+     * @param PaginationService $pagination
      * @param integer $page
      * @param ContactRepository $repo
+     * @param Request $request
+     * @param string $recherche
      * @return Response
      */
-    #[Route('/admin/contact/{page<\d+>?1}', name: 'admin_contact_index')]
-    public function index(PaginationService $pagination,int $page,ContactRepository $repo,Request $request,EntityManagerInterface $manager): Response
+    #[Route('/admin/contact/{page<\d+>?1}/{recherche}', name: 'admin_contact_index')]
+    public function index(PaginationService $pagination,int $page,ContactRepository $repo,Request $request,string $recherche = ""): Response
     {
         $pagination->setEntityClass(Contact::class)
+                    ->setSearch($recherche)
                     ->setOrder(['status'=>'ASC'])
                     ->setPage($page)
-                    ->setLimit(10);
+                    ->setLimit(2);
         $messageNotSeen = $repo->findBy(['status'=>false]);
-        $searchedMessage = '';
         $form = $this->createForm(SearchType::class);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
             $recherche = $form->get('search')->getData();
-            if($recherche == null){
-                $searchedMessage = $repo->search("");
-            }else{
-                $searchedMessage = $repo->search($recherche);
-            }
-            
+            $pagination->setSearch($recherche)
+                        ->setPage(1);
         }
     
         return $this->render('admin/contact/index.html.twig', [
             'pagination' => $pagination,
             'notSeen' => Count($messageNotSeen),
             'formSearch' => $form->createView(),
-            'searchedMessage' => $searchedMessage
         ]);
     }
 

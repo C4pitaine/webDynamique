@@ -27,14 +27,16 @@ class ContactRepository extends ServiceEntityRepository
      * @param string $search
      * @return array|null
      */
-    public function search(string $search): ?array
+    public function search(string $search,?int $limit = 10,?int $offset = 0): ?array
     {
         $search = htmlspecialchars($search);
 
         return $this->createQueryBuilder('c')
-                    ->select('c as contact','c.lastName,c.firstName, c.message, c.status')
+                    ->select('c as contact','c.id,c.lastName,c.firstName,c.email, c.message, c.status')
                     ->where('c.lastName LIKE :search OR c.firstName LIKE :search')
                     ->setParameter('search','%'.$search.'%')
+                    ->setMaxResults($limit)
+                    ->setFirstResult($offset)
                     ->getQuery()
                     ->getResult();
     }

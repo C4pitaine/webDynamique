@@ -4,6 +4,7 @@ namespace App\Service;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\Validator\Constraints\Length;
 use Twig\Environment;
 
 class PaginationService{
@@ -65,6 +66,8 @@ class PaginationService{
      */
     private ?array $order = null;
 
+    private string $search;
+
 
 
     /**
@@ -105,6 +108,17 @@ class PaginationService{
      */
     public function getEntityClass(): string{
         return $this->entityClass;
+    }
+
+    public function setSearch(string $search):self
+    {
+        $this->search = $search;
+        return $this;
+    }
+
+    public function getSearch(): string
+    {
+        return $this->search;
     }
 
     /**
@@ -191,10 +205,16 @@ class PaginationService{
 
         // // renvoyer les données
         // return $data;
-
-        return $this->manager
+                        
+        if(!$this->search){
+            return $this->manager
                         ->getRepository($this->entityClass)
                         ->findBy([],$this->order,$this->limit,$offset);
+        }else{
+            return $this->manager
+                        ->getRepository($this->entityClass)
+                        ->search($this->search,$this->limit,$offset);
+        }
     }
 
 
@@ -213,9 +233,13 @@ class PaginationService{
         // conntaire le total des enregirstement de la tablez
         // $repo = $this->manager->getRepository($this->entityClass);
         // $total = count($repo->findAll());
-        $total = count($this->manager
+        if(!$this->search){
+            $total = count($this->manager
                         ->getRepository($this->entityClass)
                         ->findAll());
+        }else{
+            $total = count($this->manager->getRepository($this->entityClass)->search($this->search));
+        }
   
         return ceil($total / $this->limit);;
     }
@@ -252,7 +276,8 @@ class PaginationService{
             'pages' => $pages,
             'route'=>$this->route,
             'pageMin' => $pageMin,
-            'pageMax' => $pageMax
+            'pageMax' => $pageMax,
+            'search' => $this->search
         ]);
     }
 
