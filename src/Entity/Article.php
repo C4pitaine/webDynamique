@@ -6,6 +6,7 @@ use Cocur\Slugify\Slugify;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ArticleRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
 #[ORM\HasLifecycleCallbacks]
@@ -17,18 +18,22 @@ class Article
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Length(min:10,max:255,minMesssage:"Le titre de l'article doit dépasser 10 caractères",maxMessage:"Le titre de l'article ne doit pas dépasser 255 caractères")]
     private ?string $title = null;
 
     #[ORM\Column(length: 255)]
     private ?string $slug = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Image(mimeTypes:['image/png','image/jpeg', 'image/jpg', 'image/gif'], mimeTypesMessage:"Vous devez upload un fichier jpg, jpeg, png ou gif")]
+    #[Assert\File(maxSize:"1024k", maxSizeMessage: "La taille du fichier est trop grande")]
     private ?string $image = null;
 
     #[ORM\Column(length: 255)]
     private ?string $link = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\Length(min:200,minMessage:"La description de l'article doit dépasser 200 caractères")]
     private ?string $description = null;
 
      /**
