@@ -18,3 +18,12 @@
         </div>
     </div>
 {% endblock %}
+
+{% block javascripts %}
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            license_key: 'gpl'
+        });
+    </script>
+{% endblock %}
