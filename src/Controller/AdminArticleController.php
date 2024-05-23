@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 class AdminArticleController extends AbstractController
 {
@@ -44,7 +45,29 @@ class AdminArticleController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid())
         {
+            //gestion de l'image
+            $file = $form['image']->getData();
+            if(!empty($file))
+            {
+                $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+                $newFilename = $safeFilename."-".uniqid().'.'.$file->guessExtension();
+                try{
+                    $file->move(
+                        $this->getParameter('uploads_directory_article'), 
+                        $newFilename 
+                    );
+                }catch(FileException $e)
+                {
+                    return $e->getMessage();
+                }
+                $article->setImage($newFilename);
+            }
+            $manager->persist($article);
+            $manager->flush();
 
+            $this->addFlash('success','L\'article a bien été ajouté');
+            return $this->redirectToRoute('admin_article_index');
         }
 
         return $this->render('/admin/article/new.html.twig',[
