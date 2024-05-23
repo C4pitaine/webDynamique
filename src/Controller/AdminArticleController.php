@@ -29,6 +29,64 @@ class AdminArticleController extends AbstractController
     }
 
     /**
+     * Permet de supprimer un article
+     *
+     * @param Article $article
+     * @param EntityManagerInterface $manager
+     * @return Response
+     */
+    #[Route('/admin/article/{id}/delete',name: 'admin_article_delete')]
+    public function delete(Article $article,EntityManagerInterface $manager): Response
+    {
+        $this->addFlash('danger','L\'article '.$article->getTitle().' a bien été supprimé');
+
+        if(!empty($article->getImage()))
+        {
+            unlink($this->getParameter('uploads_directory_article').'/'.$article->getImage());
+            $article->setImage('');
+            $manager->persist($article);
+        }
+
+        $manager->remove($article);
+        $manager->flush();
+
+        return $this->redirectToRoute('admin_article_index');
+    }
+
+    /**
+     * Permet d'afficher un article
+     *
+     * @param Article $article
+     * @return Response
+     */
+    #[Route('/admin/article/{id}/show',name: 'admin_article_show')]
+    public function show(Article $article): Response
+    {
+        return $this->render('admin/article/show.html.twig',[
+            'article' => $article
+        ]);
+    }
+
+    #[Route('/admin/article/{id}/modify',name: 'admin_article_update')]
+    public function update(Article $article,Request $request,EntityManagerInterface $manager): Response
+    {
+        $form = $this->createForm(ArticleType::class,$article);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+
+
+            $manager->persist($article);
+            $manager->flush();
+        }
+
+        return $this->render('admin/article/update.html.twig',[
+            'article' => $article
+        ]);
+    }
+
+    /**
      * Permet d'ajouter un article
      *
      * @param Request $request
@@ -73,23 +131,5 @@ class AdminArticleController extends AbstractController
         return $this->render('/admin/article/new.html.twig',[
             'formArticle' => $form->createView()
         ]);
-    }
-
-    /**
-     * Permet de supprimer un article
-     *
-     * @param Article $article
-     * @param EntityManagerInterface $manager
-     * @return Response
-     */
-    #[Route('/admin/article/{id}/delete',name: 'admin_article_delete')]
-    public function delete(Article $article,EntityManagerInterface $manager): Response
-    {
-        $this->addFlash('danger','L\'article '.$article->getTitle().' a bien été supprimé');
-
-        $manager->remove($article);
-        $manager->flush();
-
-        return $this->redirectToRoute('admin_article_index');
     }
 }
