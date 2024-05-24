@@ -24,12 +24,13 @@ class Article
     #[ORM\Column(length: 255)]
     private ?string $slug = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255,nullable:true)]
     #[Assert\Image(mimeTypes:['image/png','image/jpeg', 'image/jpg', 'image/gif','image/webp'], mimeTypesMessage:"Vous devez upload un fichier jpg, jpeg, png, gif, webP")]
     #[Assert\File(maxSize:"1024k", maxSizeMessage: "La taille du fichier est trop grande")]
     private ?string $image = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Length(min:10,max:255,minMessage:"Le lien de l'article doit dépasser 10 caractères",maxMessage:"Le titre de l'article ne doit pas dépasser 255 caractères")]
     private ?string $link = null;
 
     #[ORM\Column(type: Types::TEXT)]

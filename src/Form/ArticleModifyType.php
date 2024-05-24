@@ -11,15 +11,15 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 
-class ArticleType extends ApplicationType
+class ArticleModifyType extends ApplicationType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('title',TextType::class,$this->getConfiguration('Titre','Titre de l\'article'))
-            ->add('image', FileType::class,$this->getConfiguration('Image','Image de l\'article'))
+            ->add('image', FileType::class,$this->getConfiguration('Image','Image de l\'article',['required'=>false]))
             ->add('link',UrlType::class,$this->getConfiguration('Lien','Url de l\'article'))
-            ->add('description',TextareaType::class,$this->getConfiguration('Description','Description de l\'article',['required'=>false]))
+            ->add('description',TextareaType::class,$this->getConfiguration('Description','Description de l\'article'))
         ;
     }
 
