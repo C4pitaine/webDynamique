@@ -2,15 +2,17 @@
     {% if search %}
         {% if pages <= 5 %}
             <ul class="selfPagination">
-                <li class="page-item {% if page == 1 %}disabled{% endif %}">
+                <li class="page-item arrow {% if page == 1 %}disabled{% endif %}">
                     <a href="{{path(route,{'page': page - 1,'recherche':search})}}" class="page-link">&laquo;</a>
                 </li>
                 {% for i in 1..pages %}
-                    <li class="page-item {% if page == i %}active{% endif %}">
-                        <a href="{{path(route,{'page':i,'recherche':search})}}" class="page-link">{{i}}</a>
-                    </li>
+                    <a href="{{path(route,{'page':i})}}">
+                        <li class="page-item number {% if page == i %}active{% endif %}">
+                            <p class="page-link">{{i}}</p>
+                        </li>
+                    </a>
                 {% endfor %}
-                <li class="page-item {% if page == pages %}disabled{% endif %}">
+                <li class="page-item arrow {% if page == pages %}disabled{% endif %}">
                     <a href="{{path(route,{'page': page + 1,'recherche':search})}}" class="page-link">&raquo;</a>
                 </li>
             </ul>
@@ -20,9 +22,11 @@
                     <a href="{{path(route,{'page': page - 1,'recherche':search})}}" class="page-link">&laquo;</a>
                 </li>
                 {% for i in pageMin..pageMax%}
-                    <li class="page-item {% if page == i %}active{% endif %}">
-                        <a href="{{path(route,{'page':i,'recherche':search})}}" class="page-link">{{i}}</a>
-                    </li>
+                    <a href="{{path(route,{'page':i})}}">
+                        <li class="page-item number {% if page == i %}active{% endif %}">
+                            <p class="page-link">{{i}}</p>
+                        </li>
+                    </a>
                 {% endfor %}
                 <li class="page-item {% if page == pages %}disabled{% endif %}">
                     <a href="{{path(route,{'page': page + 1,'recherche':search})}}" class="page-link">&raquo;</a>
@@ -36,9 +40,11 @@
                     <a href="{{path(route,{'page': page - 1})}}" class="page-link">&laquo;</a>
                 </li>
                 {% for i in 1..pages %}
-                    <li class="page-item number {% if page == i %}active{% endif %}">
-                        <a href="{{path(route,{'page':i})}}" class="page-link">{{i}}</a>
-                    </li>
+                    <a href="{{path(route,{'page':i})}}">
+                        <li class="page-item number {% if page == i %}active{% endif %}">
+                            <p class="page-link">{{i}}</p>
+                        </li>
+                    </a>
                 {% endfor %}
                 <li class="page-item arrow {% if page == pages %}disabled{% endif %}">
                     <a href="{{path(route,{'page': page + 1})}}" class="page-link">&raquo;</a>
@@ -50,11 +56,11 @@
                     <a href="{{path(route,{'page': page - 1})}}" class="page-link">&laquo;</a>
                 </li>
                 {% for i in pageMin..pageMax%}
-                <a href="{{path(route,{'page':i})}}">
-                    <li class="page-item number {% if page == i %}active{% endif %}">
-                        <p class="page-link">{{i}}</p>
-                    </li>
-                </a>
+                    <a href="{{path(route,{'page':i})}}">
+                        <li class="page-item number {% if page == i %}active{% endif %}">
+                            <p class="page-link">{{i}}</p>
+                        </li>
+                    </a>
                 {% endfor %}
                 <li class="page-item arrow {% if page == pages %}disabled{% endif %}">
                     <a href="{{path(route,{'page': page + 1})}}" class="page-link">&raquo;</a>
