@@ -14,9 +14,10 @@ class BlogController extends AbstractController
     public function index(PaginationService $pagination,int $page): Response
     {   
         $pagination->setEntityClass(Article::class)
-                    ->setLimit(6)
+                    ->setLimit(1)
                     ->setPage($page)
-                    ->setSearch("");
+                    ->setSearch("")
+                    ->setTemplatePath("/partials/_pagination.html.twig");
 
         return $this->render('blog/index.html.twig', [
            'pagination' => $pagination,
