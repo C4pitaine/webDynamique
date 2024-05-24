@@ -50,9 +50,11 @@
                     <a href="{{path(route,{'page': page - 1})}}" class="page-link">&laquo;</a>
                 </li>
                 {% for i in pageMin..pageMax%}
+                <a href="{{path(route,{'page':i})}}">
                     <li class="page-item number {% if page == i %}active{% endif %}">
-                        <a href="{{path(route,{'page':i})}}" class="page-link">{{i}}</a>
+                        <p class="page-link">{{i}}</p>
                     </li>
+                </a>
                 {% endfor %}
                 <li class="page-item arrow {% if page == pages %}disabled{% endif %}">
                     <a href="{{path(route,{'page': page + 1})}}" class="page-link">&raquo;</a>
