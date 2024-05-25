@@ -2,32 +2,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
-/* Bouton pour scroll au début du site */
-
-.scrollTop {
-  z-index: 50;
-  width: 55px;
-  height: 60px;
-  background-color: #EE2525;
-  border-radius: 10px;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  position: fixed;
-  right: 15px;
-  bottom: 15px;
-  cursor: pointer;
-
-  &:hover {
-    background-color: white;
-
-    i {
-      color: #EE2525;
-    }
-  }
-}
-
 /* wrapper */
 
 .wrapper {
@@ -76,29 +50,26 @@
       margin-top: 20px;
     }
 
-    button {
+    .button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       width: 185px;
       height: 50px;
       border-radius: 10px;
       background-color: #EE2525;
       border: none;
       margin-top: 30px;
-
-      a {
-        font-family: "Roboto", sans-serif;
-        font-weight: 400;
-        font-style: normal;
-        font-size: 22px;
-        color: white;
-        text-decoration: none;
-      }
+      font-family: "Roboto", sans-serif;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 22px;
+      color: white;
+      text-decoration: none;
 
       &:hover {
         background-color: white;
-
-        a {
-          color: #EE2525;
-        }
+        color: #EE2525;
       }
     }
   }
@@ -113,18 +84,13 @@
   }
 }
 
-/* côté gauche */
-
-/* Bouton hover */
-
-/* Côté droit */
-
 /* Slide About */
 
 #about .wrapper {
   display: flex;
   position: relative;
 
+  /* côté gauche */
   #aboutG {
     width: 50%;
     min-height: 100vh;
@@ -161,35 +127,34 @@
         width: 100%;
         justify-content: space-evenly;
 
-        button {
+        .button {
+          display: flex;
+          justify-content: center;
+          align-items: center;
           width: 185px;
           height: 50px;
           border-radius: 10px;
           background-color: #EE2525;
           border: none;
-          margin: 30px 5px 0 5px;
+          margin-top: 30px;
+          font-family: "Roboto", sans-serif;
+          font-weight: 400;
+          font-style: normal;
+          font-size: 22px;
+          color: white;
+          text-decoration: none;
 
-          a {
-            font-family: "Roboto", sans-serif;
-            font-weight: 400;
-            font-style: normal;
-            font-size: 22px;
-            color: white;
-            text-decoration: none;
-          }
-
+          /* Bouton hover */
           &:hover {
             background-color: white;
-
-            a {
-              color: #EE2525;
-            }
+            color: #EE2525;
           }
         }
       }
     }
   }
 
+  /* Côté droit */
   #aboutD {
     position: absolute;
     bottom: 0;
@@ -203,17 +168,8 @@
   }
 }
 
-/* About côté Gauche */
-
-/* Texte */
-
-/* Bouton hover */
-
-/* About côté droit */
 
 /* Slide Services */
-
-/* services */
 
 #services {
   overflow: hidden;
@@ -234,6 +190,7 @@
       }
     }
 
+    /* services */
     .services, .evaluations {
       display: flex;
       flex-wrap: wrap;
@@ -262,6 +219,7 @@
       }
     }
 
+    /* evaluations */
     .evaluations .evaluation h4 {
       font-size: 20px;
       margin-bottom: 20px;
@@ -301,8 +259,6 @@
     }
   }
 }
-
-/* evaluations */
 
 /* Slide Contact */
 
@@ -395,6 +351,7 @@
     }
   }
 
+  /* Contact Droit */
   #contactD {
     width: 40%;
     display: flex;
@@ -458,6 +415,7 @@
     }
   }
 
+  /* Erreur d'envoi */
   #contactG div .contactField .invalid-feedback {
     font-family: "Roboto", sans-serif;
     font-weight: 400;
@@ -466,10 +424,6 @@
     color: #ff0000;
   }
 }
-
-/* Contact Droit */
-
-/* Erreur d'envoi */
 
 /* MediaQueries */
 

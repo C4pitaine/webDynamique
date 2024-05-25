@@ -3,14 +3,17 @@
 {% block title %} Article n° {{article.id}}{% endblock %}
 
 {% block body %}
-    <div class="slide">
+    <div class="slide blogShow">
         <div class="wrapper">
-            <h2 class="mt-5 mb-3">{{article.title}}</h2>
-            <a href="{{path('admin_article_index')}}" class="btn btn-primary">Retour</a>
-            <div class="d-flex justify-content-center w-100">
-                <img src="/uploads/articles/{{article.image}}" alt="Image de {{article.title}}" class="w-50 my-3">
+            <a href="{{path('blog')}}" class="backButton">Retour</a>
+            <h2>{{article.title}}</h2>
+            <div class="imageArticle">
+                <img src="/uploads/articles/{{article.image}}" alt="Image de {{article.title}}">
             </div>
-            <div class="my-3">{{article.description | raw | nl2br}}</div>
+            <div class="descriptionArticle">{{article.description | raw | nl2br}}</div>
+            <div class="showArticle">
+                <a href="{{article.link}}">Voir l'article</a>
+            </div>
         </div>
     </div>
 {% endblock %}
