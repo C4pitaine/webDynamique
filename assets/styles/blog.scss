@@ -129,6 +129,7 @@
     }
 }
 
+
 @media all and (max-width:1500px){
     .blog{
         .wrapper{
@@ -148,6 +149,18 @@
                 justify-content: space-evenly;
                 .articleItem{
                     width: 80%;
+                }
+            }
+        }
+    }
+}
+
+@media all and (max-width:900px){
+    .blogShow{
+        .wrapper{
+            .imageArticle{
+                img{
+                    width: 100%;
                 }
             }
         }
