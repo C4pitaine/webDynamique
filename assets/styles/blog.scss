@@ -16,7 +16,7 @@
         .articleContainer{
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-between;
+            justify-content: space-evenly;
             .articleItem{
                 width:30%;
                 margin: 40px 20px;
