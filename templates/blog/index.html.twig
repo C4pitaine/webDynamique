@@ -8,7 +8,7 @@
             <h2>Articles</h2>
             <div class="articleContainer">
                 {% for article in pagination.data %}
-                    <a href="" class="articleItem">
+                    <a href="{{path('blog_show',{'slug':article.slug})}}" class="articleItem">
                         <img src="/uploads/articles/{{article.image}}" alt="Image de {{article.title}}">
                         <h3>{{article.title}}</h3>
                     </a>
