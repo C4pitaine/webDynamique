@@ -3,16 +3,30 @@
 {% block title %}Connexion{% endblock %}
 
 {% block body %}
-    <div class="slide">
+    <div class="slide connexion">
         <div class="wrapper">
             <img src="/logo/logoQT.png" alt="Logo Quentin Coaching Sportif">
             <div class="formulaireConnexion">
-                <h2>Connexion</h2><i class="fa-solid fa-user">
+                <h2>Connexion</h2>
             </div>
+            {% if error %}
+                <div class="alert alert-danger w-100 my-2">
+                    Adresse E-mail ou mot de passe invalide
+                </div>
+            {% endif %}
+            {% if loginError %}
+                <div class="alert alert-danger w-100 mb-3">
+                    {{loginError}}
+                </div>
+            {% endif %}
+            
+            
             <form action="{{path('account_login')}}" method="POST">
                 <div class="formField">
-
+                    <input class="form-control" type="text" name="_username" placeholder="Adresse E-mail" requireValue="{{username}}">
+                    <input class="form-control" type="password" name="_password" placeholder="Mot de passe">
                 </div>
+                <button type="submit" class="boutonSubmit">Connexion</button>
             </form>
         </div>
     </div>

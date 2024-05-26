@@ -10,6 +10,7 @@ import './bootstrap.js';
 import './styles/app.scss';
 import './styles/home.scss';
 import './styles/blog.scss';
+import './styles/user.scss';
 import './styles/bootstrap.min.css';
 
 import 'bootstrap/dist/js/bootstrap.bundle';
