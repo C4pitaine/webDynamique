@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Core\Exception\TooManyLoginAttemptsAuthenticationException;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\Security\Http\Event\CheckPassportEvent;
 
 class UserController extends AbstractController
 {
