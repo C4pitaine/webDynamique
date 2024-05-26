@@ -8,18 +8,24 @@
             <img src="/logo/logoQT.png" alt="Logo Quentin Coaching Sportif">
             <div class="formulaireConnexion">
                 <h2>Connexion</h2>
+                <i class="fa-solid fa-user"></i>
             </div>
             {% if error %}
-                <div class="alert alert-danger w-100 my-2">
-                    Adresse E-mail ou mot de passe invalide
-                </div>
+                {% if emailError %}
+                    <div class="alert alert-danger w-100 mb-3">
+                        {{emailError}}
+                    </div>
+                {% else %}
+                    <div class="alert alert-danger w-100 my-2">
+                        Adresse email ou mot de passe invalide
+                    </div>
+                {% endif %}
             {% endif %}
             {% if loginError %}
                 <div class="alert alert-danger w-100 mb-3">
                     {{loginError}}
                 </div>
             {% endif %}
-            
             
             <form action="{{path('account_login')}}" method="POST">
                 <div class="formField">

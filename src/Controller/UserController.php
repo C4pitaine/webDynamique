@@ -3,12 +3,13 @@
 namespace App\Controller;
 
 use App\Repository\UserRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Security\Core\Exception\TooManyLoginAttemptsAuthenticationException;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Http\Event\CheckPassportEvent;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
+use Symfony\Component\Security\Core\Exception\TooManyLoginAttemptsAuthenticationException;
 
 class UserController extends AbstractController
 {
@@ -25,9 +26,13 @@ class UserController extends AbstractController
         $username = $utils->getLastUsername();
 
         $loginError = null;
+        $emailError = null;
 
         if($error instanceof TooManyLoginAttemptsAuthenticationException){
             $loginError = "Trop de tentatives de connexion. Veuillez attendre 15minutes";
+        }
+        if($error instanceof CustomUserMessageAuthenticationException){
+            $emailError = "Veuillez confirmer votre email";
         }
 
         if(!$error && $username){
@@ -41,7 +46,8 @@ class UserController extends AbstractController
         return $this->render('user/index.html.twig', [
             'error' => $error !==null,
             'username' => $username,
-            'loginError' => $loginError
+            'loginError' => $loginError,
+            'emailError' => $emailError
         ]);
     }
 
