@@ -2,15 +2,17 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use App\Repository\UserRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
+#[ORM\HasLifecycleCallbacks]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -72,6 +74,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->seances = new ArrayCollection();
         $this->sujets = new ArrayCollection();
         $this->commentaires = new ArrayCollection();
+    }
+
+    /**
+     * Permet d'initialiser le slug automatiquement
+     *
+     * @return void
+     */
+    #[ORM\PrePersist]
+    #[ORM\PreUpdate]
+    public function initializeSlug(): void
+    {
+        if(empty($this->slug))
+        {
+            $slugify = new Slugify();
+            $this->slug = $slugify->slugify($this->username);
+        }
     }
 
     public function getId(): ?int
