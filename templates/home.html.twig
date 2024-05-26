@@ -2,7 +2,7 @@
 
 {% block title %}Accueil{% endblock %}
 
-{% form_theme formContact _self %}
+{% form_theme formContact "form/_formField.html.twig" %}
 
 {% block body %}
     <div class="slide" id="home">
@@ -107,13 +107,6 @@
                 </div>
             </div>
         </div>
-    </div>
-{% endblock %}
-
-{% block form_row %}
-    <div class="contactField">
-        {{form_errors(form)}}
-        {{form_widget(form)}}
     </div>
 {% endblock %}
 
