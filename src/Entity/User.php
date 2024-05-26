@@ -63,6 +63,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Commentaire::class, mappedBy: 'user', orphanRemoval: true)]
     private Collection $commentaires;
 
+    #[ORM\Column]
+    private ?bool $checked = null;
+
     public function __construct()
     {
         $this->evaluations = new ArrayCollection();
@@ -286,6 +289,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $commentaire->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isChecked(): ?bool
+    {
+        return $this->checked;
+    }
+
+    public function setChecked(bool $checked): static
+    {
+        $this->checked = $checked;
 
         return $this;
     }
