@@ -26,7 +26,15 @@
                     {{loginError}}
                 </div>
             {% endif %}
-            
+            {% for label, messages in app.flashes %}
+                <div class="container mt-3 p-0">
+                    <div class="alert alert-{{label}}">
+                        {% for message in messages %}
+                            <p>{{ message | raw }}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
             <form action="{{path('account_login')}}" method="POST">
                 <div class="formField">
                     <input class="form-control" type="text" name="_username" placeholder="Adresse E-mail" require value="{{username}}">
