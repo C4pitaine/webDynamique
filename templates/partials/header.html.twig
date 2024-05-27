@@ -12,8 +12,11 @@
                     </ul>
                 </li>
                 <li><a href="{{path('blog')}}">Blog</a></li>
-                <li><a href="">Entraînement</a></li>
-                <li><a href="">Forum</a></li>
+                {% if app.user %}
+                    <li><a href="">Entraînement</a></li>
+                    <li><a href="">Forum</a></li>
+                {% endif %}
+                
                 <li>
                     <i class="fa-solid fa-user" id="iconUser"></i>
                     <ul>
@@ -41,13 +44,13 @@
     <a href="{{path('homepage')}}#services">Services</a>-
     <a href="{{path('homepage')}}#contact">Contact</a>-
     <a href="{{path('blog')}}">Blog</a>-
-    <a href="">Entraînement</a>-
-    <a href="">Forum</a>-
     {% if app.user %}
-        <li><a href="">Profil</a></li>
-        <li><a href="{{path('account_logout')}}">Déconnexion</a></li>
+        <a href="">Entraînement</a>-
+        <a href="">Forum</a>-
+        <a href="">Profil</a></li>
+        <a href="{{path('account_logout')}}">Déconnexion</a>
     {% else %}
-        <li><a href="{{path('account_login')}}">Connexion</a></li>
-        <li><a href="">Inscription</a></li>
+        <a href="{{path('account_login')}}">Connexion</a>-
+        <a href="">Inscription</a>
     {% endif %} 
 </div>
