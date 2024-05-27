@@ -93,15 +93,12 @@ class UserController extends AbstractController
                         ->to($user->getEmail())
                         ->subject("Confirmation de votre addresse email")
                         ->text("
-                            Quentin Testart
-                            Coach sportif
+                            Quentin Testart - Coach sportif
                             Confirmer votre addresse email pour pouvoir vous connecter
                             Confirmer votre email:https://qtcoachingsportif.alexandresacre.com/register/".$user->getId()."/t/".$token."
                         ")
                         ->html('
-                            <h1>Quentin Testaert</h1>
-                            <br>
-                            <h2>Coach sportif</h2>
+                            <h1>Quentin Testaert</h1><h2>- Coach sportif</h2>
                             <p>Confirmer votre adresse email pour pouvoir vous connecter</p>
                             <a href="https://qtcoachingsportif.alexandresacre.com/register/'.$user->getId()."/t/".$token.'">Confirmer votre email</a>
                         ');
@@ -128,7 +125,7 @@ class UserController extends AbstractController
         $user = $repo->findOneBy(['id'=>$id]);
         if($user){
             if($user->isChecked()){
-                $message = "Votre email a déjà été confirmé ✅";
+                $message = "Votre adresse E-mail a déjà été confirmé ✅";
             }else{
                 $checkToken = $user->getToken() == $token;
                 if($checkToken){
@@ -136,7 +133,7 @@ class UserController extends AbstractController
                     $manager->persist($user);
                     $manager->flush();
 
-                    $message = "Votre email a été confirmé ✅";
+                    $message = "Votre adresse E-mail a été confirmé ✅";
                 }else{
                     throw new BadRequestException('Token invalide');
                 }
