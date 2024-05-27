@@ -35,14 +35,6 @@ class UserController extends AbstractController
             $emailError = "Veuillez confirmer votre email";
         }
 
-        if(!$error && $username){
-            if($user = $repo->findOneBy(['email'=>$username],null)){
-                if(!$user->isChecked()){
-                    $loginError = "Veuillez confirmer votre email";
-                }
-            }
-        }
-
         return $this->render('user/index.html.twig', [
             'error' => $error !==null,
             'username' => $username,
