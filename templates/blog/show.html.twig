@@ -3,6 +3,7 @@
 {% block title %} Article n° {{article.id}}{% endblock %}
 
 {% block body %}
+    {% include "partials/_scrollToTop.html.twig" %}
     <div class="slide blogShow">
         <div class="wrapper">
             <a href="{{path('blog')}}" class="backButton">Retour</a>
@@ -16,4 +17,19 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        // Permet de remonter jusqu'en haut de la page
+        const scrollTop = document.querySelector('.scrollTop')
+
+        scrollTop.addEventListener('click',()=>{
+            window.scrollTo({
+                top:0,
+                left:0,
+                behavior: "smooth"
+            })
+        })
+    </script>
 {% endblock %}
