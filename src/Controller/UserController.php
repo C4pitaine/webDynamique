@@ -68,6 +68,7 @@ class UserController extends AbstractController
      * @param Request $request
      * @param EntityManagerInterface $manager
      * @param UserPasswordHasherInterface $hash
+     * @param MailerInterface $mailer
      * @return Response
      */
     #[Route('/register',name:'account_register')]
@@ -93,12 +94,12 @@ class UserController extends AbstractController
                         ->to($user->getEmail())
                         ->subject("Confirmation de votre addresse email")
                         ->text("
-                            Quentin Testart - Coach sportif
+                            Quentin Testart Coach sportif
                             Confirmer votre addresse email pour pouvoir vous connecter
                             Confirmer votre email:https://qtcoachingsportif.alexandresacre.com/register/".$user->getId()."/t/".$token."
                         ")
                         ->html('
-                            <h1>Quentin Testaert</h1><h2>- Coach sportif</h2>
+                            <h1>Quentin Testaert - Coach sportif</h1>
                             <p>Confirmer votre adresse email pour pouvoir vous connecter</p>
                             <a href="https://qtcoachingsportif.alexandresacre.com/register/'.$user->getId()."/t/".$token.'">Confirmer votre email</a>
                         ');

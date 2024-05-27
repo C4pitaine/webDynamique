@@ -432,13 +432,22 @@
     flex-direction: column;
 
     #homeD {
-      width: 100%;
-      order: 1;
+      display: none;
     }
 
     #homeG {
+      h2,h3,h4,h5,h6{
+        text-shadow: 1px 1px 4px black;
+      }
+      .button{
+        border: solid 1px #1A1717;
+      }
       width: 100%;
-      order: 2;
+      min-height: 100vh;
+      background-image: url(../../public/images/QTaccueil.png);
+      background-size: contain;
+      background-position: center center;
+      background-repeat: no-repeat;
     }
   }
 }
