@@ -4,8 +4,9 @@
         <nav>
             <ul>
                 <li>
-                    <a href="{{path('homepage')}}#home">Accueil</a>
+                    <a href="{{path('homepage')}}">Menu</a>
                     <ul>
+                        <li><a href="{{path('homepage')}}#home">Accueil</a></li>
                         <li><a href="{{path('homepage')}}#about">Présentation</a></li>
                         <li><a href="{{path('homepage')}}#services">Services</a></li>
                         <li><a href="{{path('homepage')}}#contact">Contact</a></li>
@@ -47,7 +48,7 @@
     {% if app.user %}
         <a href="">Entraînement</a>-
         <a href="">Forum</a>-
-        <a href="">Profil</a></li>
+        <a href="">Profil</a></li>-
         <a href="{{path('account_logout')}}">Déconnexion</a>
     {% else %}
         <a href="{{path('account_login')}}">Connexion</a>-
