@@ -106,7 +106,7 @@ class UserController extends AbstractController
         $user = $repo->findOneBy(['id'=>$id]);
         if($user){
             if($user->isChecked()){
-                $message = "Votre email a déjà été confirmé";
+                $message = "Votre email a déjà été confirmé ✅";
             }else{
                 $checkToken = $user->getToken() == $token;
                 if($checkToken){
@@ -114,7 +114,7 @@ class UserController extends AbstractController
                     $manager->persist($user);
                     $manager->flush();
 
-                    $message = "Votre email a été confirmé";
+                    $message = "Votre email a été confirmé ✅";
                 }else{
                     throw new BadRequestException('Token invalide');
                 }

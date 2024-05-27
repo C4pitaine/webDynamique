@@ -3,9 +3,15 @@
 {% block title %}Confirmation Email{% endblock %}
 
 {% block body %}
-    <div class="slide">
-        <div class="wrapper">
-            {{message}}
-        </div>
+    <div class="slide erreur">
+        <div class="wrapper errorPage text-white">
+            <div class="w-100 d-flex justify-content-center mt-5"><img src="/logo/logoQT.png" alt="Logo Quentin Coaching Sportif"></div>
+            <h1 class="mt-5">Confirmation de l'email :</h1>
+            <h2>{{message}}</h2>
+            <div class="d-flex">
+                <a href="{{path('homepage')}}" class="buttonQT">Accueil</a>
+                <a href="{{path('account_login')}}" class="buttonQT ms-3">Se connecter</a>
+            </div>
+        </div>  
     </div>
 {% endblock %}
