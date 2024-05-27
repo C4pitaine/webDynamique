@@ -87,7 +87,7 @@ class UserController extends AbstractController
             $user->setToken($token);
 
             $email = (new Email())
-                        ->from("QTcoachSportif@noreply.be")
+                        ->from("contact@qtcoachingsportif.alexandresacre.com")
                         ->to($user->getEmail())
                         ->subject("Confirmation de votre addresse email")
                         ->text("Merci de confirmer votre email")
