@@ -80,7 +80,8 @@ class UserController extends AbstractController
             $hash = $hasher->hashPassword($user,$user->getPassword());
             $user->setPassword($hash);
             $user->setChecked(false);
-            $token = md5($user->getEmail());
+            $salt = rand(1,1000);
+            $token = md5($user->getEmail().$salt);
             $user->setToken($token);
 
             $manager->persist($user);
