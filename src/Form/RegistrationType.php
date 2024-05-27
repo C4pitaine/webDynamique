@@ -17,8 +17,8 @@ class RegistrationType extends ApplicationType
         $builder
             ->add('email',EmailType::class,$this->getConfiguration('','Adresse E-mail'))
             ->add('username',TextType::class,$this->getConfiguration('','Nom / Prénom'))
-            ->add('password',PasswordType::class,$this->getConfiguration('','Mot de passe'))
-            ->add('passwordConfirm',PasswordType::class,$this->getConfiguration('','Confirmer le mot de passe'))
+            ->add('password',PasswordType::class,$this->getConfiguration('','Mot de passe',['toggle'=>true]))
+            ->add('passwordConfirm',PasswordType::class,$this->getConfiguration('','Confirmer le mot de passe',['toggle'=>true]))
         ;
     }
 
