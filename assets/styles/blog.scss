@@ -158,6 +158,7 @@
 @media all and (max-width:900px){
     .blogShow{
         .wrapper{
+            width: 90%;
             .imageArticle{
                 img{
                     width: 100%;
@@ -165,12 +166,9 @@
             }
         }
     }
-}
-
-@media all and (max-width:500px){
     .blog{
         .wrapper{
-            width:80%;
+            width:90%;
         }
     }
 }
