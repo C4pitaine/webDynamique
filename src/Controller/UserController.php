@@ -91,7 +91,7 @@ class UserController extends AbstractController
                         ->to($user->getEmail())
                         ->subject("Confirmation de votre addresse email")
                         ->text("Merci de confirmer votre email")
-                        ->html('<a href="https://qtcoachingsportif.alexandresacre.com/register/'.$user->getId().''.$token.'">Confirmer votre email</a>');
+                        ->html('<a href="https://qtcoachingsportif.alexandresacre.com/register/'.$user->getId()."//t//".$token.'">Confirmer votre email</a>');
             $mailer->send($email);
 
             $manager->persist($user);
