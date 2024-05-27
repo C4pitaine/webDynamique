@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% form_theme registrationForm "form/_formField.html.twig"%}
+
+{% block body %}
+    <div class="slide connexion">
+        <div class="wrapper">
+            <img src="/logo/logoQT.png" alt="Logo Quentin Coaching Sportif">
+            <div class="formulaireConnexion">
+                <h2>Inscription</h2>
+                <i class="fa-solid fa-user"></i>
+            </div>
+            {{form_start(registrationForm)}}
+                {{form_widget(registrationForm)}}
+                <button type="submit" class="boutonSubmit">Inscription</button>
+            {{form_end(registrationForm)}}
+        </div>
+    </div>
+{% endblock %}

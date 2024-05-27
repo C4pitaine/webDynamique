@@ -26,7 +26,7 @@
                             <li><a href="{{path('account_logout')}}">Déconnexion</a></li>
                         {% else %}
                             <li><a href="{{path('account_login')}}">Connexion</a></li>
-                            <li><a href="">Inscription</a></li>
+                            <li><a href="{{path('account_register')}}">Inscription</a></li>
                         {% endif %}
                     </ul>
                 </li>
@@ -52,6 +52,6 @@
         <a href="{{path('account_logout')}}">Déconnexion</a>
     {% else %}
         <a href="{{path('account_login')}}">Connexion</a>-
-        <a href="">Inscription</a>
+        <a href="{{path('account_register')}}">Inscription</a>
     {% endif %} 
 </div>
