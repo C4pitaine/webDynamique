@@ -4,10 +4,12 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationType;
+use Doctrine\ORM\Mapping\Entity;
+use Symfony\Component\Mime\Email;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Mapping\Entity;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -69,7 +71,7 @@ class UserController extends AbstractController
      * @return Response
      */
     #[Route('/register',name:'account_register')]
-    public function register(Request $request,EntityManagerInterface $manager,UserPasswordHasherInterface $hasher): Response
+    public function register(Request $request,EntityManagerInterface $manager,UserPasswordHasherInterface $hasher,MailerInterface $mailer): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationType::class,$user);
@@ -83,6 +85,14 @@ class UserController extends AbstractController
             $salt = rand(1,1000);
             $token = md5($user->getEmail().$salt);
             $user->setToken($token);
+
+            $email = (new Email())
+                        ->from("QTcoachSportif@noreply.be")
+                        ->to($user->getEmail())
+                        ->subject("Confirmation de votre addresse email")
+                        ->text("Merci de confirmer votre email")
+                        ->html('<a href="/register/'.$user->getId().''.$token.'">Confirmer votre email</a>');
+            $mailer->send($email);
 
             $manager->persist($user);
             $manager->flush();
