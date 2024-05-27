@@ -107,7 +107,7 @@ class UserController extends AbstractController
                         ');
             $mailer->send($email);
 
-            $this->addFlash('success','Inscription réussie,Veuillez confirmer votre email avant de pouvoir vous connecter');
+            $this->addFlash('success','Inscription réussie,Veuillez confirmer votre email avant de pouvoir vous connecter,Vérifiez vos courriers indésirables');
             return $this->redirectToRoute('account_login');
         }
 
