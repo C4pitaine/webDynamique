@@ -92,8 +92,19 @@ class UserController extends AbstractController
                         ->from("contact@qtcoachingsportif.alexandresacre.com")
                         ->to($user->getEmail())
                         ->subject("Confirmation de votre addresse email")
-                        ->text("Merci de confirmer votre email")
-                        ->html('<a href="https://qtcoachingsportif.alexandresacre.com/register/'.$user->getId()."/t/".$token.'">Confirmer votre email</a>');
+                        ->text("
+                            Quentin Testart
+                            Coach sportif
+                            Confirmer votre addresse email pour pouvoir vous connecter
+                            Confirmer votre email:https://qtcoachingsportif.alexandresacre.com/register/".$user->getId()."/t/".$token."
+                        ")
+                        ->html('
+                            <h1>Quentin Testaert</h1>
+                            <br>
+                            <h2>Coach sportif</h2>
+                            <p>Confirmer votre adresse email pour pouvoir vous connecter</p>
+                            <a href="https://qtcoachingsportif.alexandresacre.com/register/'.$user->getId()."/t/".$token.'">Confirmer votre email</a>
+                        ');
             $mailer->send($email);
 
             $this->addFlash('success','Inscription réussie,Veuillez confirmer votre email avant de pouvoir vous connecter');
