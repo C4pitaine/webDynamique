@@ -68,6 +68,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?bool $checked = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $token = null;
+
     public function __construct()
     {
         $this->evaluations = new ArrayCollection();
@@ -319,6 +322,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setChecked(bool $checked): static
     {
         $this->checked = $checked;
+
+        return $this;
+    }
+
+    public function getToken(): ?string
+    {
+        return $this->token;
+    }
+
+    public function setToken(string $token): static
+    {
+        $this->token = $token;
 
         return $this;
     }
