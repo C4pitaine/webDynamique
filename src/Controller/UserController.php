@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping\Entity;
 use Symfony\Component\Mime\Email;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Mime\Part\DataPart;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -90,6 +91,7 @@ class UserController extends AbstractController
                         ->from("QTcoachSportif@noreply.be")
                         ->to($user->getEmail())
                         ->subject("Confirmation de votre addresse email")
+                        ->addPart((new DataPart(fopen('/logo/logoQT.png', 'r'), 'logo', 'image/png'))->asInline())
                         ->text("Merci de confirmer votre email")
                         ->html('<a href="/register/'.$user->getId().''.$token.'">Confirmer votre email</a>');
             $mailer->send($email);
