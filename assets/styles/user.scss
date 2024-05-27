@@ -75,10 +75,13 @@
     }
 }
 
-@media all and (max-width:100px){
+@media all and (max-width:1000px){
     .connexion{
         .wrapper{
             width: 80%;
+            img{
+                width: 40%;
+            }
         }
     }
 }

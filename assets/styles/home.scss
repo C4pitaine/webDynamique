@@ -341,7 +341,6 @@
         font-style: normal;
         font-size: 22px;
         text-decoration: none;
-
         &:hover {
           color: #EE2525;
         }
@@ -364,7 +363,7 @@
 
         .contactSocialMedia i {
           color: white;
-          font-size: 2em;
+          font-size: 2rem;
           margin-left: 30px;
 
           &:hover {
@@ -382,6 +381,28 @@
   #services .wrapper .services .service {
     width: 45%;
     margin-top: 20px;
+  }
+}
+
+@media all and (max-width: 1550px) {
+  #contactD .contact #email{
+    p{
+      margin-bottom: 0;
+    }
+    a{
+      margin-bottom: 10px;
+    }
+  }
+}
+
+@media all and (max-width: 1220px) {
+  #contactD .contact #tel{
+    p{
+      margin-bottom: 0;
+    }
+    a{
+      margin-bottom: 10px;
+    }
   }
 }
 
