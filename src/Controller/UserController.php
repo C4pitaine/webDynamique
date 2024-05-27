@@ -93,6 +93,7 @@ class UserController extends AbstractController
                         ->text("Merci de confirmer votre email")
                         ->html('<a href="/register/'.$user->getId().''.$token.'">Confirmer votre email</a>');
             $mailer->send($email);
+            dd($email);
 
             $manager->persist($user);
             $manager->flush();
