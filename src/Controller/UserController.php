@@ -85,17 +85,17 @@ class UserController extends AbstractController
             $salt = rand(1,1000);
             $token = md5($user->getEmail().$salt);
             $user->setToken($token);
+            $manager->persist($user);
+            $manager->flush();
 
             $email = (new Email())
                         ->from("contact@qtcoachingsportif.alexandresacre.com")
                         ->to($user->getEmail())
                         ->subject("Confirmation de votre addresse email")
                         ->text("Merci de confirmer votre email")
-                        ->html('<a href="https://qtcoachingsportif.alexandresacre.com/register/'.$user->getId()."//t//".$token.'">Confirmer votre email</a>');
+                        ->html('<a href="https://qtcoachingsportif.alexandresacre.com/register/'.$user->getId()."/t/".$token.'">Confirmer votre email</a>');
             $mailer->send($email);
 
-            $manager->persist($user);
-            $manager->flush();
             $this->addFlash('success','Inscription réussie,Veuillez confirmer votre email avant de pouvoir vous connecter');
             return $this->redirectToRoute('account_login');
         }
