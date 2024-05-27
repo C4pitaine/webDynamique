@@ -2,10 +2,8 @@
 
 namespace App\Controller;
 
-use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Security\Http\Event\CheckPassportEvent;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
@@ -20,7 +18,7 @@ class UserController extends AbstractController
      * @return Response
      */
     #[Route('/login', name: 'account_login')]
-    public function index(AuthenticationUtils $utils,UserRepository $repo): Response
+    public function index(AuthenticationUtils $utils): Response
     {
         $error = $utils->getLastAuthenticationError();
         $username = $utils->getLastUsername();

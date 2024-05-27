@@ -19,6 +19,7 @@ class Article
 
     #[ORM\Column(length: 255)]
     #[Assert\Length(min:10,max:255,minMessage:"Le titre de l'article doit dépasser 10 caractères",maxMessage:"Le titre de l'article ne doit pas dépasser 255 caractères")]
+    #[Assert\NotBlank(message:"Ce champ ne peut pas être vide")]
     private ?string $title = null;
 
     #[ORM\Column(length: 255)]
@@ -31,10 +32,12 @@ class Article
 
     #[ORM\Column(length: 255)]
     #[Assert\Length(min:10,max:255,minMessage:"Le lien de l'article doit dépasser 10 caractères",maxMessage:"Le titre de l'article ne doit pas dépasser 255 caractères")]
+    #[Assert\NotBlank(message:"Ce champ ne peut pas être vide")]
     private ?string $link = null;
 
     #[ORM\Column(type: Types::TEXT)]
     #[Assert\Length(min:200,minMessage:"La description de l'article doit dépasser 200 caractères")]
+    #[Assert\NotBlank(message:"Ce champ ne peut pas être vide")]
     private ?string $description = null;
 
      /**
@@ -87,7 +90,7 @@ class Article
         return $this->image;
     }
 
-    public function setImage(string $image): static
+    public function setImage(?string $image): static
     {
         $this->image = $image;
 

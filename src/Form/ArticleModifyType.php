@@ -16,10 +16,10 @@ class ArticleModifyType extends ApplicationType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('title',TextType::class,$this->getConfiguration('Titre','Titre de l\'article'))
             ->add('image', FileType::class,$this->getConfiguration('Image','Image de l\'article',['required'=>false]))
+            ->add('title',TextType::class,$this->getConfiguration('Titre','Titre de l\'article'))
             ->add('link',UrlType::class,$this->getConfiguration('Lien','Url de l\'article'))
-            ->add('description',TextareaType::class,$this->getConfiguration('Description','Description de l\'article'))
+            ->add('description',TextareaType::class,$this->getConfiguration('Description','Description de l\'article',['required'=>false]))
         ;
     }
 
