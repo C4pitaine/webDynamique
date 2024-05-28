@@ -37,10 +37,11 @@ class AdminContactController extends AbstractController
      *
      * @param Contact $contact
      * @param EntityManagerInterface $manager
-     * @return void
+     * @return Response
      */
     #[Route('/admin/contact/{id}/delete',name: 'admin_contact_delete')]
-    public function delete(Contact $contact,EntityManagerInterface $manager){
+    public function delete(Contact $contact,EntityManagerInterface $manager):Response
+    {
         $this->addFlash('danger','Le message de '.$contact->getFullName().' a bien été supprimé');
 
         $manager->remove($contact);
@@ -66,7 +67,7 @@ class AdminContactController extends AbstractController
                     ->setSearch($recherche)
                     ->setOrder(['status'=>'ASC'])
                     ->setPage($page)
-                    ->setLimit(2);
+                    ->setLimit(10);
         $messageNotSeen = $repo->findBy(['status'=>false]);
         $form = $this->createForm(SearchType::class);
         $form->handleRequest($request);
