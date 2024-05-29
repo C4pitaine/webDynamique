@@ -24,7 +24,8 @@ class AdminEvaluationController extends AbstractController
     #[Route('/admin/eval/{id}/delete', name:"admin_evaluation_delete")]
     public function delete(EntityManagerInterface $manager,Evaluation $eval):Response
     {
-        $this->addFlash('success','delete');
+        $user = $eval->getUser();
+        $this->addFlash('success',"L'évaluation de ".$user->getUsername()." a bien été supprimé");
 
         $manager->remove($eval);
         $manager->flush();
