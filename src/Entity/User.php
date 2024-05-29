@@ -42,7 +42,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[Assert\EqualTo(propertyPath:"password", message:"Vous n'avez pas correctement confirmé votre mot de passe")]
-    #[Assert\NotBlank(message:"Ce champ ne peut pas être vide")]
     public ?string $passwordConfirm = null;
 
     #[ORM\Column(length: 255)]

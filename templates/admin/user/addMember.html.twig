@@ -1,0 +1,20 @@
+{% extends "admin/base.html.twig" %}
+
+{% block title %}Ajout d'un rôle{% endblock %}
+
+{% block body %}
+    <div class="slideAdmin">
+        <div class="wrapper">
+            <div class="form">
+                <div class="titleBack">
+                    <h2>Ajout d'un membre</h2>
+                    <a href="{{path('admin_user_index')}}" class="btn btn-secondary">Retour</a>
+                </div>
+                {{form_start(formRole)}}
+                    {{form_widget(formRole)}}
+                    <button type="submit" class="btn btn-primary my-3">Ajouter</button>
+                {{form_end(formRole)}}
+            </div>
+        </div>
+    </div>
+{% endblock %}

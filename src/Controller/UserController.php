@@ -7,7 +7,6 @@ use App\Form\RegistrationType;
 use Symfony\Component\Mime\Email;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Mime\Part\DataPart;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -113,7 +112,7 @@ class UserController extends AbstractController
             'registrationForm' => $form->createView(),
         ]);
     }
-
+    
     /**
      * Permet à l'utilisateur de confirmer son Email 
      *

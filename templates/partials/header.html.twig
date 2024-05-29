@@ -22,7 +22,7 @@
                     <i class="fa-solid fa-user" id="iconUser"></i>
                     <ul>
                         {% if app.user %}
-                            <li><a href="">Profil</a></li>
+                            <li><a href="{{path('account_profil')}}">Profil</a></li>
                             <li><a href="{{path('account_logout')}}">Déconnexion</a></li>
                         {% else %}
                             <li><a href="{{path('account_login')}}">Connexion</a></li>
@@ -48,7 +48,7 @@
     {% if app.user %}
         <a href="">Entraînement</a>-
         <a href="">Forum</a>-
-        <a href="">Profil</a></li>-
+        <a href="{{path('account_profil')}}">Profil</a></li>-
         <a href="{{path('account_logout')}}">Déconnexion</a>
     {% else %}
         <a href="{{path('account_login')}}">Connexion</a>-

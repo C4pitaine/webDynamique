@@ -30,6 +30,7 @@
                                 <td>Adresse E-mail non confirmée</td>
                             {% endif %}
                             <td class="text-center"> 
+                                <a href="{{path('admin_user_addMember',{'id':user.id})}}" class="btn btn-warning"><i class="fas fa-pen"></i></a>
                                 <div class="btn btn-danger deleteButton"><i class="fas fa-trash"></i></div>
                             </td>
                         </tr>
