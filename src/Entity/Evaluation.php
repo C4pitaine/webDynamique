@@ -24,7 +24,7 @@ class Evaluation
     private ?int $note = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    #[Assert\Length(min:10,minMessage:"L' avis doit dépasser 10 caractères")]
+    #[Assert\Length(min:10,max:450,minMessage:"L' avis doit dépasser 10 caractères",maxMessage:"L' avis ne doit pas dépasser 450 caractères")]
     private ?string $avis = null;
 
     public function getId(): ?int

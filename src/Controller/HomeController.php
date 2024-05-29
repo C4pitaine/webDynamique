@@ -6,6 +6,7 @@ use App\Entity\Contact;
 use App\Form\ContactType;
 use App\Repository\ServiceRepository;
 use App\Repository\EvaluationRepository;
+use App\Service\StatsService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,12 +17,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'homepage')]
-    public function index(ServiceRepository $servicesRepo,EvaluationRepository $evalRepo,Request $request,EntityManagerInterface $manager): Response
+    public function index(ServiceRepository $servicesRepo,EvaluationRepository $evalRepo,Request $request,EntityManagerInterface $manager,StatsService $statsService): Response
     {
         $contact = new Contact();
         $form = $this->createForm(ContactType::class,$contact);
         $form->handleRequest($request);
         $contact->setStatus(false);
+
+        $evals = $statsService->bestEval();
         
         if($form->isSubmitted() && $form->isValid()){
             $manager->persist($contact);
@@ -32,7 +35,7 @@ class HomeController extends AbstractController
         
         return $this->render('home.html.twig', [
             'services' => $servicesRepo->findAll(),
-            'evaluations' => $evalRepo->findBy([],null,3,null),
+            'evaluations' => $evals,
             'formContact' => $form->createView()
         ]);
     }
