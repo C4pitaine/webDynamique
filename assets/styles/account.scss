@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
+/* Profil */
 .profil{
     .wrapper{
         width:80%;
@@ -59,6 +60,75 @@
     }
 }
 
+/* Evaluation */
+.eval{
+    .wrapper{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        img{
+            margin: 30px 0;
+        }
+        h2{
+            align-self: self-start;
+            font-size: 30px;
+            font-family: "Roboto", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: normal;
+            font-style: normal;
+            color: white;
+        }
+        form{
+            width: 100%;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            #evaluation{
+                width: 100%;
+            }
+            .boutonSubmit{
+                width: 180px;
+                height:50px;
+                background-color: #EE2525;
+                border-radius: 10px;
+                font-size: 24px;
+                font-family: "Roboto", sans-serif;
+                font-optical-sizing: auto;
+                font-weight: normal;
+                font-style: normal;
+                border: none;
+                color: white;
+                margin-bottom: 20px;
+                &:hover{
+                    background-color: white;
+                    color: #EE2525;
+                }
+            }
+        }
+    }
+}
+
+/* Media queries */
+
+@media all and (max-width:1000px){
+    .eval{
+        .wrapper{
+            img{
+                width: 40%;
+            }
+        }
+    }
+}
+
+@media all and (max-width:800px){
+    .eval{
+        .wrapper{
+            width: 90%;
+        }
+    }
+}
+
 @media all and (max-width:705px){
     .profil{
         .wrapper{
@@ -67,6 +137,14 @@
                     margin-right: 0;
                 }
             }
+        }
+    }
+}
+
+@media all and (max-width:600px){
+    .profil{
+        .wrapper{
+            width: 90%;
         }
     }
 }

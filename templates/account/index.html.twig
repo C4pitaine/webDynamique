@@ -9,13 +9,22 @@
                 <i class="fa-solid fa-user"></i>
                 <h5>{{user.username}}</h5>
             </div>
+            {% for label, messages in app.flashes %}
+                <div class="container mt-3">
+                    <div class="alert alert-{{label}}">
+                        {% for message in messages %}
+                            <p>{{ message | raw }}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
             <div class="buttonsUser">
                 <a href="" class="buttonLeft">Modifier votre mot de passe</a>
                 <a href="">Modifier vos informations</a>
             </div>
             {% if is_granted('ROLE_MEMBER') or is_granted('ROLE_ADMIN')%}
                 <div class="buttonMember">
-                        <a href="">Évaluer le coach</a>
+                        <a href="{{path('account_profil_eval')}}">Évaluer le coach</a>
                 </div>
             {% endif %}
         </div>

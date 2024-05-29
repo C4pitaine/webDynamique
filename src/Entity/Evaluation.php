@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\EvaluationRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: EvaluationRepository::class)]
 class Evaluation
@@ -19,9 +20,11 @@ class Evaluation
     private ?User $user = null;
 
     #[ORM\Column]
+    #[Assert\Range(min:1,max:5,notInRangeMessage:"Vous devez choisir un chiffre entre 1 et 5")]
     private ?int $note = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\Length(min:10,minMessage:"L' avis doit dépasser 10 caractères")]
     private ?string $avis = null;
 
     public function getId(): ?int
