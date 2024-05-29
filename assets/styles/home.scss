@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
-
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 /* wrapper */
@@ -430,6 +428,7 @@
 
     #contactD {
       width: 100%;
+      margin-left: 0;
 
       img {
         margin-top: 20px;
@@ -504,7 +503,18 @@
         
       }
     }
- }
+  }
+
+  #home .wrapper {
+    #homeG {
+      h2, h3, h4 {
+        font-size: 38px;
+      }
+      h5, h6 {
+        font-size: 28px;
+      }
+    }
+  }
 }
 
 /* Media queries Height */
