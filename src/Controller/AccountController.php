@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Evaluation;
 use App\Form\EvaluationType;
+use App\Repository\EvaluationRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -59,4 +61,24 @@ class AccountController extends AbstractController
         ]);
     }
 
+    /**
+     * Récupération des évaluations d'un utilisateur
+     *
+     * @param EvaluationRepository $evalRepo
+     * @param UserRepository $userRepo
+     * @return Response
+     */
+    #[Route('/profil/evals', name:'account_profil_evals')]
+    #[IsGranted('ROLE_MEMBER')]
+    public function showEvals(EvaluationRepository $evalRepo,UserRepository $userRepo):Response
+    {
+        $user = $this->getUser();
+        $userEval = $userRepo->findBy(['email'=>$user->getUserIdentifier()]);
+        $evals = $evalRepo->findBy(['user'=>$userEval[0]->getId()]);
+
+        return $this->render('account/showEvals.html.twig',[
+            'user' => $user,
+            'evaluations' => $evals
+        ]);
+    }
 }

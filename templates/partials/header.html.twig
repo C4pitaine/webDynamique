@@ -23,6 +23,10 @@
                     <ul>
                         {% if app.user %}
                             <li><a href="{{path('account_profil')}}">Profil</a></li>
+                            {% if is_granted('ROLE_MEMBER') %}
+                                <li><a href="{{path('account_profil_evals')}}">Évaluations</a></li>
+                            {% endif %}
+                            
                             <li><a href="{{path('account_logout')}}">Déconnexion</a></li>
                         {% else %}
                             <li><a href="{{path('account_login')}}">Connexion</a></li>
@@ -40,18 +44,21 @@
     </div>
 </header>
 <div class="slide" id="menu">
-    <a href="{{path('homepage')}}#home">Accueil</a>-
-    <a href="{{path('homepage')}}#about">Présentation</a>-
-    <a href="{{path('homepage')}}#services">Services</a>-
-    <a href="{{path('homepage')}}#contact">Contact</a>-
-    <a href="{{path('blog')}}">Blog</a>-
+    <a href="{{path('homepage')}}#home">Accueil</a>
+    <a href="{{path('homepage')}}#about">Présentation</a>
+    <a href="{{path('homepage')}}#services">Services</a>
+    <a href="{{path('homepage')}}#contact">Contact</a>
+    <a href="{{path('blog')}}">Blog</a>
     {% if app.user %}
-        <a href="">Entraînement</a>-
-        <a href="">Forum</a>-
-        <a href="{{path('account_profil')}}">Profil</a></li>-
+        <a href="">Entraînement</a>
+        <a href="">Forum</a>
+        <a href="{{path('account_profil')}}">Profil</a>
+        {% if is_granted('ROLE_MEMBER') %}
+            <a href="{{path('account_profil_evals')}}">Évaluations</a>
+        {% endif %}
         <a href="{{path('account_logout')}}">Déconnexion</a>
     {% else %}
-        <a href="{{path('account_login')}}">Connexion</a>-
+        <a href="{{path('account_login')}}">Connexion</a>
         <a href="{{path('account_register')}}">Inscription</a>
     {% endif %} 
 </div>

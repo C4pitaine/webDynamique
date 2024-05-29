@@ -70,7 +70,7 @@ class AdminUserController extends AbstractController
     }
 
     /**
-     * Permet d'afficher de manière paginer et avec une recherche les utilisateurs
+     * Permet d'afficher de manière paginer et avec une recherche sur les utilisateurs
      *
      * @param PaginationService $pagination
      * @param Request $request

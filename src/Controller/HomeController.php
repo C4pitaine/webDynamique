@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\Contact;
 use App\Form\ContactType;
 use App\Repository\ServiceRepository;
-use App\Repository\EvaluationRepository;
 use App\Service\StatsService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,7 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'homepage')]
-    public function index(ServiceRepository $servicesRepo,EvaluationRepository $evalRepo,Request $request,EntityManagerInterface $manager,StatsService $statsService): Response
+    public function index(ServiceRepository $servicesRepo,Request $request,EntityManagerInterface $manager,StatsService $statsService): Response
     {
         $contact = new Contact();
         $form = $this->createForm(ContactType::class,$contact);

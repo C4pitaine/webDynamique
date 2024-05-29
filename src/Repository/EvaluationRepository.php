@@ -21,6 +21,27 @@ class EvaluationRepository extends ServiceEntityRepository
         parent::__construct($registry, Evaluation::class);
     }
 
+    /**
+     * Permet de faire une recherche sur l'username pour trouver ses évaluations
+     *
+     * @param string $search
+     * @return array|null
+     */
+    public function search(string $search,?int $limit = 10,?int $offset = 0): ?array
+    {
+        $search = htmlspecialchars($search);
+
+        return $this->createQueryBuilder('e')
+                    ->select('e.id,e.note,e.avis,u.username')
+                    ->join('e.user','u')
+                    ->where('u.username LIKE :search')
+                    ->setParameter('search','%'.$search.'%')
+                    ->setMaxResults($limit)
+                    ->setFirstResult($offset)
+                    ->getQuery()
+                    ->getResult();
+    }
+
     //    /**
     //     * @return Evaluation[] Returns an array of Evaluation objects
     //     */
