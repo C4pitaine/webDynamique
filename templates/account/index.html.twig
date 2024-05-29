@@ -3,19 +3,21 @@
 {% block title %}Profil de {{user.username}}{% endblock %}
 
 {% block body %}
-    <div class="slide">
+    <div class="slide profil">
         <div class="wrapper">
             <div class="username">
                 <i class="fa-solid fa-user"></i>
                 <h5>{{user.username}}</h5>
             </div>
             <div class="buttonsUser">
-                <a href="">Modifier votre mot de passe</a>
+                <a href="" class="buttonLeft">Modifier votre mot de passe</a>
                 <a href="">Modifier vos informations</a>
-                {% if is_granted('ROLE_MEMBRE') %}
-                    <a href="">Évaluer le coach</a>
-                {% endif %}
             </div>
+            {% if is_granted('ROLE_MEMBER') or is_granted('ROLE_ADMIN')%}
+                <div class="buttonMember">
+                        <a href="">Évaluer le coach</a>
+                </div>
+            {% endif %}
         </div>
     </div>
 {% endblock %}

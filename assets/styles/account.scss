@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+.profil{
+    .wrapper{
+        width:80%;
+        margin: 0 auto;
+        .username{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            i{
+                font-size: 5em;
+                color: white;
+                margin:50px 0 20px;
+            }
+            h5{
+                font-family: "Roboto", sans-serif;
+                font-weight: 400;
+                font-style: normal;
+                font-size: 28px;
+                color: white;
+                margin-bottom: 20px;
+            }
+        }
+        .buttonsUser,.buttonMember{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            .buttonLeft{
+                margin-right: 20px;
+            }
+            a{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: white;
+                width: fit-content;
+                padding: 0 10px;
+                height: 50px;
+                border-radius: 10px;
+                background-color: #EE2525;
+                border: none;
+                margin-bottom: 20px;
+                font-family: "Roboto", sans-serif;
+                font-weight: 400;
+                font-style: normal;
+                font-size: 22px;
+                color: white;
+                text-decoration: none;
+              
+                &:hover {
+                  background-color: white;
+                  color: #EE2525;
+                }
+            }
+        }
+    }
+}
+
+@media all and (max-width:705px){
+    .profil{
+        .wrapper{
+            .buttonsUser{
+                .buttonLeft{
+                    margin-right: 0;
+                }
+            }
+        }
+    }
+}
+
+@media all and (max-width:400px){
+    .profil{
+        .wrapper{
+            .buttonsUser,.buttonMember{
+                a{
+                    font-size: 18px;
+                }
+            }
+        }
+    }
+}
