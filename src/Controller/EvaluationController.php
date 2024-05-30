@@ -10,6 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -54,6 +55,11 @@ class EvaluationController extends AbstractController
      * @return Response
      */
     #[Route('/evaluation/{id}/delete', name:"evaluation_delete")]
+    #[IsGranted(
+        attribute: new Expression('(user == subject and is_granted("ROLE_MEMBER"))'),
+        subject: new Expression('args["eval"].getUser()'),
+        message: "Vous n'avez pas envoyé cette évaluation, sa suppression ne vous est pas permise"
+    )]
     public function delete(EntityManagerInterface $manager,Evaluation $eval):Response
     {
         $this->addFlash('success','Votre évaluation a bien été supprimée');
