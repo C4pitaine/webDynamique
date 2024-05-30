@@ -15,10 +15,10 @@ class ContactType extends ApplicationType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('lastName',TextType::class,$this->getConfiguration('','Nom'))
-            ->add('firstName',TextType::class,$this->getConfiguration('','Prénom'))
-            ->add('email',EmailType::class,$this->getConfiguration('','E-mail'))
-            ->add('message',TextareaType::class,$this->getConfiguration('','Votre Message'))
+            ->add('lastName',TextType::class,$this->getConfiguration('Nom','Nom'))
+            ->add('firstName',TextType::class,$this->getConfiguration('Prénom','Prénom'))
+            ->add('email',EmailType::class,$this->getConfiguration('E-mail','E-mail'))
+            ->add('message',TextareaType::class,$this->getConfiguration('Message','Votre Message'))
         ;
     }
 
