@@ -20,7 +20,7 @@
                 {% for evaluation in evaluations %}
                     <div class="evaluation">
                         <div class="buttons mb-3">
-                            <a href="" class="btn btn-warning"><i class="fas fa-pen"></i></a>
+                            <a href="{{path('evaluation_update',{'id':evaluation.id})}}" class="btn btn-warning"><i class="fas fa-pen"></i></a>
                             <div class="btn btn-danger deleteButtonUser"><i class="fas fa-trash"></i></div>
                         </div>
                         {% include "partials/rating.html.twig" with {'rating':evaluation.note} %}

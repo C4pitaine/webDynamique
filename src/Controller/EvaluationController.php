@@ -4,9 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Evaluation;
 use App\Form\EvaluationType;
+use App\Form\EvaluationUpdateType;
 use App\Repository\UserRepository;
 use App\Repository\EvaluationRepository;
-use App\Service\PaginationService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,7 +14,6 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Validator\Constraints\Length;
 
 class EvaluationController extends AbstractController
 {
@@ -23,6 +22,8 @@ class EvaluationController extends AbstractController
      *
      * @param EntityManagerInterface $manager
      * @param Request $request
+     * @param UserRepository $userRepo
+     * @param EvaluationRepository $evalRepo
      * @return Response
      */
     #[Route('/evaluation/create', name:'evaluation_create')]
@@ -44,11 +45,11 @@ class EvaluationController extends AbstractController
                 $manager->flush();
 
                 $this->addFlash('success','Votre évaluation a été envoyée avec succès');
-                return $this->redirectToRoute('evaluations');
+                return $this->redirectToRoute('evaluation');
             }
         }else{
             $this->addFlash('warning','Vous avez déjà évalué le coach, si vous voulez refaire une évaluation veuillez supprimer la précédente');
-            return $this->redirectToRoute('evaluations');
+            return $this->redirectToRoute('evaluation');
         }
 
         return $this->render('evaluation/new.html.twig',[
@@ -76,17 +77,49 @@ class EvaluationController extends AbstractController
         $manager->remove($eval);
         $manager->flush();
 
-        return $this->redirectToRoute('evaluations');
+        return $this->redirectToRoute('evaluation');
     }
 
     /**
-     * Récupération des évaluations d'un utilisateur
+     * Permet à l'utilisateur de modifier son évaluation
+     *
+     * @param EntityManagerInterface $manager
+     * @param Request $request
+     * @param Evaluation $eval
+     * @return Response
+     */
+    #[Route('/evaluation/{id}/update', name:"evaluation_update")]
+    #[IsGranted(
+        attribute: new Expression('(user == subject and is_granted("ROLE_MEMBER"))'),
+        subject: new Expression('args["eval"].getUser()'),
+        message: "Vous n'avez pas envoyé cette évaluation, sa modification ne vous est pas permise"
+    )]
+    public function update(EntityManagerInterface $manager,Request $request,Evaluation $eval): Response
+    {
+        $form = $this->createForm(EvaluationUpdateType::class,$eval);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $manager->persist($eval);
+            $manager->flush();
+
+            $this->addFlash('success','Votre évaluation a bien été modifiée');
+            return $this->redirectToRoute('evaluation');
+        }
+
+        return $this->render('/evaluation/update.html.twig',[
+            'formEval' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * Récupération de l'évaluation d'un utilisateur
      *
      * @param EvaluationRepository $evalRepo
      * @param UserRepository $userRepo
      * @return Response
      */
-    #[Route('/evaluations/{page<\d+>?1}', name:'evaluations')]
+    #[Route('/evaluation', name:'evaluation')]
     #[IsGranted('ROLE_MEMBER')]
     public function showEvals(EvaluationRepository $evalRepo,UserRepository $userRepo):Response
     {
