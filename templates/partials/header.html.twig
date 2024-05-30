@@ -23,10 +23,6 @@
                     <ul>
                         {% if app.user %}
                             <li><a href="{{path('account_profil')}}">Profil</a></li>
-                            {% if is_granted('ROLE_MEMBER') %}
-                                <li><a href="{{path('evaluations')}}">Évaluations</a></li>
-                            {% endif %}
-                            
                             <li><a href="{{path('account_logout')}}">Déconnexion</a></li>
                         {% else %}
                             <li><a href="{{path('account_login')}}">Connexion</a></li>
@@ -53,9 +49,6 @@
         <a href="">Entraînement</a>
         <a href="">Forum</a>
         <a href="{{path('account_profil')}}">Profil</a>
-        {% if is_granted('ROLE_MEMBER') %}
-            <a href="{{path('evaluations')}}">Évaluations</a>
-        {% endif %}
         <a href="{{path('account_logout')}}">Déconnexion</a>
     {% else %}
         <a href="{{path('account_login')}}">Connexion</a>

@@ -6,6 +6,7 @@ use App\Entity\Evaluation;
 use App\Form\EvaluationType;
 use App\Repository\UserRepository;
 use App\Repository\EvaluationRepository;
+use App\Service\PaginationService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,6 +14,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Validator\Constraints\Length;
 
 class EvaluationController extends AbstractController
 {
@@ -25,20 +27,27 @@ class EvaluationController extends AbstractController
      */
     #[Route('/evaluation/create', name:'evaluation_create')]
     #[IsGranted('ROLE_MEMBER')]
-    public function eval(EntityManagerInterface $manager,Request $request): Response
+    public function eval(EntityManagerInterface $manager,Request $request,EvaluationRepository $evalRepo,UserRepository $userRepo): Response
     {
         $user = $this->getUser();
         $eval = new Evaluation();
+        $userEval = $userRepo->findBy(['email'=>$user->getUserIdentifier()]);
+        $evals = $evalRepo->findBy(['user'=>$userEval[0]->getId()]);
         $form = $this->createForm(EvaluationType::class,$eval);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid())
-        {
-            $eval->setUser($user);
-            $manager->persist($eval);
-            $manager->flush();
+        if(count($evals) == 0){
+            if($form->isSubmitted() && $form->isValid())
+            {
+                $eval->setUser($user);
+                $manager->persist($eval);
+                $manager->flush();
 
-            $this->addFlash('success','Votre évaluation a été envoyée avec succès');
+                $this->addFlash('success','Votre évaluation a été envoyée avec succès');
+                return $this->redirectToRoute('evaluations');
+            }
+        }else{
+            $this->addFlash('warning','Vous avez déjà évalué le coach, si vous voulez refaire une évaluation veuillez supprimer la précédente');
             return $this->redirectToRoute('evaluations');
         }
 
@@ -77,7 +86,7 @@ class EvaluationController extends AbstractController
      * @param UserRepository $userRepo
      * @return Response
      */
-    #[Route('/evaluations', name:'evaluations')]
+    #[Route('/evaluations/{page<\d+>?1}', name:'evaluations')]
     #[IsGranted('ROLE_MEMBER')]
     public function showEvals(EvaluationRepository $evalRepo,UserRepository $userRepo):Response
     {
