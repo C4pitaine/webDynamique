@@ -116,7 +116,10 @@ class UserController extends AbstractController
     /**
      * Permet à l'utilisateur de confirmer son Email 
      *
-     * @param User $user
+     * @param UserRepository $repo
+     * @param EntityManagerInterface $manager
+     * @param integer $id
+     * @param string $token
      * @return Response
      */
     #[Route('/register/{id}/t/{token}',name:'account_checkEmail')]

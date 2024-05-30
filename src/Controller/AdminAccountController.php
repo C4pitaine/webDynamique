@@ -11,7 +11,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class AdminAccountController extends AbstractController
 {
     /**
-     * Fonction de connexion
+     * Permet de se connecter
      *
      * @param AuthenticationUtils $utils
      * @return Response
@@ -44,7 +44,7 @@ class AdminAccountController extends AbstractController
     }
 
     /**
-     * Foncton de déconnexion
+     * Permet de se déconnecter
      *
      * @return void
      */

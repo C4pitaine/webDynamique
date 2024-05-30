@@ -67,10 +67,10 @@ class AdminServicesController extends AbstractController
      * @param Service $service
      * @param Request $request
      * @param EntityManagerInterface $manager
-     * @return void
+     * @return Response
      */
     #[Route('/admin/services/{id}/update',name:'admin_services_update')]
-    public function update(Service $service,Request $request,EntityManagerInterface $manager)
+    public function update(Service $service,Request $request,EntityManagerInterface $manager): Response
     {
         $form = $this->createForm(ServiceType::class,$service);
         $form->handleRequest($request);
@@ -95,10 +95,11 @@ class AdminServicesController extends AbstractController
      *
      * @param Service $service
      * @param EntityManagerInterface $manager
-     * @return void
+     * @return Response
      */
     #[Route('admin/services/{id}/delete',name:'admin_services_delete')]
-    public function delete(Service $service,EntityManagerInterface $manager){
+    public function delete(Service $service,EntityManagerInterface $manager): Response
+    {
         $this->addFlash('danger','Le service '.$service->getTitle().' a bien été supprimé');
 
         $manager->remove($service);

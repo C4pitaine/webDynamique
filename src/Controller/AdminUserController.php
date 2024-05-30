@@ -7,7 +7,6 @@ use App\Form\AddMemberType;
 use App\Form\SearchType;
 use App\Service\PaginationService;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Mapping\Entity;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -70,7 +69,7 @@ class AdminUserController extends AbstractController
     }
 
     /**
-     * Permet d'afficher de manière paginer et avec une recherche sur les utilisateurs
+     * Permet d'afficher de manière paginer les utilisateurs et avec une recherche sur les usernames
      *
      * @param PaginationService $pagination
      * @param Request $request

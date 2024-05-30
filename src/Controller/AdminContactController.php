@@ -14,10 +14,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AdminContactController extends AbstractController
 {
-    /**
-     * Permet d'afficher un message
+     /**
+     * Permet d'afficher un message et de passer son status en vu
      *
      * @param Contact $contact
+     * @param EntityManagerInterface $manager
      * @return Response
      */
     #[Route('/admin/contact/{id}/show',name: 'admin_contact_show')]

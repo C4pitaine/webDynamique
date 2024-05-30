@@ -11,7 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class BlogController extends AbstractController
 {
      /**
-     * Permet d'afficher tous les articles 
+     * Permet d'afficher tous les articles côté utilisateur
      *
      * @param PaginationService $pagination
      * @param integer $page

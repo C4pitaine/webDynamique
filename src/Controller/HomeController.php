@@ -15,6 +15,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
+     /**
+     * Permet d'afficher les services, les dernières meilleures évaluations et de traiter le formulaire de contact
+     *
+     * @param ServiceRepository $servicesRepo
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @param StatsService $statsService
+     * @return Response
+     */
     #[Route('/', name: 'homepage')]
     public function index(ServiceRepository $servicesRepo,Request $request,EntityManagerInterface $manager,StatsService $statsService): Response
     {
