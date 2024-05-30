@@ -17,6 +17,28 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class EvaluationController extends AbstractController
 {
+
+    /**
+     * Récupération de l'évaluation d'un utilisateur
+     *
+     * @param EvaluationRepository $evalRepo
+     * @param UserRepository $userRepo
+     * @return Response
+     */
+    #[Route('/evaluation', name:'evaluation')]
+    #[IsGranted('ROLE_MEMBER')]
+    public function showEvals(EvaluationRepository $evalRepo,UserRepository $userRepo):Response
+    {
+        $user = $this->getUser();
+        $userEval = $userRepo->findBy(['email'=>$user->getUserIdentifier()]);
+        $evals = $evalRepo->findBy(['user'=>$userEval[0]->getId()]);
+
+        return $this->render('evaluation/index.html.twig',[
+            'user' => $user,
+            'evaluations' => $evals
+        ]);
+    }
+    
     /**
      * Permet à l'utilisateur d'ajouter une evaluation
      *
@@ -109,27 +131,6 @@ class EvaluationController extends AbstractController
 
         return $this->render('/evaluation/update.html.twig',[
             'formEval' => $form->createView(),
-        ]);
-    }
-
-    /**
-     * Récupération de l'évaluation d'un utilisateur
-     *
-     * @param EvaluationRepository $evalRepo
-     * @param UserRepository $userRepo
-     * @return Response
-     */
-    #[Route('/evaluation', name:'evaluation')]
-    #[IsGranted('ROLE_MEMBER')]
-    public function showEvals(EvaluationRepository $evalRepo,UserRepository $userRepo):Response
-    {
-        $user = $this->getUser();
-        $userEval = $userRepo->findBy(['email'=>$user->getUserIdentifier()]);
-        $evals = $evalRepo->findBy(['user'=>$userEval[0]->getId()]);
-
-        return $this->render('evaluation/index.html.twig',[
-            'user' => $user,
-            'evaluations' => $evals
         ]);
     }
 }
