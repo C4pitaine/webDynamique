@@ -24,7 +24,7 @@
             </div>
             {% if is_granted('ROLE_MEMBER') or is_granted('ROLE_ADMIN')%}
                 <div class="buttonMember">
-                        <a href="{{path('account_profil_eval')}}">Évaluer le coach</a>
+                        <a href="{{path('evaluation_create')}}">Évaluer le coach</a>
                 </div>
             {% endif %}
         </div>

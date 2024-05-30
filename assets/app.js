@@ -35,7 +35,10 @@ menuA.forEach((menuA)=>{
     })
 })
 
-// Gestion Alerte de suppresion
+// Taille de l'écran 
+
+
+// Gestion Alerte de suppresion admin
 const deleteButtons = document.querySelectorAll('.deleteButton')
 const alertDelete = document.querySelectorAll('.alertDelete')
 const annulerDelete = document.querySelectorAll('.annulerDelete')
@@ -49,5 +52,22 @@ deleteButtons.forEach((deleteButton,key)=>{
 annulerDelete.forEach((annulerDelete,key)=>{
     annulerDelete.addEventListener('click',()=>{
         alertDelete[key].classList.remove('active')
+    })
+})
+
+// Gestion Alerte de suppresion User
+const deleteButtonsUser = document.querySelectorAll('.deleteButtonUser')
+const alertDeleteUser = document.querySelectorAll('.alertDeleteUser')
+const annulerDeleteUser = document.querySelectorAll('.annulerDeleteUser')
+
+deleteButtonsUser.forEach((deleteButton,key)=>{
+    deleteButton.addEventListener('click',()=>{
+        alertDeleteUser[key].classList.add('active')
+    })
+})
+
+annulerDeleteUser.forEach((annulerDelete,key)=>{
+    annulerDelete.addEventListener('click',()=>{
+        alertDeleteUser[key].classList.remove('active')
     })
 })

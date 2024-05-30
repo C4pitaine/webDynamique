@@ -47,7 +47,7 @@ class AdminEvaluationController extends AbstractController
     {
         $pagination->setEntityClass(Evaluation::class)
                     ->setSearch($recherche)
-                    ->setLimit(1)
+                    ->setLimit(10)
                     ->setPage($page);
 
         $form = $this->createForm(SearchType::class);

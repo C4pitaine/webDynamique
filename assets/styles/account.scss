@@ -109,6 +109,67 @@
     }
 }
 
+.evaluations{
+    overflow: hidden;
+    .wrapper{
+        .backProfil{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            width: fit-content;
+            padding: 0 10px;
+            height: 50px;
+            border-radius: 10px;
+            background-color: #EE2525;
+            border: none;
+            margin: 20px 0 20px;
+            font-family: "Roboto", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 22px;
+            color: white;
+            text-decoration: none;
+            
+            &:hover {
+                background-color: white;
+                color: #EE2525;
+            }
+        }
+        h2{
+            font-family: "Roboto", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 30px;
+            color: white;
+            margin: 20px 0 40px;
+        }
+        .evaluations{
+            
+            .evaluation {
+                border: solid 1px #EE2525;
+                border-radius: 10px;
+                padding: 20px;
+                display: flex;
+                flex-direction: column;
+                color: white;
+                width: 100%;
+                margin-bottom: 20px;
+                p {
+                  font-size: 16px;
+                  font-family: "Roboto", sans-serif;
+                  font-weight: 400;
+                  font-style: normal;
+                }
+                .rating .fas {
+                  margin-bottom: 10px;
+                  color: #EE2525;
+                }
+            }
+        }
+    }
+}
+
 /* Media queries */
 
 @media all and (max-width:1000px){
@@ -122,11 +183,12 @@
 }
 
 @media all and (max-width:800px){
-    .eval{
+    .eval,.evaluations{
         .wrapper{
             width: 90%;
         }
     }
+
 }
 
 @media all and (max-width:705px){
