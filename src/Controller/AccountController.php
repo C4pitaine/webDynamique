@@ -35,7 +35,7 @@ class AccountController extends AbstractController
      *
      * @param EntityManagerInterface $manager
      * @param Request $request
-     * @param UserPasswordHasher $hasher
+     * @param UserPasswordHasherInterface $hasher
      * @return Response
      */
     #[Route("/profile/passwordUpdate", name:"account_profile_passwordUpdate")]
