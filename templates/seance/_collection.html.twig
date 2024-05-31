@@ -1,0 +1,49 @@
+{% block form_row %}
+    <div class="formField">
+        {{form_errors(form)}}
+        {{form_widget(form)}}
+    </div>
+{% endblock %}
+
+{% block _seance_exosMusculations_widget %}
+    <p>Ajouter vos exercices de Musculation</p>
+    {{form_widget(form)}}
+    <input type="hidden" id="widgets-counter" value="0">
+    <div class="form-group">
+        <button type="button" id="add-image" class="boutonSubmit">Ajouter un exercice Muscu</button>
+    </div> 
+
+{% endblock %}
+
+{% block _seance_exosMusculations_entry_row %}
+    {{form_widget(form)}}
+{% endblock %}
+
+{% block _seance_exosMusculations_entry_widget %}
+    <div class="form-group my-2" id="block_{{id}}">
+        <div class="formComplet">
+            <div class="formEntryButton">
+                <button type="button" class="btn btn-danger" data-action="delete" data-target="#block_{{id}}">X</button>
+            </div>
+            <div class="formBlock">
+                <div class="formEntry">
+                    {{form_widget(form.name)}}
+                    {{form_errors(form.name)}}
+                </div>
+                <div class="formEntry">
+                    {{form_widget(form.series)}}
+                    {{form_errors(form.series)}}
+                </div>
+                <div class="formEntry">
+                    {{form_widget(form.repetitions)}}
+                    {{form_errors(form.repetitions)}}
+                </div>
+                <div class="formEntry">
+                    {{form_widget(form.poids)}}
+                    {{form_errors(form.poids)}}
+                </div>
+            </div>
+            <hr>
+        </div>
+    </div>
+{% endblock %}
