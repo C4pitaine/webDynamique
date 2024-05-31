@@ -48,3 +48,14 @@
         </div>
     </div>
 {% endblock %}
+
+{% block javascripts %}
+    <script>
+        const seance = document.querySelectorAll('.seance')
+        for(i=0;i < seance.length;i++){
+            if(!(i % 2 == 0)){
+                seance[i].classList.add('seanceEnd')
+            }
+        }
+    </script>
+{% endblock %}

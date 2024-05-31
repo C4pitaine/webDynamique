@@ -73,7 +73,7 @@
                 border-radius: 10px;
                 background-color: #EE2525;
                 border: none;
-                margin-bottom: 20px;
+                margin-bottom: 30px;
                 font-family: "Roboto", sans-serif;
                 font-weight: 400;
                 font-style: normal;
@@ -99,6 +99,9 @@
             .seancesContainer{
                 display: flex;
                 flex-wrap: wrap;
+                .seanceEnd{
+                    justify-content: end;
+                }
                 .seance{
                     width: 50%;
                     display: flex;
@@ -379,6 +382,9 @@
                 .seancesContainer{
                     .seance{
                         width: 100%;
+                    }
+                    .seanceEnd{
+                        justify-content: start;
                     }
                 }
             }
