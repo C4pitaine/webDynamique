@@ -5,13 +5,37 @@
         overflow: hidden;
         width: 80%;
         margin: 0 auto;
+        .backButton{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            width: fit-content;
+            padding: 0 20px;
+            height: 50px;
+            border-radius: 10px;
+            background-color: #EE2525;
+            border: none;
+            margin: 50px 0 20px;
+            font-family: "Roboto", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 18px;
+            color: white;
+            text-decoration: none;
+            
+            &:hover {
+                background-color: white;
+                color: #EE2525;
+            }
+        }
         h2{
             font-size: 30px;
             font-family: "Roboto", sans-serif;
             font-optical-sizing: auto;
             font-weight: normal;
             font-style: normal;
-            margin:50px 0 20px;
+            margin:20px 0 20px;
             color: white;
         }
         form{

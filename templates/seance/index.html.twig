@@ -8,6 +8,7 @@
     {% include "partials/_scrollToTop.html.twig" %}
     <div class="slide seance">
         <div class="wrapper">
+            <a href="{{path('account_profil')}}" class="backButton">Retour</a>
             <h2>Ajouter une séance</h2>
             {{form_start(formSeance)}}
                 {{form_widget(formSeance)}}

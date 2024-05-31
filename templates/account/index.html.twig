@@ -27,9 +27,24 @@
                         <a href="{{path('evaluation_create')}}">Évaluer le coach</a>
                 </div>
             {% endif %}
+            <div class="seances">
+                <h6>Séances de sport :</h6>
+                <div class="seancesContainer">
+                    {% for seance in pagination.data %}
+                    {% set date = seance.date %} {# Crée une nouvelle date avec la date et l'heure actuelles #}
+                        <div class="seance">
+                            <p>{{seance.name}}</p>
+                            <p class="ligne">-</p>
+                            <p>{{ date|date("d/m/Y") }}</p>
+                            <a href="">Afficher</a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
             <div class="button">
                 <a href="{{path('seance_create')}}" class="buttonAdd">Ajouter une séance</a>
             </div>
+            {{pagination.display}}
         </div>
     </div>
 {% endblock %}

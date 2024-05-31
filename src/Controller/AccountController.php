@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Seance;
+use App\Form\UserUpdateType;
 use App\Entity\PasswordUpdate;
 use App\Form\PasswordUpdateType;
-use App\Form\UserUpdateType;
+use App\Service\PaginationService;
 use Symfony\Component\Form\FormError;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,13 +23,20 @@ class AccountController extends AbstractController
      *
      * @return Response
      */
-    #[Route('/profil',name:'account_profil')]
+    #[Route('/profil/{page<\d+>?1}',name:'account_profil')]
     #[IsGranted('ROLE_USER')]
-    public function profile(): Response
+    public function profile(int $page,PaginationService $pagination): Response
     {
         $user = $this->getUser();
+        $pagination->setEntityClass(Seance::class)
+                    ->setLimit(10)
+                    ->setPage($page)
+                    ->setTemplatePath('partials/_pagination.html.twig')
+                    ->setSearch($user->getId());
+
        return $this->render('account/index.html.twig',[
-            'user' =>$user
+            'user' =>$user,
+            'pagination' => $pagination
        ]);
     }
 

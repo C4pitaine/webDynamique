@@ -21,6 +21,28 @@ class SeanceRepository extends ServiceEntityRepository
         parent::__construct($registry, Seance::class);
     }
 
+    /**
+     * Permet de faire une recherche sur les noms / prénoms pour les messages
+     *
+     * @param string $search
+     * @return array|null
+     */
+    public function search(string $search,?int $limit = 10,?int $offset = 0): ?array
+    {
+        $search = htmlspecialchars($search);
+
+        return $this->createQueryBuilder('s')
+                    ->select('s as seance','s.id,s.name,s.date,u.id')
+                    ->join('s.user','u')
+                    ->where('u.id LIKE :search')
+                    ->setParameter('search','%'.$search.'%')
+                    ->setMaxResults($limit)
+                    ->setFirstResult($offset)
+                    ->orderBy('s.date','DESC')
+                    ->getQuery()
+                    ->getResult();
+    }
+
     //    /**
     //     * @return Seance[] Returns an array of Seance objects
     //     */

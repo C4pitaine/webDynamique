@@ -61,6 +61,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            margin-top: 20px;
             .buttonAdd{
                 display: flex;
                 justify-content: center;
@@ -83,6 +84,62 @@
                 &:hover {
                   background-color: white;
                   color: #EE2525;
+                }
+            }
+        }
+        .seances{
+            h6{
+                font-family: "Roboto", sans-serif;
+                font-weight: 400;
+                font-style: normal;
+                font-size: 24px;
+                color: white;
+                margin:40px 0 20px;
+            }
+            .seancesContainer{
+                display: flex;
+                flex-wrap: wrap;
+                .seance{
+                    width: 50%;
+                    display: flex;
+                    align-items: center;
+                    color: white;
+                    margin: 10px 0;
+                    p{
+                        font-family: "Roboto", sans-serif;
+                        font-weight: 400;
+                        font-style: normal;
+                        font-size: 20px;
+                    }
+                    .ligne{
+                        margin-left: 10px;
+                        margin-right: 10px;
+                    }
+                    a{
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        color: white;
+                        width: fit-content;
+                        padding: 0 20px;
+                        height: 50px;
+                        border-radius: 10px;
+                        background-color: #EE2525;
+                        border: none;
+                        margin-bottom: 20px;
+                        margin-left: 20px;
+                        font-family: "Roboto", sans-serif;
+                        font-weight: 400;
+                        font-style: normal;
+                        font-size: 22px;
+                        color: white;
+                        text-decoration: none;
+                      
+                        &:hover {
+                          background-color: white;
+                          color: #EE2525;
+                        } 
+                    }
                 }
             }
         }
@@ -315,6 +372,20 @@
 
 /* Media queries */
 
+@media all and (max-width:1050px){
+    .profil{
+        .wrapper{
+            .seances{
+                .seancesContainer{
+                    .seance{
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+}
+
 @media all and (max-width:1000px){
     .eval,.passwordUpdate,.userUpdate{
         .wrapper{
@@ -350,6 +421,27 @@
     .profil{
         .wrapper{
             width: 90%;
+        }
+    }
+}
+
+@media all and (max-width:500px){
+    .profil{
+        .wrapper{
+            .seances{
+                .seancesContainer{
+                    .seance{
+                        flex-direction: column;
+                        margin-bottom: 20px;
+                        .ligne{
+                            display: none;
+                        }
+                        a{
+                            margin-left: 0;
+                        }
+                    }
+                }
+            }
         }
     }
 }
