@@ -20,7 +20,7 @@
             {% endfor %}
             <div class="buttonsUser">
                 <a href="{{path('account_profile_passwordUpdate')}}" class="buttonLeft">Modifier votre mot de passe</a>
-                <a href="">Modifier votre username</a>
+                <a href="">Modifier votre nom d'utilisateur</a>
             </div>
             {% if is_granted('ROLE_MEMBER') or is_granted('ROLE_ADMIN')%}
                 <div class="buttonMember">
