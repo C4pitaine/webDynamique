@@ -135,7 +135,7 @@
 }
 
 /* Modification du mot de passe */
-.passwordUpdate{
+.passwordUpdate,.userUpdate{
     .wrapper{
         display: flex;
         justify-content: center;
@@ -163,6 +163,7 @@
             font-size: 22px;
             color: white;
             text-decoration: none;
+            margin-bottom: 30px;
             
             &:hover {
                 background-color: white;
@@ -183,7 +184,7 @@
             display: flex;
             align-items: center;
             flex-direction: column;
-            #password_update{
+            #password_update,#user_update{
                 width: 100%;
                 .formField{
                     .toggle-password-container{
@@ -286,7 +287,7 @@
 /* Media queries */
 
 @media all and (max-width:1000px){
-    .eval,.passwordUpdate{
+    .eval,.passwordUpdate,.userUpdate{
         .wrapper{
             img{
                 width: 40%;
@@ -296,7 +297,7 @@
 }
 
 @media all and (max-width:800px){
-    .eval,.evaluations,.passwordUpdate{
+    .eval,.evaluations,.passwordUpdate,.userUpdate{
         .wrapper{
             width: 90%;
         }

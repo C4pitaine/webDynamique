@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\PasswordUpdate;
 use App\Form\PasswordUpdateType;
+use App\Form\UserUpdateType;
 use Symfony\Component\Form\FormError;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -71,5 +72,30 @@ class AccountController extends AbstractController
         ]);
     }
 
-    
+    /**
+     * Permet à l'utilisateur de modifier son nom d'utilisateur
+     *
+     * @param EntityManagerInterface $manager
+     * @param Request $request
+     * @return Response
+     */
+    #[Route('/profile/userUpdate', name:"account_profile_userUpdate")]
+    public function updateUser(EntityManagerInterface $manager,Request $request): Response
+    {
+        $user = $this->getUser();
+        $form = $this->createForm(UserUpdateType::class,$user);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $manager->persist($user);
+            $manager->flush();
+
+            $this->addFlash('success',"Votre nom d'utilisateur est maintenant : ".$user->getUsername());
+            return $this->redirectToRoute('account_profil');
+        }
+
+        return $this->render('account/userUpdate.html.twig',[
+            'formUserUpdate' => $form->createView(),
+        ]);
+    }
 }

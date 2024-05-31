@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Username{% endblock %}
+
+{% form_theme formUserUpdate "form/_formField.html.twig"%}
+
+{% block body %}
+    <div class="slide userUpdate">
+        <div class="wrapper">
+            <img src="/logo/logoQT.png" alt="Logo Quentin Coaching Sportif">
+            <a href="{{path('account_profil')}}" class="buttonBack">Retour</a>
+            <h2>Modifier votre nom d'utilisateur</h2>
+            {{form_start(formUserUpdate)}}
+                {{form_widget(formUserUpdate)}}
+                <button type="submit" class="boutonSubmit">Modifier</button>
+            {{form_end(formUserUpdate)}}
+        </div>
+    </div>
+{% endblock %}

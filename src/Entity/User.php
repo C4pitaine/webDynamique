@@ -47,6 +47,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message:"Ce champ ne peut pas être vide")]
+    #[Assert\Length(min:2,max:255,minMessage:"Votre nom d'utilisateur doit faire plus de 2 caractères",maxMessage:"Votre nom d'utilisateur ne doit pas faire plus de 255 caractères")]
     private ?string $username = null;
 
     #[ORM\Column(length: 255)]
