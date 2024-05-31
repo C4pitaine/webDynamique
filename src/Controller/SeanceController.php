@@ -31,7 +31,22 @@ class SeanceController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid())
         {
+            foreach($seance->getExosMusculations() as $exosMuscu)
+            {
+                $exosMuscu->setSeance($seance);
+                $manager->persist($exosMuscu);
+            } foreach($seance->getExosCardios() as $exosCardio)
+            {
+                $exosCardio->setSeances($seance);
+                $manager->persist($exosCardio);
+            }
 
+            $seance->setUser($this->getUser());
+
+            $manager->persist($seance);
+            $manager->flush();
+            $this->addFlash('success','Votre séance : '.$seance->getName().' a bien été ajoutée');
+            return $this->redirectToRoute('account_profil');
         }
 
         return $this->render('seance/index.html.twig', [

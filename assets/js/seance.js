@@ -1,30 +1,25 @@
-// on crée un nouveau fichier car si on le met dans app.js il fera tout ce qu'y est mit ici à chaque fois et pas uniquement dans les fichiers voulu
 const addExosMuscu = document.querySelector('#exos-muscu')
 addExosMuscu.addEventListener('click',()=>{
-    // compter combien j'ai d form-group pour les indices ex: annonce_image_0_url
     const widgetCounter = document.querySelector("#widgets-counter")
-    const index = +widgetCounter.value // le + permet de transformer en nombre, value rends tjrs un string 
+    const index = +widgetCounter.value
     const exosMusculations = document.querySelector("#seance_exosMusculations")
-    // recup le prototype dans la div
 
-    const prototypeMuscu = exosMusculations.dataset.prototype.replace(/__name__/g, index) // drapeau g pour indiqur que l'on va le faire plusieurs fois 
+    const prototypeMuscu = exosMusculations.dataset.prototype.replace(/__name__/g, index)
     exosMusculations.insertAdjacentHTML('beforeend', prototypeMuscu)
     widgetCounter.value = index+1
-    handleDeleteButtons() //  pour mettre à jour la table deletes
+    handleDeleteButtons()
 })
 
 const addExosCardio = document.querySelector('#exos-cardio')
 addExosCardio.addEventListener('click',()=>{
-    // compter combien j'ai d form-group pour les indices ex: annonce_image_0_url
     const widgetCounter = document.querySelector("#widgets-counter")
-    const index = +widgetCounter.value // le + permet de transformer en nombre, value rends tjrs un string 
+    const index = +widgetCounter.value
     const exosCardios = document.querySelector("#seance_exosCardios")
-    // recup le prototype dans la div
 
-    const prototypeCardio = exosCardios.dataset.prototype.replace(/__name__/g, index) // drapeau g pour indiqur que l'on va le faire plusieurs fois 
+    const prototypeCardio = exosCardios.dataset.prototype.replace(/__name__/g, index)
     exosCardios.insertAdjacentHTML('beforeend', prototypeCardio)
     widgetCounter.value = index+1
-    handleDeleteButtons() //  pour mettre à jour la table deletes
+    handleDeleteButtons()
 })
 
 const updateCounter = () => {
@@ -39,7 +34,7 @@ const handleDeleteButtons = () => {
             const target = button.dataset.target
             const elementTarget = document.querySelector(target)
             if(elementTarget){
-                elementTarget.remove() // supprimer l'éléménet
+                elementTarget.remove()
             }
         })
     })
