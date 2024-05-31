@@ -10,7 +10,7 @@
     {{form_widget(form)}}
     <input type="hidden" id="widgets-counter" value="0">
     <div class="form-group">
-        <button type="button" id="add-image" class="boutonSubmit">Ajouter un exercice Muscu</button>
+        <button type="button" id="exos-muscu" class="boutonSubmit">Ajouter un exercice Muscu</button>
     </div> 
 
 {% endblock %}
@@ -41,6 +41,43 @@
                 <div class="formEntry">
                     {{form_widget(form.poids)}}
                     {{form_errors(form.poids)}}
+                </div>
+            </div>
+            <hr>
+        </div>
+    </div>
+{% endblock %}
+
+
+
+{% block _seance_exosCardios_widget %}
+    <p>Ajouter vos exercices de Cardio</p>
+    {{form_widget(form)}}
+    <input type="hidden" id="widgets-counter" value="0">
+    <div class="form-group">
+        <button type="button" id="exos-cardio" class="boutonSubmit">Ajouter un exercice cardio</button>
+    </div> 
+
+{% endblock %}
+
+{% block _seance_exosCardios_entry_row %}
+    {{form_widget(form)}}
+{% endblock %}
+
+{% block _seance_exosCardios_entry_widget %}
+    <div class="form-group my-2" id="block_{{id}}">
+        <div class="formComplet">
+            <div class="formEntryButton">
+                <button type="button" class="btn btn-danger" data-action="delete" data-target="#block_{{id}}">X</button>
+            </div>
+            <div class="formBlock">
+                <div class="formEntry">
+                    {{form_widget(form.name)}}
+                    {{form_errors(form.name)}}
+                </div>
+                <div class="formEntry">
+                    {{form_widget(form.time)}}
+                    {{form_errors(form.time)}}
                 </div>
             </div>
             <hr>

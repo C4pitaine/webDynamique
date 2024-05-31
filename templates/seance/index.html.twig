@@ -5,12 +5,13 @@
 {% form_theme formSeance 'seance/_collection.html.twig' %}
 
 {% block body %}
+    {% include "partials/_scrollToTop.html.twig" %}
     <div class="slide seance">
         <div class="wrapper">
             <h2>Ajouter une séance</h2>
             {{form_start(formSeance)}}
                 {{form_widget(formSeance)}}
-                <button type="submit" class="boutonSubmit">Ajouter</button>
+                <button type="submit" class="boutonSubmit">Ajouter la séance</button>
             {{form_end(formSeance)}}
         </div>
     </div>

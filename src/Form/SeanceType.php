@@ -8,8 +8,8 @@ use App\Form\ApplicationType;
 use App\Form\ExosMusculationType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class SeanceType extends ApplicationType
@@ -18,7 +18,7 @@ class SeanceType extends ApplicationType
     {
         $builder
             ->add('name',TextType::class,$this->getConfiguration('','Nom de votre séance'))
-            ->add('date',DateTimeType::class,$this->getConfiguration('','Date de votre séance',[
+            ->add('date',DateType::class,$this->getConfiguration('','Date de votre séance',[
                 'widget' => 'single_text',
             ]))
             ->add('exosMusculations', CollectionType::class, [

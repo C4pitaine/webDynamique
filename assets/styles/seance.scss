@@ -15,7 +15,36 @@
             color: white;
         }
         form{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            .boutonSubmit{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: white;
+                width: fit-content;
+                padding: 0 10px;
+                height: 50px;
+                border-radius: 10px;
+                background-color: #EE2525;
+                border: none;
+                margin: 20px 0 20px;
+                font-family: "Roboto", sans-serif;
+                font-weight: 400;
+                font-style: normal;
+                font-size: 18px;
+                color: white;
+                text-decoration: none;
+                
+                &:hover {
+                    background-color: white;
+                    color: #EE2525;
+                }
+            }
             #seance{
+                width: 100%;
                 .formField{
                     p{
                         font-size: 22px;
@@ -26,40 +55,11 @@
                         margin:40px 0 20px;
                         color: white;
                     }
-                    #seance_exosMusculations{
+                    #seance_exosMusculations,#seance_exosCardios{
                         .formComplet{
-                            .formBlock{
-                                .formEntry{
-
-                                }
-                            }
                             hr{
                                 color: white;
                             }
-                        }
-                    }
-                    .boutonSubmit{
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        color: white;
-                        width: fit-content;
-                        padding: 0 10px;
-                        height: 50px;
-                        border-radius: 10px;
-                        background-color: #EE2525;
-                        border: none;
-                        margin: 20px 0 20px;
-                        font-family: "Roboto", sans-serif;
-                        font-weight: 400;
-                        font-style: normal;
-                        font-size: 22px;
-                        color: white;
-                        text-decoration: none;
-                        
-                        &:hover {
-                            background-color: white;
-                            color: #EE2525;
                         }
                     }
                 }

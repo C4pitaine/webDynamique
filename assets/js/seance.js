@@ -1,14 +1,28 @@
 // on crée un nouveau fichier car si on le met dans app.js il fera tout ce qu'y est mit ici à chaque fois et pas uniquement dans les fichiers voulu
-const addImage = document.querySelector('#add-image')
-addImage.addEventListener('click',()=>{
+const addExosMuscu = document.querySelector('#exos-muscu')
+addExosMuscu.addEventListener('click',()=>{
     // compter combien j'ai d form-group pour les indices ex: annonce_image_0_url
     const widgetCounter = document.querySelector("#widgets-counter")
     const index = +widgetCounter.value // le + permet de transformer en nombre, value rends tjrs un string 
-    const annonceImages = document.querySelector("#seance_exosMusculations")
+    const exosMusculations = document.querySelector("#seance_exosMusculations")
     // recup le prototype dans la div
 
-    const prototype = annonceImages.dataset.prototype.replace(/__name__/g, index) // drapeau g pour indiqur que l'on va le faire plusieurs fois 
-    annonceImages.insertAdjacentHTML('beforeend', prototype)
+    const prototypeMuscu = exosMusculations.dataset.prototype.replace(/__name__/g, index) // drapeau g pour indiqur que l'on va le faire plusieurs fois 
+    exosMusculations.insertAdjacentHTML('beforeend', prototypeMuscu)
+    widgetCounter.value = index+1
+    handleDeleteButtons() //  pour mettre à jour la table deletes
+})
+
+const addExosCardio = document.querySelector('#exos-cardio')
+addExosCardio.addEventListener('click',()=>{
+    // compter combien j'ai d form-group pour les indices ex: annonce_image_0_url
+    const widgetCounter = document.querySelector("#widgets-counter")
+    const index = +widgetCounter.value // le + permet de transformer en nombre, value rends tjrs un string 
+    const exosCardios = document.querySelector("#seance_exosCardios")
+    // recup le prototype dans la div
+
+    const prototypeCardio = exosCardios.dataset.prototype.replace(/__name__/g, index) // drapeau g pour indiqur que l'on va le faire plusieurs fois 
+    exosCardios.insertAdjacentHTML('beforeend', prototypeCardio)
     widgetCounter.value = index+1
     handleDeleteButtons() //  pour mettre à jour la table deletes
 })
@@ -34,3 +48,14 @@ const handleDeleteButtons = () => {
 
 updateCounter()
 handleDeleteButtons()
+
+// Permet de remonter jusqu'en haut de la page
+const scrollTop = document.querySelector('.scrollTop')
+
+scrollTop.addEventListener('click',()=>{
+    window.scrollTo({
+        top:0,
+        left:0,
+        behavior: "smooth"
+    })
+})
