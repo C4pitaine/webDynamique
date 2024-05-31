@@ -80,6 +80,7 @@ class AccountController extends AbstractController
      * @return Response
      */
     #[Route('/profile/userUpdate', name:"account_profile_userUpdate")]
+    #[IsGranted('ROLE_USER')]
     public function updateUser(EntityManagerInterface $manager,Request $request): Response
     {
         $user = $this->getUser();

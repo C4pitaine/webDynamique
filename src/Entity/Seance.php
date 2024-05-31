@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: SeanceRepository::class)]
 class Seance
@@ -21,6 +22,7 @@ class Seance
     private ?User $user = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Length(min:2,max:255,minMessage:"Le nom de la séance doit dépasser 2 caractères",maxMessage:"Le nom de la séance ne doit pas dépasser 255 caractères")]
     private ?string $name = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]

@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ExosMusculationRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ExosMusculationRepository::class)]
 class ExosMusculation
@@ -18,15 +19,19 @@ class ExosMusculation
     private ?Seance $seance = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Length(min:2,max:255,minMessage:"Le nom de l'exercice muscu doit dépasser 2 caractères",maxMessage:"Le nom de l'exercice muscu ne doit pas dépasser 255 caractères")]
     private ?string $name = null;
 
     #[ORM\Column]
+    #[Assert\Range(min:1,max:100,notInRangeMessage:"Le nombre de séries doit être entre 1 et 100")]
     private ?int $series = null;
 
     #[ORM\Column]
+    #[Assert\Range(min:1,max:100,notInRangeMessage:"Le nombre de répétitions doit être entre 1 et 100")]
     private ?int $repetitions = null;
 
     #[ORM\Column]
+    #[Assert\Range(min:1,max:1000,notInRangeMessage:"Le poids doit être entre 1 et 1000 KG")]
     private ?int $poids = null;
 
     public function getId(): ?int
