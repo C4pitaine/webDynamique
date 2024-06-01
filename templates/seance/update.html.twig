@@ -8,7 +8,7 @@
     {% include "partials/_scrollToTop.html.twig" %}
     <div class="slide seance">
         <div class="wrapper">
-            <a href="{{path('account_profil')}}" class="backButton">Retour</a>
+            <a href="{{path('seance_show',{'id':seance.id})}}" class="backButton">Retour</a>
             <h2>Modifier une séance</h2>
             {{form_start(formUpdateSeance)}}
                 {{form_widget(formUpdateSeance)}}

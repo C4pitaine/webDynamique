@@ -114,6 +114,7 @@ class SeanceController extends AbstractController
 
         return $this->render('seance/update.html.twig',[
             'formUpdateSeance' => $form->createView(),
+            'seance' => $seance,
         ]);
     }
 }

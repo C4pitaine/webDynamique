@@ -145,17 +145,18 @@
             .exos{
                 display: flex;
                 flex-wrap: wrap;
+                margin: 30px 0;
                 p{
                     font-size: 20px;
                     font-family: "Roboto", sans-serif;
                     font-weight: normal;
                     font-style: normal;
-                    margin:20px 0;
                     color: white;
                     padding: 10px 15px;
                     border: solid 1px #EE2525;
                     border-radius: 10px;
                     margin-right: 10px;
+                    margin-bottom: 10px;
                 }
             }
             .noExos{
@@ -165,6 +166,18 @@
                 font-style: normal;
                 margin:20px 0;
                 color: white;
+            }
+        }
+    }
+}
+
+@media all and (max-width:500px){
+    .seanceShow{
+        .wrapper{
+            .musculation,.cardio{
+                .exos{
+                    justify-content: center;
+                }
             }
         }
     }
