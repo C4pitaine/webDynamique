@@ -18,7 +18,7 @@
             </ul>
         {% else %}
             <ul class="selfPagination">
-                <li class="page-item {% if page == 1 %}disabled{% endif %}">
+                <li class="page-item arrow {% if page == 1 %}disabled{% endif %}">
                     <a href="{{path(route,{'page': page - 1,'recherche':search})}}" class="page-link">&laquo;</a>
                 </li>
                 {% for i in pageMin..pageMax%}
@@ -28,7 +28,7 @@
                         </li>
                     </a>
                 {% endfor %}
-                <li class="page-item {% if page == pages %}disabled{% endif %}">
+                <li class="page-item arrow {% if page == pages %}disabled{% endif %}">
                     <a href="{{path(route,{'page': page + 1,'recherche':search})}}" class="page-link">&raquo;</a>
                 </li>
             </ul>

@@ -29,7 +29,7 @@ class AccountController extends AbstractController
     {
         $user = $this->getUser();
         $pagination->setEntityClass(Seance::class)
-                    ->setLimit(10)
+                    ->setLimit(1)
                     ->setPage($page)
                     ->setTemplatePath('partials/_pagination.html.twig')
                     ->setSearch($user->getId());
