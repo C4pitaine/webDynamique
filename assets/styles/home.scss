@@ -359,13 +359,17 @@
         flex-wrap: wrap;
         justify-content: space-between;
 
-        .contactSocialMedia i {
-          color: white;
-          font-size: 2rem;
-          margin-left: 30px;
+        .contactSocialMedia{
+          a{
+            margin-left: 30px;
+            i{
+              color: white;
+              font-size: 2rem;
 
-          &:hover {
-            color: #EE2525;
+              &:hover {
+                color: #EE2525;
+              }
+            }
           }
         }
       }
