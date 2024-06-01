@@ -1,0 +1,12 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Séance : {{seance.name}}{% endblock %}
+
+{% block body %}
+    <div class="slide seanceShow">
+        <div class="wrapper">
+            {% set date = seance.date %}
+            <h3>{{seance.name}} du {{date | date("d/m/Y")}}</h3>
+        </div> 
+    </div>
+{% endblock %}

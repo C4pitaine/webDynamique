@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -51,6 +52,25 @@ class SeanceController extends AbstractController
 
         return $this->render('seance/index.html.twig', [
             'formSeance' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * Permet d'afficher une séance
+     *
+     * @param Seance $seance
+     * @return Response
+     */
+    #[Route('/seance/show/{id}',name:"seance_show")]
+    #[IsGranted(
+        attribute: New Expression('user == subject and is_granted("ROLE_USER")'),
+        subject: New Expression('args["seance"].getUser()'),
+        message: "Cette séance ne vous appartient pas"
+    )]
+    public function show(Seance $seance): Response
+    {
+        return $this->render('seance/show.html.twig',[
+            'seance' => $seance
         ]);
     }
 }

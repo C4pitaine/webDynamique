@@ -33,10 +33,11 @@
                     {% for seance in pagination.data %}
                     {% set date = seance.date %} {# Crée une nouvelle date avec la date et l'heure actuelles #}
                         <div class="seance">
+                        <p>{{seance.id}}</p>
                             <p>{{seance.name}}</p>
                             <p class="ligne">-</p>
                             <p>{{ date|date("d/m/Y") }}</p>
-                            <a href="">Afficher</a>
+                            <a href="{{path('seance_show',{'id':seance.id})}}">Afficher</a>
                         </div>
                     {% endfor %}
                 </div>
