@@ -20,7 +20,7 @@
             <div class="title">
                 <h3>{{seance.name}} du {{date | date("d/m/Y")}}</h3>
                 <a href="{{path('seance_update',{'id':seance.id})}}" class="button buttonModify">Modifier</a>
-                <a href="{{path('seance_delete',{'id':seance.id})}}" class="button buttonDelete">Supprimer</a>
+                <div class="button buttonDelete deleteButtonUser">Supprimer</div>
             </div>
             <div class="musculation">
                 <h5>Musculation :</h5>
@@ -56,4 +56,5 @@
             </div>
         </div> 
     </div>
+    {% include "partials/deleteAlert.html.twig" with {'type':'','title': "La séance " ~ seance.name ~ " du " ~ date | date("d/m/Y"),'id':seance.id, 'route':'seance_delete'} %}
 {% endblock %}
