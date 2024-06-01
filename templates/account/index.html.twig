@@ -30,15 +30,22 @@
             <div class="seances">
                 <h6>Séances de sport :</h6>
                 <div class="seancesContainer">
-                    {% for seance in pagination.data %}
-                    {% set date = seance.date %} {# Crée une nouvelle date avec la date et l'heure actuelles #}
-                        <div class="seance">
-                            <p>{{seance.name}}</p>
-                            <p class="ligne">-</p>
-                            <p>{{ date|date("d/m/Y") }}</p>
-                            <a href="{{path('seance_show',{'id':seance.seance.id})}}">Afficher</a>
+                    {% if pagination.data is empty %}
+                        <div class="noSeances">
+                            <p>Vous n'avez pas encore ajouté de séance de sport</p>
                         </div>
-                    {% endfor %}
+                    {% else %}
+                        {% for seance in pagination.data %}
+                        {% set date = seance.date %} {# Crée une nouvelle date avec la date et l'heure actuelles #}
+                            <div class="seance">
+                                <p>{{seance.name}}</p>
+                                <p class="ligne">-</p>
+                                <p>{{ date|date("d/m/Y") }}</p>
+                                <a href="{{path('seance_show',{'id':seance.seance.id})}}">Afficher</a>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    
                 </div>
             </div>
             <div class="button">

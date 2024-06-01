@@ -73,4 +73,6 @@ class SeanceController extends AbstractController
             'seance' => $seance
         ]);
     }
+
+    
 }
