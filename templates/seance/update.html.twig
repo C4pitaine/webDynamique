@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Séance{% endblock %}
+
+{% form_theme formUpdateSeance 'seance/_collection.html.twig' %}
+
+{% block body %}
+    {% include "partials/_scrollToTop.html.twig" %}
+    <div class="slide seance">
+        <div class="wrapper">
+            <a href="{{path('account_profil')}}" class="backButton">Retour</a>
+            <h2>Modifier une séance</h2>
+            {{form_start(formUpdateSeance)}}
+                {{form_widget(formUpdateSeance)}}
+                <button type="submit" class="boutonSubmit">Modifier</button>
+            {{form_end(formUpdateSeance)}}
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{encore_entry_script_tags('seance')}}
+{% endblock %}

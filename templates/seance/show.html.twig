@@ -8,9 +8,18 @@
     <div class="slide seanceShow">
         <div class="wrapper">
             <a href="{{path('account_profil')}}" class="button back">Retour</a>
+            {% for label, messages in app.flashes %}
+                <div class="container mt-3">
+                    <div class="alert alert-{{label}}">
+                        {% for message in messages %}
+                            <p>{{ message | raw }}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
             <div class="title">
                 <h3>{{seance.name}} du {{date | date("d/m/Y")}}</h3>
-                <a href="" class="button">Modifier</a>
+                <a href="{{path('seance_update',{'id':seance.id})}}" class="button">Modifier</a>
             </div>
             <div class="musculation">
                 <h5>Musculation :</h5>

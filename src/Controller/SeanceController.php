@@ -56,7 +56,7 @@ class SeanceController extends AbstractController
     }
 
     /**
-     * Permet d'afficher une séance
+     * Permet à un utilisateur d'afficher une de ses séance
      *
      * @param Seance $seance
      * @return Response
@@ -74,5 +74,46 @@ class SeanceController extends AbstractController
         ]);
     }
 
-    
+    /**
+     * Permet à un utilisateur de modifier une de ses séances
+     *
+     * @param EntityManagerInterface $manager
+     * @param Request $request
+     * @param Seance $seance
+     * @return Response
+     */
+    #[Route('/seance/{id}/update', name:"seance_update")]
+    #[IsGranted(
+        attribute: New Expression('user == subject and is_granted("ROLE_USER")'),
+        subject: New Expression('args["seance"].getUser()'),
+        message: "Cette séance ne vous appartient pas"
+    )]
+    public function update(EntityManagerInterface $manager,Request $request,Seance $seance): Response
+    {
+        $form = $this->createForm(SeanceType::class,$seance);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            foreach($seance->getExosMusculations() as $exosMuscu)
+            {
+                $exosMuscu->setSeance($seance);
+                $manager->persist($exosMuscu);
+            } foreach($seance->getExosCardios() as $exosCardio)
+            {
+                $exosCardio->setSeances($seance);
+                $manager->persist($exosCardio);
+            }
+
+            $seance->setUser($this->getUser());
+
+            $manager->persist($seance);
+            $manager->flush();
+            $this->addFlash('success','Votre séance : '.$seance->getName().' a bien été modifiée');
+            return $this->redirectToRoute('seance_show',['id'=>$seance->getId()]);
+        }
+
+        return $this->render('seance/update.html.twig',[
+            'formUpdateSeance' => $form->createView(),
+        ]);
+    }
 }
