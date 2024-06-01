@@ -68,7 +68,7 @@ class AdminContactController extends AbstractController
                     ->setSearch($recherche)
                     ->setOrder(['status'=>'ASC'])
                     ->setPage($page)
-                    ->setLimit(10);
+                    ->setLimit(2);
         $messageNotSeen = $repo->findBy(['status'=>false]);
         $form = $this->createForm(SearchType::class);
         $form->handleRequest($request);

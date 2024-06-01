@@ -44,7 +44,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
      * @param string $search
      * @return array|null
      */
-    public function search(string $search,?int $limit = 10,?int $offset = 0): ?array
+    public function search(string $search,?int $limit = null,?int $offset = 0): ?array
     {
         $search = htmlspecialchars($search);
 
