@@ -61,7 +61,7 @@ class SeanceController extends AbstractController
      * @param Seance $seance
      * @return Response
      */
-    #[Route('/seance/show/{id}',name:"seance_show")]
+    #[Route('/seance/{id}/show',name:"seance_show")]
     #[IsGranted(
         attribute: New Expression('user == subject and is_granted("ROLE_USER")'),
         subject: New Expression('args["seance"].getUser()'),
