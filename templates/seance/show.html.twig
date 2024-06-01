@@ -2,11 +2,48 @@
 
 {% block title %}Séance : {{seance.name}}{% endblock %}
 
+{% set date = seance.date %}
+
 {% block body %}
     <div class="slide seanceShow">
         <div class="wrapper">
-            {% set date = seance.date %}
-            <h3>{{seance.name}} du {{date | date("d/m/Y")}}</h3>
+            <a href="{{path('account_profil')}}" class="button back">Retour</a>
+            <div class="title">
+                <h3>{{seance.name}} du {{date | date("d/m/Y")}}</h3>
+                <a href="" class="button">Modifier</a>
+            </div>
+            <div class="musculation">
+                <h5>Musculation :</h5>
+                {% if seance.exosMusculations | length > 0 %}
+                    {% for musculation in seance.exosMusculations %}
+                        <div class="exos">
+                            <p>{{musculation.name}}</p>
+                            <p>{{musculation.series}} séries</p>
+                            <p>{{musculation.repetitions}} répétitions</p>
+                            <p>{{musculation.poids}} KG</p>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="noExos">
+                        Votre séance : {{seance.name}} du {{date | date("d/m/Y")}} n'a pas d'exercice de musculation
+                    </div>
+                {% endif %}
+            </div>
+             <div class="cardio">
+                <h5>Cardio:</h5>
+                {% if seance.exosCardios | length > 0 %}
+                    {% for cardio in seance.exosCardios %}
+                        <div class="exos">
+                            <p>{{cardio.name}}</p>
+                            <p>{{cardio.time}} min</p>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="noExos">
+                        Votre séance : {{seance.name}} du {{date | date("d/m/Y")}} n'a pas d'exercice de cardio
+                    </div>
+                {% endif %}
+            </div>
         </div> 
     </div>
 {% endblock %}

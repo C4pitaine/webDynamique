@@ -22,7 +22,7 @@ class Seance
     private ?User $user = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\Length(min:2,max:255,minMessage:"Le nom de la séance doit dépasser 2 caractères",maxMessage:"Le nom de la séance ne doit pas dépasser 255 caractères")]
+    #[Assert\Length(min:2,max:50,minMessage:"Le nom de la séance doit dépasser 2 caractères",maxMessage:"Le nom de la séance ne doit pas dépasser 50 caractères")]
     private ?string $name = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]

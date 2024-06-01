@@ -38,7 +38,8 @@ class SeanceRepository extends ServiceEntityRepository
                     ->setParameter('search','%'.$search.'%')
                     ->setMaxResults($limit)
                     ->setFirstResult($offset)
-                    ->orderBy('s.date','ASC')
+                    ->orderBy('s.date','DESC')
+                    ->addOrderBy('s.id','DESC')
                     ->getQuery()
                     ->getResult();
     }
