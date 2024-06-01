@@ -19,7 +19,8 @@
             {% endfor %}
             <div class="title">
                 <h3>{{seance.name}} du {{date | date("d/m/Y")}}</h3>
-                <a href="{{path('seance_update',{'id':seance.id})}}" class="button">Modifier</a>
+                <a href="{{path('seance_update',{'id':seance.id})}}" class="button buttonModify">Modifier</a>
+                <a href="{{path('seance_delete',{'id':seance.id})}}" class="button buttonDelete">Supprimer</a>
             </div>
             <div class="musculation">
                 <h5>Musculation :</h5>

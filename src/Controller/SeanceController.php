@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Seance;
 use App\Form\SeanceType;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Mapping\Entity;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -116,5 +117,28 @@ class SeanceController extends AbstractController
             'formUpdateSeance' => $form->createView(),
             'seance' => $seance,
         ]);
+    }
+
+    /**
+     * Permet à un utilisateur de supprimer une séance
+     *
+     * @param EntityManagerInterface $manager
+     * @param Seance $seance
+     * @return Response
+     */
+    #[Route('/seance/{id}/delete', name:"seance_delete")]
+    #[IsGranted(
+        attribute: New Expression('user == subject and is_granted("ROLE_USER")'),
+        subject: New Expression('args["seance"].getUser()'),
+        message: "Cette séance ne vous appartient pas"
+    )]
+    public function delete(EntityManagerInterface $manager,Seance $seance): Response
+    {
+        $this->addFlash('success','Votre séance : '.$seance->getName().' a bien été supprimée');
+
+        $manager->remove($seance);
+        $manager->flush();
+
+        return $this->redirectToRoute('account_profil');
     }
 }

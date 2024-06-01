@@ -103,7 +103,7 @@
             border-radius: 10px;
             background-color: #EE2525;
             border: none;
-            margin: 20px 0;
+            margin: 20px 20px 20px 0;
             font-family: "Roboto", sans-serif;
             font-weight: 400;
             font-style: normal;
@@ -171,12 +171,26 @@
     }
 }
 
-@media all and (max-width:500px){
+@media all and (max-width:824px){
     .seanceShow{
         .wrapper{
-            .musculation,.cardio{
-                .exos{
-                    justify-content: center;
+            .title{
+                margin-right: 40px;
+                .buttonDelete{
+                    margin-top: 0;
+                }
+            }
+        }
+    }
+}
+
+@media all and (max-width:683px){
+    .seanceShow{
+        .wrapper{
+            .title{
+                justify-content: center;
+                .buttonModify{
+                    margin-top: 0;
                 }
             }
         }
@@ -187,6 +201,18 @@
     .seance,.seanceShow{
         .wrapper{
             width: 90%;
+        }
+    }
+}
+
+@media all and (max-width:500px){
+    .seanceShow{
+        .wrapper{
+            .musculation,.cardio{
+                .exos{
+                    justify-content: center;
+                }
+            }
         }
     }
 }
