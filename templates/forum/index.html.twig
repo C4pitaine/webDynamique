@@ -9,6 +9,31 @@
         <div class="wrapper">
             <h2>Forum</h2>
             {% include "partials/_search.html.twig" %}
+            <a href="{{path('forum_create')}}" class="button">Ajouter un sujet</a>
+            {% for label, messages in app.flashes %}
+                <div class="container mt-3 p-0">
+                    <div class="alert alert-{{label}}">
+                        {% for message in messages %}
+                            <p>{{ message | raw }}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+            <div class="sujets">
+                {% for sujet in pagination.data %}
+                {% set date = sujet.date %}
+                    <div class="sujet">
+                        <a href="">{{sujet.title}}</a>
+                        {% if search %}
+                            <p>{{sujet.username}}</p>
+                        {% else %}
+                            <p>{{sujet.user.username}}</p>
+                        {% endif %}
+                        <p class="dateSujet">{{date | date('d/m/Y H:i:s')}}</p>
+                    </div>
+                {% endfor %}
+            </div>
+            {{pagination.display}}
         </div>
     </div>
 {% endblock %}

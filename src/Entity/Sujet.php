@@ -2,13 +2,16 @@
 
 namespace App\Entity;
 
-use App\Repository\SujetRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use Cocur\Slugify\Slugify;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\SujetRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: SujetRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Sujet
 {
     #[ORM\Id]
@@ -17,6 +20,7 @@ class Sujet
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Length(min:2,max:255,minMessage:"Le titre de votre sujet doit dépasser 2 caractères",maxMessage:"Le titre de votre sujet ne doit pas dépasser 255 caractères")]
     private ?string $title = null;
 
     #[ORM\Column(length: 255)]
@@ -30,9 +34,12 @@ class Sujet
     private ?\DateTimeInterface $date = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Image(mimeTypes:['image/png','image/jpeg', 'image/jpg', 'image/gif','image/webp'], mimeTypesMessage:"Vous devez upload un fichier jpg, jpeg, png, gif, webP")]
+    #[Assert\File(maxSize:"1024k", maxSizeMessage: "La taille du fichier est trop grande")]
     private ?string $image = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\Length(min:50,minMessage:"Votre description doit dépasser 50 caractères")]
     private ?string $description = null;
 
     /**
@@ -44,6 +51,36 @@ class Sujet
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
+    }
+
+    /**
+     * Permet de mettre en place la date de création de l'annnonce
+     *
+     * @return void
+     */
+    #[ORM\PrePersist]
+    public function prePersist(): void
+    {
+        if(empty($this->date))
+        {
+            $this->date = new \DateTime();
+        }
+    }
+
+    /**
+     * Permet d'initialiser le slug automatiquement
+     *
+     * @return void
+     */
+    #[ORM\PrePersist]
+    #[ORM\PreUpdate]
+    public function initializeSlug(): void
+    {
+        if(empty($this->slug))
+        {
+            $slugify = new Slugify();
+            $this->slug = $slugify->slugify($this->title);
+        }
     }
 
     public function getId(): ?int
@@ -104,7 +141,7 @@ class Sujet
         return $this->image;
     }
 
-    public function setImage(string $image): static
+    public function setImage(?string $image): static
     {
         $this->image = $image;
 

@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sujet{% endblock %}
+
+{% form_theme formSujet "form/_formField.html.twig"%}
+
+{% block body %}
+    <div class="slide connexion addSujet">
+        <div class="wrapper">
+            <img src="/logo/logoQT.png" alt="Logo Quentin Coaching Sportif">
+            <a href="{{path('forum_index')}}" class="backButton">Retour</a>
+            <div class="formulaireConnexion">
+                <h2>Forum - Ajout d'un sujet</h2>
+            </div>
+            {{form_start(formSujet)}}
+                {{form_widget(formSujet)}}
+                <button type="submit" class="boutonSubmit">Ajouter</button>
+            {{form_end(formSujet)}}
+        </div>
+    </div>
+{% endblock %}

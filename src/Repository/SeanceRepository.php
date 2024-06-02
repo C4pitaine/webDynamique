@@ -22,7 +22,7 @@ class SeanceRepository extends ServiceEntityRepository
     }
 
     /**
-     * Permet de faire une recherche sur les noms / prénoms pour les messages
+     * Permet de trouver toutes les séances d'un User
      *
      * @param string $search
      * @return array|null

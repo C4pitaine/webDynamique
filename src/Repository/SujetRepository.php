@@ -21,6 +21,29 @@ class SujetRepository extends ServiceEntityRepository
         parent::__construct($registry, Sujet::class);
     }
 
+    /**
+     * Permet de faire une recherche sur les titres des sujets
+     *
+     * @param string $search
+     * @return array|null
+     */
+    public function search(string $search,?int $limit = null,?int $offset = 0): ?array
+    {
+        $search = htmlspecialchars($search);
+
+        return $this->createQueryBuilder('s')
+                    ->select('s as sujet','s.id,s.title,s.date,u.username')
+                    ->join('s.user','u')
+                    ->where('s.title LIKE :search')
+                    ->setParameter('search','%'.$search.'%')
+                    ->setMaxResults($limit)
+                    ->setFirstResult($offset)
+                    ->orderBy('s.date','DESC')
+                    ->addOrderBy('s.id','DESC')
+                    ->getQuery()
+                    ->getResult();
+    }
+
     //    /**
     //     * @return Sujet[] Returns an array of Sujet objects
     //     */
