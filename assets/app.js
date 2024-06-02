@@ -13,6 +13,7 @@ import './styles/blog.scss';
 import './styles/user.scss';
 import './styles/account.scss';
 import './styles/seance.scss';
+import './styles/forum.scss';
 import './styles/bootstrap.min.css';
 
 import 'bootstrap/dist/js/bootstrap.bundle';

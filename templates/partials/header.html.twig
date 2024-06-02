@@ -15,7 +15,7 @@
                 <li><a href="{{path('blog')}}">Blog</a></li>
                 {% if app.user %}
                     <li><a href="">Entraînement</a></li>
-                    <li><a href="">Forum</a></li>
+                    <li><a href="{{path('forum_index')}}">Forum</a></li>
                 {% endif %}
                 
                 <li>
@@ -47,7 +47,7 @@
     <a href="{{path('blog')}}">Blog</a>
     {% if app.user %}
         <a href="">Entraînement</a>
-        <a href="">Forum</a>
+        <a href="{{path('forum_index')}}">Forum</a>
         <a href="{{path('account_profil')}}">Profil</a>
         <a href="{{path('account_logout')}}">Déconnexion</a>
     {% else %}

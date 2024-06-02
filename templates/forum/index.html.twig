@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Forum{% endblock %}
+
+{% form_theme formSearch "form/_formField.html.twig" %}
+
+{% block body %}
+    <div class="slide forum">
+        <div class="wrapper">
+            <h2>Forum</h2>
+            {% include "partials/_search.html.twig" %}
+        </div>
+    </div>
+{% endblock %}
