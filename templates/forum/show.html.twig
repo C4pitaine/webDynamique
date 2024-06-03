@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Sujet : {{sujet.title}}{% endblock %}
+
+{% block body %}
+    <div class="slide sujet">
+        <div class="wrapper">
+            <div class="sujetHeader">
+                 <h2>Sujet : {{sujet.title}}</h2>
+                 <div class="buttons">
+                    <a href="">Répondre</a>
+                    {% if is_granted('ROLE_ADMIN') or app.user == sujet.user %}
+                        <a href="">Modifier</a>
+                        <a href="">Supprimer</a>
+                    {% endif %}
+                 </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

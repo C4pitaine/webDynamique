@@ -23,7 +23,7 @@
                 {% for sujet in pagination.data %}
                 {% set date = sujet.date %}
                     <div class="sujet">
-                        <a href="">{{sujet.title}}</a>
+                        <a href="{{path('forum_show',{'slug':sujet.slug})}}">{{sujet.title}}</a>
                         {% if search %}
                             <p>{{sujet.username}}</p>
                         {% else %}

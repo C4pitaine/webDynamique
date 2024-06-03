@@ -16,6 +16,15 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 class ForumController extends AbstractController
 {
+     /**
+     * Permet d'afficher de manière paginer les sujets + fonction de recherche
+     *
+     * @param Request $request
+     * @param PaginationService $pagination
+     * @param integer $page
+     * @param string $recherche
+     * @return Response
+     */
     #[Route('/forum/{page<\d+>?1}/{recherche}', name: 'forum_index')]
     #[IsGranted('ROLE_USER')]
     public function index(Request $request,PaginationService $pagination,int $page,string $recherche =""): Response
@@ -95,6 +104,21 @@ class ForumController extends AbstractController
 
         return $this->render('forum/new.html.twig',[
             'formSujet' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * Permet d'afficher un sujet du forum
+     *
+     * @param Sujet $sujet
+     * @return Response
+     */
+    #[Route('/forum/{slug}/show', name:'forum_show')]
+    #[IsGranted('ROLE_USER')]
+    public function show(Sujet $sujet): Response
+    {
+        return $this->render('forum/show.html.twig',[
+            'sujet' => $sujet
         ]);
     }
 }
