@@ -18,7 +18,9 @@
             </div>
             <div class="sujetBody">
                 <h3>{{sujet.user.username}} - {{date | date('d/m/Y à H:i:s')}}</h3>
-                <img src="/uploads/forum/{{sujet.image}}" alt="Image de {{sujet.title}}">
+                {% if sujet.image %}
+                    <img src="/uploads/forum/{{sujet.image}}" alt="Image de {{sujet.title}}">
+                {% endif %}
                 <p>{{sujet.description}}</p>
             </div>
         </div>
