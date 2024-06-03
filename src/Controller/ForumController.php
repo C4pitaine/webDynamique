@@ -16,47 +16,6 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 class ForumController extends AbstractController
 {
-     /**
-     * Permet d'afficher de manière paginer les sujets + fonction de recherche
-     *
-     * @param Request $request
-     * @param PaginationService $pagination
-     * @param integer $page
-     * @param string $recherche
-     * @return Response
-     */
-    #[Route('/forum/{page<\d+>?1}/{recherche}', name: 'forum_index')]
-    #[IsGranted('ROLE_USER')]
-    public function index(Request $request,PaginationService $pagination,int $page,string $recherche =""): Response
-    {
-        $pagination->setEntityClass(Sujet::class)
-                    ->setPage($page)
-                    ->setLimit(10)
-                    ->setOrder(['id'=>'DESC'])
-                    ->setSearch($recherche)
-                    ->setTemplatePath('partials/_pagination.html.twig');
-
-        $form = $this->createForm(SearchType::class);
-        $form->handleRequest($request);
-
-        if($form->isSubmitted() && $form->isValid()){
-            $recherche = $form->get('search')->getData();
-            if($recherche !== null){
-                $pagination->setSearch($recherche)
-                        ->setPage(1);
-            }else{
-                $pagination->setSearch("")
-                        ->setPage(1);
-            }
-        }
-        
-        return $this->render('forum/index.html.twig', [
-            'pagination' => $pagination,
-            'formSearch' => $form->createView(),
-            'search' => $recherche
-        ]);
-    }
-
     /**
      * Permet d'ajouter un sujet
      *
@@ -108,6 +67,30 @@ class ForumController extends AbstractController
     }
 
     /**
+     * Permet de supprimer un sujet du forum
+     *
+     * @param EntityManagerInterface $manager
+     * @param Sujet $sujet
+     * @return Response
+     */
+    #[Route('/forum/{id}/delete', name:'forum_delete')]
+    public function delete(EntityManagerInterface $manager,Sujet $sujet): Response
+    {
+        $this->addFlash("success","Le sujet ".$sujet->getTitle()." a bien été supprimé");
+
+        if(!empty($sujet->getImage()))
+        {
+            unlink($this->getParameter('uploads_directory_forum').'/'.$sujet->getImage());
+            $sujet->setImage('');
+            $manager->persist($sujet);
+        }
+
+        $manager->remove($sujet);
+        $manager->flush();
+        return $this->redirectToRoute("forum_index");
+    }
+
+    /**
      * Permet d'afficher un sujet du forum
      *
      * @param Sujet $sujet
@@ -119,6 +102,47 @@ class ForumController extends AbstractController
     {
         return $this->render('forum/show.html.twig',[
             'sujet' => $sujet
+        ]);
+    }
+
+     /**
+     * Permet d'afficher de manière paginer les sujets + fonction de recherche
+     *
+     * @param Request $request
+     * @param PaginationService $pagination
+     * @param integer $page
+     * @param string $recherche
+     * @return Response
+     */
+    #[Route('/forum/{page<\d+>?1}/{recherche}', name: 'forum_index')]
+    #[IsGranted('ROLE_USER')]
+    public function index(Request $request,PaginationService $pagination,int $page,string $recherche =""): Response
+    {
+        $pagination->setEntityClass(Sujet::class)
+                    ->setPage($page)
+                    ->setLimit(10)
+                    ->setOrder(['id'=>'DESC'])
+                    ->setSearch($recherche)
+                    ->setTemplatePath('partials/_pagination.html.twig');
+
+        $form = $this->createForm(SearchType::class);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $recherche = $form->get('search')->getData();
+            if($recherche !== null){
+                $pagination->setSearch($recherche)
+                        ->setPage(1);
+            }else{
+                $pagination->setSearch("")
+                        ->setPage(1);
+            }
+        }
+        
+        return $this->render('forum/index.html.twig', [
+            'pagination' => $pagination,
+            'formSearch' => $form->createView(),
+            'search' => $recherche
         ]);
     }
 }

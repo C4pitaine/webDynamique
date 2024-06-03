@@ -1,20 +1,27 @@
 {% extends "base.html.twig" %}
 
 {% block title %}Sujet : {{sujet.title}}{% endblock %}
-
+{% set date = sujet.date %}
 {% block body %}
-    <div class="slide sujet">
+    <div class="slide sujetShow">
         <div class="wrapper">
+            <a href="{{path('forum_index')}}" class='backButton'>Retour</a>
             <div class="sujetHeader">
-                 <h2>Sujet : {{sujet.title}}</h2>
+                 <h2>{{sujet.title}}</h2>
                  <div class="buttons">
                     <a href="">Répondre</a>
                     {% if is_granted('ROLE_ADMIN') or app.user == sujet.user %}
                         <a href="">Modifier</a>
-                        <a href="">Supprimer</a>
+                        <div class="buttonDelete deleteButtonUser">Supprimer</div>
                     {% endif %}
                  </div>
             </div>
+            <div class="sujetBody">
+                <h3>{{sujet.user.username}} - {{date | date('d/m/Y à H:i:s')}}</h3>
+                <img src="/uploads/forum/{{sujet.image}}" alt="Image de {{sujet.title}}">
+                <p>{{sujet.description}}</p>
+            </div>
         </div>
     </div>
+    {% include "partials/deleteAlert.html.twig" with {'type':'','title': "Votre sujet " ~ sujet.title,'id':sujet.id, 'route':'forum_delete'} %}
 {% endblock %}

@@ -141,6 +141,108 @@
     }
 }
 
+/* Affichage d'un sujet */
+
+.sujetShow{
+    .wrapper{
+        overflow: hidden;
+        .backButton{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            width: fit-content;
+            padding: 10px 20px;
+            border-radius: 10px;
+            background-color: #EE2525;
+            border: none;
+            font-family: "Roboto", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 18px;
+            color: white;
+            text-decoration: none;
+            margin:50px 0 30px;
+            &:hover {
+                background-color: white;
+                color: #EE2525;
+            }
+        }
+        .sujetHeader{
+            margin-bottom: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            h2{
+                font-size: 30px;
+                font-family: "Roboto", sans-serif;
+                font-weight: normal;
+                font-style: normal;
+                color: white;
+                margin-right: 20px;
+            }
+            .buttons{
+                display: flex;
+                align-items: center;
+                flex-wrap: wrap;
+                .deleteButtonUser{
+                    cursor: pointer;
+                }
+                a,.deleteButtonUser{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    color: white;
+                    width: fit-content;
+                    padding: 10px 20px;
+                    border-radius: 10px;
+                    background-color: #EE2525;
+                    border: none;
+                    font-family: "Roboto", sans-serif;
+                    font-weight: 400;
+                    font-style: normal;
+                    font-size: 18px;
+                    color: white;
+                    text-decoration: none;
+                    margin-right: 20px;
+                    &:hover {
+                        background-color: white;
+                        color: #EE2525;
+                    }
+                }
+            }
+        }
+        .sujetBody{
+            padding: 10px 20px;
+            border: solid 1px #EE2525;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            h3{
+                font-size: 24px;
+                font-family: "Roboto", sans-serif;
+                font-weight: normal;
+                font-style: normal;
+                color: white;
+                margin-bottom: 20px;
+            }
+            img{
+                width: 40%;
+                object-fit: cover;
+                align-self: center;
+            }
+            p{
+                font-size: 18px;
+                font-family: "Roboto", sans-serif;
+                font-weight: normal;
+                font-style: normal;
+                color: white;
+                margin-top: 20px;
+            }
+        }
+    }   
+}
+
 /* Media queries */
 
 @media all and (max-width:1200px){
@@ -159,7 +261,7 @@
 }
 
 @media all and (max-width:600px){
-    .forum{
+    .forum,.sujetShow{
         .wrapper{
             width: 90%;
             .sujets{
@@ -167,6 +269,26 @@
                     p,a,.dateSujet{
                         text-align: center;
                     }
+                }
+            }
+        }
+    }
+}
+
+@media all and (max-width:500px){
+    .sujetShow{
+        .wrapper{
+            .sujetHeader{
+                .buttons{
+                    justify-content: center;
+                    a,.deleteButtonUser{
+                        margin-top: 20px;
+                    }
+                }
+            }
+            .sujetBody{
+                img{
+                    width:70%;
                 }
             }
         }
