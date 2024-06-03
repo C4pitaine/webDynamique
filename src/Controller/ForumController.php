@@ -97,6 +97,69 @@ class ForumController extends AbstractController
     }
 
     /**
+     * Permet à l'utilisateur qui a créer un sujet de le modifier
+     *
+     * @param Sujet $sujet
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @return Response
+     */
+    #[Route('/forum/{id}/update',name: 'forum_update')]
+    #[IsGranted(
+        attribute: New Expression('(user == subject and is_granted("ROLE_USER"))'),
+        subject: New Expression('args["sujet"].getUser()'),
+        message: "Ce sujet ne vous appartient pas"
+    )]
+    public function update(Sujet $sujet,Request $request,EntityManagerInterface $manager): Response
+    {
+        $sujetImage = $sujet->getImage();
+        $sujet->setImage("");
+        $form = $this->createForm(SujetType::class,$sujet);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $sujet->setImage($sujetImage);
+            $file = $form['image']->getData();
+            if(!empty($file))
+            {
+                if(!empty($sujetImage)){
+                    unlink($this->getParameter('uploads_directory_forum').'/'.$sujetImage);
+                }
+                $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+                $newFilename = $safeFilename."-".uniqid().'.'.$file->guessExtension();
+                try{
+                    $file->move(
+                        $this->getParameter('uploads_directory_forum'), 
+                        $newFilename 
+                    );
+                }catch(FileException $e)
+                {
+                    return $e->getMessage();
+                }
+                $sujet->setImage($newFilename);
+            }else{
+                if(!empty($sujetImage)){
+                    $sujet->setImage($sujetImage);
+                }
+            }
+
+            $manager->persist($sujet);
+            $manager->flush();
+            
+            $this->addFlash('warning','Le sujet : '.$sujet->getTitle().' a bien été modifié');
+            return $this->redirectToRoute('forum_show',['slug'=>$sujet->getSlug()]);
+        }
+
+        return $this->render('forum/update.html.twig',[
+            'sujet' => $sujet,
+            'formSujet' => $form->createView(),
+            'sujetImage' => $sujetImage,
+        ]);
+    }
+
+    /**
      * Permet d'afficher un sujet du forum
      *
      * @param Sujet $sujet

@@ -10,12 +10,23 @@
                  <h2>{{sujet.title}}</h2>
                  <div class="buttons">
                     <a href="">Répondre</a>
-                    {% if is_granted('ROLE_ADMIN') or app.user == sujet.user %}
-                        <a href="">Modifier</a>
+                    {% if app.user == sujet.user %}
+                        <a href="{{path('forum_update',{'id':sujet.id})}}">Modifier</a>
+                    {% endif %}
+                     {% if is_granted('ROLE_ADMIN') or app.user == sujet.user %}
                         <div class="buttonDelete deleteButtonUser">Supprimer</div>
                     {% endif %}
                  </div>
             </div>
+            {% for label, messages in app.flashes %}
+                <div class="container mt-3 p-0">
+                    <div class="alert alert-{{label}}">
+                        {% for message in messages %}
+                            <p>{{ message | raw }}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
             <div class="sujetBody">
                 <h3>{{sujet.user.username}} - {{date | date('d/m/Y à H:i:s')}}</h3>
                 {% if sujet.image %}

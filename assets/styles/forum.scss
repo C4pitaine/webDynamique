@@ -110,6 +110,9 @@
 /* Ajout d'un sujet */
 .addSujet{
     .wrapper{
+        .imageSujet{
+            width: 50%;
+        }
         .backButton{
             align-self: self-start;
             display: flex;
