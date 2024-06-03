@@ -228,7 +228,8 @@
             }
             img{
                 width: 40%;
-                object-fit: cover;
+                max-height:40vh;
+                object-fit: contain;
                 align-self: center;
             }
             p{

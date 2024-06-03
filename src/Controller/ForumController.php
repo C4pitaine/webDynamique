@@ -10,6 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -74,6 +75,11 @@ class ForumController extends AbstractController
      * @return Response
      */
     #[Route('/forum/{id}/delete', name:'forum_delete')]
+    #[IsGranted(
+        attribute: New Expression('(user == subject and is_granted("ROLE_USER")) or is_granted("ROLE_ADMIN")'),
+        subject: New Expression('args["sujet"].getUser()'),
+        message: "Ce sujet ne vous appartient pas"
+    )]
     public function delete(EntityManagerInterface $manager,Sujet $sujet): Response
     {
         $this->addFlash("success","Le sujet ".$sujet->getTitle()." a bien été supprimé");

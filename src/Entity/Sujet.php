@@ -54,7 +54,7 @@ class Sujet
     }
 
     /**
-     * Permet de mettre en place la date de création de l'annnonce
+     * Permet de mettre en place la date de création du sujet
      *
      * @return void
      */
@@ -63,7 +63,7 @@ class Sujet
     {
         if(empty($this->date))
         {
-            $this->date = new \DateTime();
+            $this->date = new \DateTime('now', new \DateTimeZone('Europe/Brussels'));
         }
     }
 
