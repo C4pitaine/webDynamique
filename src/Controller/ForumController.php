@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Commentaire;
 use App\Entity\Sujet;
+use App\Form\CommentaireType;
 use App\Form\SujetType;
 use App\Form\SearchType;
 use App\Service\PaginationService;
@@ -167,10 +169,26 @@ class ForumController extends AbstractController
      */
     #[Route('/forum/{slug}/show', name:'forum_show')]
     #[IsGranted('ROLE_USER')]
-    public function show(Sujet $sujet): Response
+    public function show(Sujet $sujet,EntityManagerInterface $manager,Request $request): Response
     {
+        $commentaire = new Commentaire();
+        $form = $this->createForm(CommentaireType::class,$commentaire);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $commentaire->setUser($this->getUser())
+                        ->setSujet($sujet);
+
+            $manager->persist($commentaire);
+            $manager->flush();
+
+            $this->addFlash('success','Votre commentaire a bien été ajouté');
+        }
+
         return $this->render('forum/show.html.twig',[
-            'sujet' => $sujet
+            'sujet' => $sujet,
+            'formCommentaire' => $form->createView(),
         ]);
     }
 

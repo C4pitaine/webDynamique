@@ -1,7 +1,10 @@
 {% extends "base.html.twig" %}
 
 {% block title %}Sujet : {{sujet.title}}{% endblock %}
+
+{% form_theme formCommentaire "form/_formField.html.twig" %}
 {% set date = sujet.date %}
+
 {% block body %}
     <div class="slide sujetShow">
         <div class="wrapper">
@@ -34,6 +37,11 @@
                 {% endif %}
                 <p>{{sujet.description}}</p>
             </div>
+            <h4>Résponses :</h4>
+            {{form_start(formCommentaire)}}
+                {{form_widget(formCommentaire)}}
+                <button type="submit" class="boutonSubmit">Répondre</button>
+            {{form_end(formCommentaire)}}
         </div>
     </div>
     {% include "partials/deleteAlert.html.twig" with {'type':'','title': "Votre sujet " ~ sujet.title,'id':sujet.id, 'route':'forum_delete'} %}
