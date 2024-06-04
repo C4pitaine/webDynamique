@@ -21,6 +21,29 @@ class CommentaireRepository extends ServiceEntityRepository
         parent::__construct($registry, Commentaire::class);
     }
 
+    /**
+     * Permet de trouver toutes les séances d'un User
+     *
+     * @param string $search
+     * @return array|null
+     */
+    public function search(string $search,?int $limit = null,?int $offset = 0): ?array
+    {
+        $search = htmlspecialchars($search);
+
+        return $this->createQueryBuilder('c')
+                    ->select('c as commentaire','c.id,c.date,u.username')
+                    ->join('c.user','u')
+                    ->join('c.sujet','s')
+                    ->where('s.id LIKE :search')
+                    ->setParameter('search','%'.$search.'%')
+                    ->setMaxResults($limit)
+                    ->setFirstResult($offset)
+                    ->orderBy('c.date','ASC')
+                    ->getQuery()
+                    ->getResult();
+    }
+
     //    /**
     //     * @return Commentaire[] Returns an array of Commentaire objects
     //     */

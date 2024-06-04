@@ -38,6 +38,19 @@
                 <p>{{sujet.description}}</p>
             </div>
             <h4>Résponses :</h4>
+            <div class="commentaires">
+                <div class="commentaire">
+                    {% for commentaire in pagination.data %}
+                        {{dump(pagination.data)}}
+                        {% set dateCommentaire = commentaire.date %}
+                        {# <div class="headerCommentaire">
+                            <h5>{{commentaire.user.username}} - {{date | date('d/m/Y à H:i:s')}}</h5>
+                            <p>{{commentaire.message}}</p>
+                        </div> #}
+                    {% endfor %}
+                </div>
+            </div>
+            {{pagination.display}}
             {{form_start(formCommentaire)}}
                 {{form_widget(formCommentaire)}}
                 <button type="submit" class="boutonSubmit">Répondre</button>

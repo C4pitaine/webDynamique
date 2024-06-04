@@ -167,13 +167,19 @@ class ForumController extends AbstractController
      * @param Sujet $sujet
      * @return Response
      */
-    #[Route('/forum/{slug}/show', name:'forum_show')]
+    #[Route('/forum/{slug}/show/{page<\d+>?1}', name:'forum_show')]
     #[IsGranted('ROLE_USER')]
-    public function show(Sujet $sujet,EntityManagerInterface $manager,Request $request): Response
+    public function show(Sujet $sujet,EntityManagerInterface $manager,Request $request,PaginationService $pagination,int $page,string $recherche=""): Response
     {
         $commentaire = new Commentaire();
         $form = $this->createForm(CommentaireType::class,$commentaire);
         $form->handleRequest($request);
+
+        $pagination->setEntityClass(Commentaire::class)
+                    ->setLimit(10)
+                    ->setPage($page)
+                    ->setTemplatePath('partials/_paginationSlug.html.twig')
+                    ->setSearch($sujet->getId());
 
         if($form->isSubmitted() && $form->isValid())
         {
@@ -189,6 +195,7 @@ class ForumController extends AbstractController
         return $this->render('forum/show.html.twig',[
             'sujet' => $sujet,
             'formCommentaire' => $form->createView(),
+            'pagination' => $pagination,
         ]);
     }
 
