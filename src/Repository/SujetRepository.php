@@ -32,7 +32,7 @@ class SujetRepository extends ServiceEntityRepository
         $search = htmlspecialchars($search);
 
         return $this->createQueryBuilder('s')
-                    ->select('s as sujet','s.id,s.title,s.date,u.username')
+                    ->select('s as sujet','s.id,s.title,s.date,s.slug,u.username')
                     ->join('s.user','u')
                     ->where('s.title LIKE :search')
                     ->setParameter('search','%'.$search.'%')

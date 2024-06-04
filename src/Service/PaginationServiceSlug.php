@@ -6,7 +6,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Twig\Environment;
 
-class PaginationService{
+class PaginationServiceSlug{
 
     /**
      * Le nom de l'entité sur laquelle on veut effectuer une pagination
@@ -73,6 +73,15 @@ class PaginationService{
     private string $search;
 
     /**
+     * Est utiliser si on utilise la pagination sur une route demandant un slug
+     *
+     * @var string
+     */
+    private string $slug;
+
+
+
+    /**
      * Constructeur du service de pagination qui sera appelé par Symfony
      * 
      * N'oubliez pas de configurer votre fichier service.yaml afin que symfony sache quelle valeur utiliser 
@@ -133,6 +142,30 @@ class PaginationService{
     {
         return $this->search;
     }
+
+    /**
+     * Permet de set le slug
+     *
+     * @param string $search
+     * @return self
+     */
+    public function setSlug(string $slug):self
+    {
+        $this->slug = $slug;
+        return $this;
+    }
+
+    /**
+     * Permet de récupérer le Slug
+     *
+     * @return string
+     */
+    public function getSlug(): string
+    {
+        return $this->slug;
+    }
+
+
 
     /**
      * Permet de spécifier le nombre d'enregistrament que l'on souhaite obtenir
@@ -294,6 +327,7 @@ class PaginationService{
             'pageMin' => $pageMin,
             'pageMax' => $pageMax,
             'search' => $this->search,
+            'slug' => $this->slug,
         ]);
         
     }

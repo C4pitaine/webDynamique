@@ -1,71 +1,35 @@
 <div class="d-flex justify-content-center">
-    {% if search %}
-        {% if pages <= 5 %}
-            <ul class="selfPagination">
-                <li class="page-item arrow {% if page == 1 %}disabled{% endif %}">
-                    <a href="{{path(route,{'page': page - 1,'recherche':search})}}" class="page-link">&laquo;</a>
-                </li>
-                {% for i in 1..pages %}
-                    <a href="{{path(route,{'page':i})}}">
-                        <li class="page-item number {% if page == i %}active{% endif %}">
-                            <p class="page-link">{{i}}</p>
-                        </li>
-                    </a>
-                {% endfor %}
-                <li class="page-item arrow {% if page == pages %}disabled{% endif %}">
-                    <a href="{{path(route,{'page': page + 1,'recherche':search})}}" class="page-link">&raquo;</a>
-                </li>
-            </ul>
-        {% else %}
-            <ul class="selfPagination">
-                <li class="page-item arrow {% if page == 1 %}disabled{% endif %}">
-                    <a href="{{path(route,{'page': page - 1,'recherche':search})}}" class="page-link">&laquo;</a>
-                </li>
-                {% for i in pageMin..pageMax%}
-                    <a href="{{path(route,{'page':i})}}">
-                        <li class="page-item number {% if page == i %}active{% endif %}">
-                            <p class="page-link">{{i}}</p>
-                        </li>
-                    </a>
-                {% endfor %}
-                <li class="page-item arrow {% if page == pages %}disabled{% endif %}">
-                    <a href="{{path(route,{'page': page + 1,'recherche':search})}}" class="page-link">&raquo;</a>
-                </li>
-            </ul>
-        {% endif %}
+    {% if pages <= 5 %}
+        <ul class="selfPagination">
+            <li class="page-item arrow {% if page == 1 %}disabled{% endif %}">
+                <a href="{{path(route,{'page': page - 1,'slug':slug})}}" class="page-link">&laquo;</a>
+            </li>
+            {% for i in 1..pages %}
+                <a href="{{path(route,{'page':i,'slug':slug})}}">
+                    <li class="page-item number {% if page == i %}active{% endif %}">
+                        <p class="page-link">{{i}}</p>
+                    </li>
+                </a>
+            {% endfor %}
+            <li class="page-item arrow {% if page == pages %}disabled{% endif %}">
+                <a href="{{path(route,{'page': page + 1,'slug':slug})}}" class="page-link">&raquo;</a>
+            </li>
+        </ul>
     {% else %}
-        {% if pages <= 5 %}
-            <ul class="selfPagination">
-                <li class="page-item arrow {% if page == 1 %}disabled{% endif %}">
-                    <a href="{{path(route,{'page': page - 1})}}" class="page-link">&laquo;</a>
-                </li>
-                {% for i in 1..pages %}
-                    <a href="{{path(route,{'page':i})}}">
-                        <li class="page-item number {% if page == i %}active{% endif %}">
-                            <p class="page-link">{{i}}</p>
-                        </li>
-                    </a>
-                {% endfor %}
-                <li class="page-item arrow {% if page == pages %}disabled{% endif %}">
-                    <a href="{{path(route,{'page': page + 1})}}" class="page-link">&raquo;</a>
-                </li>
-            </ul>
-        {% else %}
-            <ul class="selfPagination">
-                <li class="page-item arrow {% if page == 1 %}disabled{% endif %}">
-                    <a href="{{path(route,{'page': page - 1})}}" class="page-link">&laquo;</a>
-                </li>
-                {% for i in pageMin..pageMax%}
-                    <a href="{{path(route,{'page':i})}}">
-                        <li class="page-item number {% if page == i %}active{% endif %}">
-                            <p class="page-link">{{i}}</p>
-                        </li>
-                    </a>
-                {% endfor %}
-                <li class="page-item arrow {% if page == pages %}disabled{% endif %}">
-                    <a href="{{path(route,{'page': page + 1})}}" class="page-link">&raquo;</a>
-                </li>
-            </ul>
-        {% endif %}
+        <ul class="selfPagination">
+            <li class="page-item arrow {% if page == 1 %}disabled{% endif %}">
+                <a href="{{path(route,{'page': page - 1,'slug':slug})}}" class="page-link">&laquo;</a>
+            </li>
+            {% for i in pageMin..pageMax%}
+                <a href="{{path(route,{'page':i,'slug':slug})}}">
+                    <li class="page-item number {% if page == i %}active{% endif %}">
+                        <p class="page-link">{{i}}</p>
+                    </li>
+                </a>
+            {% endfor %}
+            <li class="page-item arrow {% if page == pages %}disabled{% endif %}">
+                <a href="{{path(route,{'page': page + 1,'slug':slug})}}" class="page-link">&raquo;</a>
+            </li>
+        </ul>
     {% endif %}
 </div>

@@ -2,12 +2,13 @@
 
 namespace App\Controller;
 
-use App\Entity\Commentaire;
 use App\Entity\Sujet;
-use App\Form\CommentaireType;
 use App\Form\SujetType;
 use App\Form\SearchType;
+use App\Entity\Commentaire;
+use App\Form\CommentaireType;
 use App\Service\PaginationService;
+use App\Service\PaginationServiceSlug;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -169,16 +170,17 @@ class ForumController extends AbstractController
      */
     #[Route('/forum/{slug}/show/{page<\d+>?1}', name:'forum_show')]
     #[IsGranted('ROLE_USER')]
-    public function show(Sujet $sujet,EntityManagerInterface $manager,Request $request,PaginationService $pagination,int $page,string $recherche=""): Response
+    public function show(EntityManagerInterface $manager,Request $request,PaginationService $paginationSlug,Sujet $sujet,int $page): Response
     {
         $commentaire = new Commentaire();
         $form = $this->createForm(CommentaireType::class,$commentaire);
         $form->handleRequest($request);
 
-        $pagination->setEntityClass(Commentaire::class)
+        $paginationSlug->setEntityClass(Commentaire::class)
                     ->setLimit(10)
                     ->setPage($page)
                     ->setTemplatePath('partials/_paginationSlug.html.twig')
+                    // ->setSlug($sujet->getSlug())
                     ->setSearch($sujet->getId());
 
         if($form->isSubmitted() && $form->isValid())
@@ -196,7 +198,7 @@ class ForumController extends AbstractController
         return $this->render('forum/show.html.twig',[
             'sujet' => $sujet,
             'formCommentaire' => $form->createView(),
-            'pagination' => $pagination,
+            'pagination' => $paginationSlug,
         ]);
     }
 

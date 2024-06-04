@@ -55,14 +55,14 @@
                         </div>
                         <p>{{commentaire.commentaire.message}}</p>
                     </div>
-                    {% include "partials/deleteAlert.html.twig" with {'type':'','title': "Votre commentaire",'id':commentaire.id, 'route':'forum_delete'} %}
+                    {% include "partials/deleteAlert.html.twig" with {'type':'','title': "Votre commentaire",'id':commentaire.id, 'route':'commentaire_delete'} %}
                 {% endfor %}
                 {% else %}
                     <h6>Ce sujet n'a pas encore de réponses</h6>
                 {% endif %}
                 
             </div>
-            {{pagination.display}}
+            {# {{pagination.display}} #}
             <h4>Votre commentaire :</h4>
             {{form_start(formCommentaire)}}
                 {{form_widget(formCommentaire)}}
