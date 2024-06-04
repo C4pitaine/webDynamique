@@ -253,6 +253,13 @@
             margin: 50px 0 30px;
         }
         .commentaires{
+            h6{
+                font-size: 20px;
+                font-family: "Roboto", sans-serif;
+                font-weight: normal;
+                font-style: normal;
+                color: white;
+            }
             .commentaire{
                 border: solid 1px #EE2525;
                 padding: 10px 20px;
@@ -272,6 +279,36 @@
                     font-style: normal;
                     color: white;
                     margin-bottom: 0;
+                }
+                .buttons{
+                    display: flex;
+                    align-items: center;
+                    flex-wrap: wrap;
+                    .deleteButtonUser{
+                        cursor: pointer;
+                    }
+                    a,.deleteButtonUser{
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        color: white;
+                        width: fit-content;
+                        padding: 10px 20px;
+                        border-radius: 10px;
+                        background-color: #EE2525;
+                        border: none;
+                        font-family: "Roboto", sans-serif;
+                        font-weight: 400;
+                        font-style: normal;
+                        font-size: 18px;
+                        color: white;
+                        text-decoration: none;
+                        margin: 20px 20px 20px 0;
+                        &:hover {
+                            background-color: white;
+                            color: #EE2525;
+                        }
+                    }
                 }
             }
         }
@@ -351,6 +388,16 @@
             .sujetBody{
                 img{
                     width:70%;
+                }
+            }
+            .commentaires{
+                .commentaire{
+                    .buttons{
+                        justify-content: center;
+                        a{
+                            margin-bottom: 0;
+                        }
+                    }
                 }
             }
         }

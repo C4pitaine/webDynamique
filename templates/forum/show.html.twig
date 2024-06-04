@@ -40,7 +40,8 @@
             </div>
             <h4>Résponses :</h4>
             <div class="commentaires">
-                {% for commentaire in pagination.data %}
+                {% if pagination.data %}
+                    {% for commentaire in pagination.data %}
                     {% set dateCommentaire = commentaire.date %}
                     <div class="commentaire">
                         <h5>{{commentaire.username}} - {{dateCommentaire | date('d/m/Y à H:i:s')}}</h5>
@@ -56,8 +57,12 @@
                     </div>
                     {% include "partials/deleteAlert.html.twig" with {'type':'','title': "Votre commentaire",'id':commentaire.id, 'route':'forum_delete'} %}
                 {% endfor %}
+                {% else %}
+                    <h6>Ce sujet n'a pas encore de réponses</h6>
+                {% endif %}
+                
             </div>
-            {# {{pagination.display}} #}
+            {{pagination.display}}
             <h4>Votre commentaire :</h4>
             {{form_start(formCommentaire)}}
                 {{form_widget(formCommentaire)}}

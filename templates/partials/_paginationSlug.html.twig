@@ -3,7 +3,7 @@
         {% if pages <= 5 %}
             <ul class="selfPagination">
                 <li class="page-item arrow {% if page == 1 %}disabled{% endif %}">
-                    <a href="{{path(route,{'page': page - 1,'recherche':search,'slug':slug})}}" class="page-link">&laquo;</a>
+                    <a href="{{path(route,{'page': page - 1,'recherche':search})}}" class="page-link">&laquo;</a>
                 </li>
                 {% for i in 1..pages %}
                     <a href="{{path(route,{'page':i})}}">
@@ -13,13 +13,13 @@
                     </a>
                 {% endfor %}
                 <li class="page-item arrow {% if page == pages %}disabled{% endif %}">
-                    <a href="{{path(route,{'page': page + 1,'recherche':search,'slug':slug})}}" class="page-link">&raquo;</a>
+                    <a href="{{path(route,{'page': page + 1,'recherche':search})}}" class="page-link">&raquo;</a>
                 </li>
             </ul>
         {% else %}
             <ul class="selfPagination">
                 <li class="page-item arrow {% if page == 1 %}disabled{% endif %}">
-                    <a href="{{path(route,{'page': page - 1,'recherche':search,'slug':slug})}}" class="page-link">&laquo;</a>
+                    <a href="{{path(route,{'page': page - 1,'recherche':search})}}" class="page-link">&laquo;</a>
                 </li>
                 {% for i in pageMin..pageMax%}
                     <a href="{{path(route,{'page':i})}}">
@@ -29,7 +29,7 @@
                     </a>
                 {% endfor %}
                 <li class="page-item arrow {% if page == pages %}disabled{% endif %}">
-                    <a href="{{path(route,{'page': page + 1,'recherche':search,'slug':slug})}}" class="page-link">&raquo;</a>
+                    <a href="{{path(route,{'page': page + 1,'recherche':search})}}" class="page-link">&raquo;</a>
                 </li>
             </ul>
         {% endif %}
