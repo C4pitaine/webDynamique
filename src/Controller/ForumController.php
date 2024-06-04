@@ -190,6 +190,7 @@ class ForumController extends AbstractController
             $manager->flush();
 
             $this->addFlash('success','Votre commentaire a bien été ajouté');
+            return $this->redirectToRoute('forum_show',['slug'=>$sujet->getSlug()]);
         }
 
         return $this->render('forum/show.html.twig',[

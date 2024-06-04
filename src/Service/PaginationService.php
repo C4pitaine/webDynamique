@@ -4,7 +4,6 @@ namespace App\Service;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\Validator\Constraints\Length;
 use Twig\Environment;
 
 class PaginationService{
@@ -66,7 +65,19 @@ class PaginationService{
      */
     private ?array $order = null;
 
+    /**
+     * Variable qui permet de paginer si on fait une recherche
+     *
+     * @var string
+     */
     private string $search;
+
+    /**
+     * 
+     *
+     * @var string
+     */
+    private string $slug;
 
 
 
@@ -110,12 +121,23 @@ class PaginationService{
         return $this->entityClass;
     }
 
+    /**
+     * Sur quoi on fait la recherche
+     *
+     * @param string $search
+     * @return self
+     */
     public function setSearch(string $search):self
     {
         $this->search = $search;
         return $this;
     }
 
+    /**
+     * Permet de récupérer la recherche
+     *
+     * @return string
+     */
     public function getSearch(): string
     {
         return $this->search;

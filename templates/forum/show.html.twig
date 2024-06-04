@@ -39,18 +39,24 @@
             </div>
             <h4>Résponses :</h4>
             <div class="commentaires">
-                <div class="commentaire">
-                    {% for commentaire in pagination.data %}
-                        {{dump(pagination.data)}}
-                        {% set dateCommentaire = commentaire.date %}
-                        {# <div class="headerCommentaire">
-                            <h5>{{commentaire.user.username}} - {{date | date('d/m/Y à H:i:s')}}</h5>
-                            <p>{{commentaire.message}}</p>
-                        </div> #}
-                    {% endfor %}
-                </div>
+                {% for commentaire in pagination.data %}
+                    {% set dateCommentaire = commentaire.date %}
+                    <div class="commentaire">
+                        <h5>{{commentaire.username}} - {{dateCommentaire | date('d/m/Y à H:i:s')}}</h5>
+                        <div class="buttons">
+                            {% if app.user == sujet.user %}
+                                <a href="">Modifier</a>
+                            {% endif %}
+                            {% if is_granted('ROLE_ADMIN') or app.user == sujet.user %}
+                                <div class="buttonDelete deleteCommentaire">Supprimer</div>
+                            {% endif %}
+                        </div>
+                        <p>{{commentaire.commentaire.message}}</p>
+                    </div>
+                {% endfor %}
             </div>
-            {{pagination.display}}
+            {# {{pagination.display}} #}
+            <h4>Votre commentaire :</h4>
             {{form_start(formCommentaire)}}
                 {{form_widget(formCommentaire)}}
                 <button type="submit" class="boutonSubmit">Répondre</button>

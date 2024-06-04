@@ -252,6 +252,29 @@
             color: white;
             margin: 50px 0 30px;
         }
+        .commentaires{
+            .commentaire{
+                border: solid 1px #EE2525;
+                padding: 10px 20px;
+                border-radius: 10px;
+                margin-bottom: 20px;
+                h5{
+                    font-size: 20px;
+                    font-family: "Roboto", sans-serif;
+                    font-weight: normal;
+                    font-style: normal;
+                    color: white;
+                }
+                p{
+                    font-size: 18px;
+                    font-family: "Roboto", sans-serif;
+                    font-weight: normal;
+                    font-style: normal;
+                    color: white;
+                    margin-bottom: 0;
+                }
+            }
+        }
         form{
             display: flex;
             flex-direction: column;
