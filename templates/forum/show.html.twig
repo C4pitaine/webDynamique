@@ -7,6 +7,7 @@
 
 {% block body %}
     {% include "partials/deleteAlert.html.twig" with {'type':'','title': "Votre sujet " ~ sujet.title,'id':sujet.id, 'route':'forum_delete'} %}
+    {% include "partials/_scrollToTop.html.twig" %}
     <div class="slide sujetShow">
         <div class="wrapper">
             <a href="{{path('forum_index')}}" class='backButton'>Retour</a>
@@ -69,4 +70,19 @@
             {{form_end(formCommentaire)}}
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        // Permet de remonter jusqu'en haut de la page
+        const scrollTop = document.querySelector('.scrollTop')
+
+        scrollTop.addEventListener('click',()=>{
+            window.scrollTo({
+                top:0,
+                left:0,
+                behavior: "smooth"
+            })
+        })
+    </script>
 {% endblock %}

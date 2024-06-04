@@ -177,7 +177,7 @@ class ForumController extends AbstractController
         $form->handleRequest($request);
 
         $pagination->setEntityClass(Commentaire::class)
-                    ->setLimit(2)
+                    ->setLimit(10)
                     ->setPage($page)
                     ->setSlug($sujet->getSlug())
                     ->setSearch($sujet->getId());
