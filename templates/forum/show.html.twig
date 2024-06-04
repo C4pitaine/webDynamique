@@ -62,7 +62,9 @@
                     <h6>Ce sujet n'a pas encore de réponses</h6>
                 {% endif %}
             </div>
-            {{pagination.display}}
+            {% if pagination.data %}
+                 {{pagination.display}}
+            {% endif %}
             <h4>Votre commentaire :</h4>
             {{form_start(formCommentaire)}}
                 {{form_widget(formCommentaire)}}

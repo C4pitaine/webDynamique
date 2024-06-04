@@ -163,9 +163,13 @@ class ForumController extends AbstractController
     }
 
     /**
-     * Permet d'afficher un sujet du forum
+     * Permet d'afficher un sujet avec ses commentaires associés de manière paginer
      *
+     * @param EntityManagerInterface $manager
+     * @param Request $request
+     * @param PaginationServiceSlug $pagination
      * @param Sujet $sujet
+     * @param integer $page
      * @return Response
      */
     #[Route('/forum/{slug}/show/{page<\d+>?1}', name:'forum_show')]

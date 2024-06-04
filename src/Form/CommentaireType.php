@@ -2,12 +2,9 @@
 
 namespace App\Form;
 
-use App\Entity\User;
-use App\Entity\Sujet;
 use App\Entity\Commentaire;
 use App\Form\ApplicationType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 

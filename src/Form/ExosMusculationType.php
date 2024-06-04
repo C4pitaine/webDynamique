@@ -2,11 +2,9 @@
 
 namespace App\Form;
 
-use App\Entity\Seance;
 use App\Form\ApplicationType;
 use App\Entity\ExosMusculation;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;

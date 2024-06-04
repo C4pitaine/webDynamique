@@ -22,7 +22,7 @@ class CommentaireRepository extends ServiceEntityRepository
     }
 
     /**
-     * Permet de trouver toutes les séances d'un User
+     * Permet de trouver tous les commentaires d'un sujet
      *
      * @param string $search
      * @return array|null
