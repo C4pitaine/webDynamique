@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\CommentaireRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CommentaireRepository::class)]
 class Commentaire
@@ -23,10 +24,25 @@ class Commentaire
     private ?Sujet $sujet = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\Length(min:10,max:600,minMessage:"Le commentaire doit dépasser 10 caractères",maxMessage:"Le commentaire ne doit pas dépasser 600 caractères")]
     private ?string $message = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date = null;
+
+    /**
+     * Permet de mettre en place la date de création du commentaire
+     *
+     * @return void
+     */
+    #[ORM\PrePersist]
+    public function prePersist(): void
+    {
+        if(empty($this->date))
+        {
+            $this->date = new \DateTime('now', new \DateTimeZone('Europe/Brussels'));
+        }
+    }
 
     public function getId(): ?int
     {
