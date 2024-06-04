@@ -6,6 +6,7 @@
 {% set date = sujet.date %}
 
 {% block body %}
+    {% include "partials/deleteAlert.html.twig" with {'type':'','title': "Votre sujet " ~ sujet.title,'id':sujet.id, 'route':'forum_delete'} %}
     <div class="slide sujetShow">
         <div class="wrapper">
             <a href="{{path('forum_index')}}" class='backButton'>Retour</a>
@@ -48,11 +49,12 @@
                                 <a href="">Modifier</a>
                             {% endif %}
                             {% if is_granted('ROLE_ADMIN') or app.user == sujet.user %}
-                                <div class="buttonDelete deleteCommentaire">Supprimer</div>
+                                <div class="buttonDelete deleteButtonUser">Supprimer</div>
                             {% endif %}
                         </div>
                         <p>{{commentaire.commentaire.message}}</p>
                     </div>
+                    {% include "partials/deleteAlert.html.twig" with {'type':'','title': "Votre commentaire",'id':commentaire.id, 'route':'forum_delete'} %}
                 {% endfor %}
             </div>
             {# {{pagination.display}} #}
@@ -63,5 +65,4 @@
             {{form_end(formCommentaire)}}
         </div>
     </div>
-    {% include "partials/deleteAlert.html.twig" with {'type':'','title': "Votre sujet " ~ sujet.title,'id':sujet.id, 'route':'forum_delete'} %}
 {% endblock %}
