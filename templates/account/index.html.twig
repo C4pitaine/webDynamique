@@ -51,7 +51,9 @@
             <div class="button">
                 <a href="{{path('seance_create')}}" class="buttonAdd">Ajouter une séance</a>
             </div>
-            {{pagination.display}}
+            {% if pagination.data %}
+                {{pagination.display}}
+            {% endif %}
         </div>
     </div>
 {% endblock %}

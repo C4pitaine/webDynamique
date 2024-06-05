@@ -33,7 +33,9 @@
                     </div>
                 {% endfor %}
             </div>
-            {{pagination.display}}
+            {% if pagination.data %}
+                {{pagination.display}}
+            {% endif %}
         </div>
     </div>
 {% endblock %}

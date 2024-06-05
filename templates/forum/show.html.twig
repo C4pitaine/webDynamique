@@ -14,7 +14,6 @@
             <div class="sujetHeader">
                  <h2>{{sujet.title}}</h2>
                  <div class="buttons">
-                    <a href="">Répondre</a>
                     {% if app.user == sujet.user %}
                         <a href="{{path('forum_update',{'id':sujet.id})}}">Modifier</a>
                     {% endif %}
