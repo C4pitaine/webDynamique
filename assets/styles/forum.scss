@@ -394,9 +394,7 @@
                 .commentaire{
                     .buttons{
                         justify-content: center;
-                        a{
-                            margin-bottom: 0;
-                        }
+                        
                     }
                 }
             }
@@ -413,6 +411,23 @@
                     align-items: start !important;
                     .boutonSubmit{
                         margin-top: 20px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media all and (max-width:345px){
+    .sujetShow{
+        .wrapper{
+            .commentaires{
+                .commentaire{
+                    .buttons{
+                        justify-content: center;
+                        a{
+                            margin-bottom: 0;
+                        }
                     }
                 }
             }
