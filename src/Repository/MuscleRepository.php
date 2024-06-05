@@ -31,7 +31,7 @@ class MuscleRepository extends ServiceEntityRepository
     {
         $search = htmlspecialchars($search);
 
-        return $this->createQueryBuilder('c')
+        return $this->createQueryBuilder('m')
                     ->select('m as muscle','m.id,m.name,m.image,m.description')
                     ->where('m.name LIKE :search')
                     ->setParameter('search','%'.$search.'%')

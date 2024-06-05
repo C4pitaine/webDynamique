@@ -6,6 +6,7 @@
 parameters:
     uploads_directory_article: '%kernel.project_dir%/public/uploads/articles'
     uploads_directory_forum: '%kernel.project_dir%/public/uploads/forum'
+    uploads_directory_muscles: '%kernel.project_dir%/public/uploads/muscles'
     uploads_directory: '%kernel.project_dir%/public/uploads'
 
 services:
