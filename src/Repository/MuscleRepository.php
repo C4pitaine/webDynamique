@@ -21,6 +21,26 @@ class MuscleRepository extends ServiceEntityRepository
         parent::__construct($registry, Muscle::class);
     }
 
+    /**
+     * Permet de faire une recherche sur les noms des muscles
+     *
+     * @param string $search
+     * @return array|null
+     */
+    public function search(string $search,?int $limit = null,?int $offset = 0): ?array
+    {
+        $search = htmlspecialchars($search);
+
+        return $this->createQueryBuilder('c')
+                    ->select('m as muscle','m.id,m.name,m.image,m.description')
+                    ->where('m.name LIKE :search')
+                    ->setParameter('search','%'.$search.'%')
+                    ->setMaxResults($limit)
+                    ->setFirstResult($offset)
+                    ->getQuery()
+                    ->getResult();
+    }
+
     //    /**
     //     * @return Muscle[] Returns an array of Muscle objects
     //     */

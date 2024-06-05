@@ -1,0 +1,40 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Muscle{% endblock %}
+
+
+{% block body %}
+    <div class="container-fluid full slideAdmin">
+        <div class="wrapper">
+            <h1 class="mt-5 mb-3">Gestion des muscles</h1>
+            {% include "admin/partials/_search.html.twig" %}
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Image</th>
+                        <th>Description</th>
+                        <th class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for muscle in pagination.data %}
+                        <tr>
+                            <td>{{muscle.id}}</td>
+                            <td>{{muscle.name}}</td>
+                            <td>{{muscle.image}}</td>
+                            <td>{{muscle.description}}</td>
+                            <td class="text-center"> 
+                                <a href="" class="btn btn-warning"><i class="fas fa-pen"></i></a>
+                                <div class="btn btn-danger deleteButton"><i class="fas fa-trash"></i></div>
+                            </td>
+                        </tr>
+                        {% include "admin/partials/deleteAlert.html.twig" with {'type':'','title': "Le muscle " ~ muscle.name,'id':muscle.id, 'route':'admin_user_delete'} %}
+                    {% endfor %}
+                </tbody>
+            </table>
+            {{pagination.display}}
+        </div>
+    </div>
+{% endblock %}
