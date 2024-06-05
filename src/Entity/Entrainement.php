@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\EntrainementRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: EntrainementRepository::class)]
 #[ORM\HasLifecycleCallbacks]
@@ -18,12 +19,16 @@ class Entrainement
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Length(min:2,max:255,minMessage:"Le titre de l'entrainement doit dépasser 2 caractères",maxMessage:"Le titre de l'entrainement ne doit pas dépasser 255 caractères")]
+    #[Assert\NotBlank(message:"Ce champ ne peut pas être vide")]
     private ?string $title = null;
 
     #[ORM\Column(length: 255)]
     private ?string $slug = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Image(mimeTypes:['image/png','image/jpeg', 'image/jpg', 'image/gif','image/webp'], mimeTypesMessage:"Vous devez upload un fichier jpg, jpeg, png, gif, webP")]
+    #[Assert\File(maxSize:"1024k", maxSizeMessage: "La taille du fichier est trop grande")]
     private ?string $image = null;
 
     /**
