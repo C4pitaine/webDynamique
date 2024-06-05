@@ -147,7 +147,7 @@ class MuscleController extends AbstractController
     }
 
     /**
-     * Permet d'afficher les muscles de manière paginé + avec la recherche
+     * Permet d'afficher les muscles de manière paginé + la recherche
      *
      * @param PaginationService $pagination
      * @param Request $request

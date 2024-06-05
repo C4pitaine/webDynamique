@@ -2,12 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\EntrainementRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\EntrainementRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: EntrainementRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Entrainement
 {
     #[ORM\Id]
@@ -33,6 +35,22 @@ class Entrainement
     public function __construct()
     {
         $this->muscle = new ArrayCollection();
+    }
+
+    /**
+     * Permet d'initialiser le slug automatiquement
+     *
+     * @return void
+     */
+    #[ORM\PrePersist]
+    #[ORM\PreUpdate]
+    public function initializeSlug(): void
+    {
+        if(empty($this->slug))
+        {
+            $slugify = new Slugify();
+            $this->slug = $slugify->slugify($this->title);
+        }
     }
 
     public function getId(): ?int

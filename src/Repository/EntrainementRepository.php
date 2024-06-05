@@ -21,6 +21,26 @@ class EntrainementRepository extends ServiceEntityRepository
         parent::__construct($registry, Entrainement::class);
     }
 
+    /**
+     * Permet de faire une recherche sur le titre des entrainements
+     *
+     * @param string $search
+     * @return array|null
+     */
+    public function search(string $search,?int $limit = null,?int $offset = 0): ?array
+    {
+        $search = htmlspecialchars($search);
+
+        return $this->createQueryBuilder('e')
+                    ->select('e as entrainement','e.id,e.title,e.slug,e.image')
+                    ->where('e.title LIKE :search')
+                    ->setParameter('search','%'.$search.'%')
+                    ->setMaxResults($limit)
+                    ->setFirstResult($offset)
+                    ->getQuery()
+                    ->getResult();
+    }
+
     //    /**
     //     * @return Entrainement[] Returns an array of Entrainement objects
     //     */
