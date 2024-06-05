@@ -81,7 +81,7 @@ class MuscleController extends AbstractController
         }
 
         $manager->remove($muscle);
-        $manager->flush($muscle);
+        $manager->flush();
 
         return $this->redirectToRoute('admin_muscle_index');
     }

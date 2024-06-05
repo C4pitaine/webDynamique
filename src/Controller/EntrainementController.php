@@ -63,6 +63,28 @@ class EntrainementController extends AbstractController
     }
 
     /**
+     * Permet de supprimer un entrainement
+     *
+     * @param EntityManagerInterface $manager
+     * @param Entrainement $entrainement
+     * @return Response
+     */
+    #[Route('/admin/entrainement/{id}/delete', name:"admin_entrainement_delete")]
+    public function delete(EntityManagerInterface $manager,Entrainement $entrainement) :Response
+    {
+        $this->addFlash('success','L\'entrainement '.$entrainement->getTitle().' a bien été supprimé');
+
+        if(!empty($entrainement->getImage())){
+            unlink($this->getParameter('uploads_directory_entrainements').'/'.$entrainement->getImage());
+        }
+
+        $manager->remove($entrainement);
+        $manager->flush();
+
+        return $this->redirectToRoute('admin_entrainement_index');
+    }
+
+    /**
      * Permet d'afficher les muscles de manière paginé + la recherche
      *
      * @param PaginationService $pagination
