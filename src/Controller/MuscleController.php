@@ -64,6 +64,24 @@ class MuscleController extends AbstractController
     }
 
     /**
+     * Permet de supprimer un muscle
+     *
+     * @param EntityManagerInterface $manager
+     * @param Muscle $muscle
+     * @return Response
+     */
+    #[Route('/admin/muscle/{id}/delete', name:"admin_muscle_delete")]
+    public function delete(EntityManagerInterface $manager,Muscle $muscle) :Response
+    {
+        $this->addFlash('success','Le muscle '.$muscle->getName().' a bien été supprimé');
+
+        $manager->remove($muscle);
+        $manager->flush($muscle);
+
+        return $this->redirectToRoute('admin_muscle_index');
+    }
+
+    /**
      * Permet d'afficher les muscles de manière paginé + avec la recherche
      *
      * @param PaginationService $pagination
@@ -77,7 +95,7 @@ class MuscleController extends AbstractController
     {
         $pagination->setEntityClass(Muscle::class)
                     ->setPage($page)
-                    ->setLimit(1)
+                    ->setLimit(10)
                     ->setSearch($recherche);
 
         $form = $this->createForm(SearchType::class);
