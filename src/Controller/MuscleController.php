@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Muscle;
+use App\Form\MuscleModifyType;
 use App\Form\MuscleType;
 use App\Form\SearchType;
 use App\Service\PaginationService;
@@ -75,10 +76,74 @@ class MuscleController extends AbstractController
     {
         $this->addFlash('success','Le muscle '.$muscle->getName().' a bien été supprimé');
 
+        if(!empty($muscle->getImage())){
+            unlink($this->getParameter('uploads_directory_muscles').'/'.$muscle->getImage());
+        }
+
         $manager->remove($muscle);
         $manager->flush($muscle);
 
         return $this->redirectToRoute('admin_muscle_index');
+    }
+
+    /**
+     * Permet de modifier un muscle
+     *
+     * @param EntityManagerInterface $manager
+     * @param Request $request
+     * @param Muscle $muscle
+     * @return Response
+     */
+    #[Route('/admin/muscle/{id}/update', name:"admin_muscle_update")]
+    public function update(EntityManagerInterface $manager,Request $request,Muscle $muscle): Response
+    {   
+        $muscleImage = $muscle->getImage();
+        $muscle->setImage("");
+
+        $form = $this->createForm(MuscleModifyType::class,$muscle);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $muscle->setImage($muscleImage);
+            $file = $form['image']->getData();
+            if(!empty($file))
+            {
+                if(!empty($muscleImage)){
+                    unlink($this->getParameter('uploads_directory_muscles').'/'.$muscleImage);
+                }
+                $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+                $newFilename = $safeFilename."-".uniqid().'.'.$file->guessExtension();
+                try{
+                    $file->move(
+                        $this->getParameter('uploads_directory_muscles'), 
+                        $newFilename 
+                    );
+                }catch(FileException $e)
+                {
+                    return $e->getMessage();
+                }
+                $muscle->setImage($newFilename);
+            }else{
+                if(!empty($articleImage)){
+                    $muscle->setImage($muscleImage);
+                }
+            }
+
+            $manager->persist($muscle);
+            $manager->flush();
+            
+            $this->addFlash('warning','Le muscle : '.$muscle->getName().' a bien été modifié');
+            return $this->redirectToRoute('admin_muscle_index');
+        }
+        
+
+        return $this->render('admin/muscle/update.html.twig',[
+            'formMuscle' => $form->createView(),
+            'muscleImage' => $muscleImage,
+            'muscle' => $muscle,
+        ]);
     }
 
     /**

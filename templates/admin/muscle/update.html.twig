@@ -1,0 +1,23 @@
+{% extends "admin/base.html.twig" %}
+
+{% block title %}Modification d'un muscle{% endblock %}
+
+{% block body %}
+    <div class="slideAdmin">
+        <div class="wrapper">
+            <div class="form">
+                <div class="titleBack">
+                    <h2>Modifier un muscle</h2>
+                    <a href="{{path('admin_muscle_index')}}" class="btn btn-secondary">Retour</a>
+                </div>
+                <div class="d-flex justify-content-center w-100">
+                    <img src="/uploads/muscles/{{muscleImage}}" alt="Image de {{muscle.name}}" class="w-50 my-3">
+                </div>
+                {{form_start(formMuscle)}}
+                    {{form_widget(formMuscle)}}
+                    <button type="submit" class="btn btn-warning my-3">Modifier</button>
+                {{form_end(formMuscle)}}
+            </div>
+        </div>
+    </div>
+{% endblock %}

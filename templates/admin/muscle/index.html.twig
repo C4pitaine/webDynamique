@@ -15,7 +15,6 @@
                         <th>Id</th>
                         <th>Name</th>
                         <th>Image</th>
-                        <th>Description</th>
                         <th class="text-center">Action</th>
                     </tr>
                 </thead>
@@ -25,9 +24,8 @@
                             <td>{{muscle.id}}</td>
                             <td>{{muscle.name}}</td>
                             <td>{{muscle.image}}</td>
-                            <td>{{muscle.description}}</td>
                             <td class="text-center"> 
-                                <a href="" class="btn btn-warning"><i class="fas fa-pen"></i></a>
+                                <a href="{{path('admin_muscle_update',{'id':muscle.id})}}" class="btn btn-warning"><i class="fas fa-pen"></i></a>
                                 <div class="btn btn-danger deleteButton"><i class="fas fa-trash"></i></div>
                             </td>
                         </tr>
