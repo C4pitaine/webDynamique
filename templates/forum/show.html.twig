@@ -66,7 +66,8 @@
             {% if pagination.data %}
                  {{pagination.display}}
             {% endif %}
-            <h4>Votre commentaire :</h4>
+            <h4 id="commentaire">Votre commentaire :</h4>
+            {# {{form_start(formCommentaire,{"action":path('forum_show',{"_fragment":"commentaire",'slug':sujet.slug}),"method":"POST"})}} #}
             {{form_start(formCommentaire)}}
                 {{form_widget(formCommentaire)}}
                 <button type="submit" class="boutonSubmit">Répondre</button>
