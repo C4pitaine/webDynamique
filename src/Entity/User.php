@@ -15,6 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
 #[UniqueEntity(fields:['email'],message: "Un autre utilisateur possède déjà cette adresse e-mail, merci de la modifier")]
+#[UniqueEntity(fields:['username'],message: "Un autre utilisateur possède déjà cet username, merci de le modifier")]
 #[ORM\HasLifecycleCallbacks]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
