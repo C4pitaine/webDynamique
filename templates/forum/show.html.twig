@@ -47,7 +47,6 @@
                     {% set dateCommentaire = commentaire.date %}
                     <div class="commentaire">
                         <h5>{{commentaire.username}} - {{dateCommentaire | date('d/m/Y à H:i:s')}}</h5>
-                        <h5>{{commentaire.id}}</h5>
                         <div class="buttons">
                             {% if app.user == commentaire.commentaire.user %}
                                 <a href="" class="button">Modifier</a>
