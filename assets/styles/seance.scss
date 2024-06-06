@@ -144,8 +144,8 @@
                 color: white;
             }
             .exos{
-                display: flex;
-                flex-wrap: wrap;
+                display: grid;
+                grid-template-columns: repeat(4,1fr);
                 margin: 30px 0;
                 p{
                     font-size: 20px;
@@ -167,6 +167,31 @@
                 font-style: normal;
                 margin:20px 0;
                 color: white;
+            }
+        }
+    }
+}
+
+@media all and (max-width:1200px){
+    .seanceShow{
+        .wrapper{
+            .musculation,.cardio{
+                .exos{
+                    grid-template-columns: repeat(2,1fr);
+                }
+            }
+        }
+    }
+}
+
+@media all and (max-width:900px){
+    .seanceShow{
+        .wrapper{
+            .musculation,.cardio{
+                .exos{
+                    grid-template-columns: 1fr;
+                    margin: 50px 0;
+                }
             }
         }
     }
