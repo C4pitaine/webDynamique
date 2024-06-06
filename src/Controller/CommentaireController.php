@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Commentaire;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -26,11 +27,15 @@ class CommentaireController extends AbstractController
         subject: New Expression('args["commentaire"].getUser()'),
         message: "Ce commentaire ne vous appartient pas"
     )]
-    public function delete(EntityManagerInterface $manager,Commentaire $commentaire): Response
+    public function delete(EntityManagerInterface $manager,Commentaire $commentaire,UserRepository $userRepo): Response
     {
         $this->addFlash('success','Votre commentaire a bien été supprimé');
         $sujet = $commentaire->getSujet();
-        $manager->remove($commentaire);
+        $user = $userRepo->findBy(['email'=>'anonyme@noreply.be']);
+        $commentaire->setMessage('Ce commentaire a été supprimé')
+                    ->setUser($user[0]);
+
+        $manager->persist($commentaire);
         $manager->flush();
 
         return $this->redirectToRoute('forum_show',['slug'=>$sujet->getSlug()]);
