@@ -6,7 +6,9 @@
 {% set date = sujet.date %}
 
 {% block body %}
-    {% include "partials/deleteAlert.html.twig" with {'type':'','title': "Votre sujet " ~ sujet.title,'id':sujet.id, 'route':'forum_delete'} %}
+    {% if app.user == sujet.user%}
+        {% include "partials/deleteAlert.html.twig" with {'type':'','title': "Votre sujet " ~ sujet.title,'id':sujet.id, 'route':'forum_delete'} %}
+    {% endif %}
     {% include "partials/_scrollToTop.html.twig" %}
     <div class="slide sujetShow">
         <div class="wrapper">
