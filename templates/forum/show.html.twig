@@ -47,17 +47,18 @@
                     {% set dateCommentaire = commentaire.date %}
                     <div class="commentaire">
                         <h5>{{commentaire.username}} - {{dateCommentaire | date('d/m/Y à H:i:s')}}</h5>
+                        <h5>{{commentaire.id}}</h5>
                         <div class="buttons">
                             {% if app.user == commentaire.commentaire.user %}
-                                <a href="">Modifier</a>
+                                <a href="" class="button">Modifier</a>
                             {% endif %}
                             {% if is_granted('ROLE_ADMIN') or app.user == commentaire.commentaire.user %}
-                                <div class="buttonDelete deleteButtonUser">Supprimer</div>
+                                <div class="buttonDelete deleteButtonUser button">Supprimer</div>
+                                {% include "partials/deleteAlert.html.twig" with {'type':'','title': "Votre commentaire",'id':commentaire.id, 'route':'commentaire_delete'} %}
                             {% endif %}
                         </div>
                         <p>{{commentaire.commentaire.message}}</p>
                     </div>
-                    {% include "partials/deleteAlert.html.twig" with {'type':'','title': "Votre commentaire",'id':commentaire.id, 'route':'commentaire_delete'} %}
                 {% endfor %}
                 {% else %}
                     <h6>Ce sujet n'a pas encore de réponses</h6>

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\AddMemberType;
 use App\Form\SearchType;
+use App\Repository\UserRepository;
 use App\Service\PaginationService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,9 +23,17 @@ class AdminUserController extends AbstractController
      * @return Response
      */
     #[Route('admin/user/{id}/delete',name:"admin_user_delete")]
-    public function delete(User $user,EntityManagerInterface $manager):Response
+    public function delete(User $user,EntityManagerInterface $manager,UserRepository $userRepo):Response
     {
         $this->addFlash('success','L\'utilisateur '.$user->getUsername().' a bien été supprimé');
+
+        $anonyme = $userRepo->findBy(['email'=>'anonyme@noreply.be']);
+
+        foreach($user->getCommentaires() as $userCommentaires)
+        {
+            $userCommentaires->setMessage('Ce commentaire a été supprimé')
+                            ->setUser($anonyme[0]);
+        }
 
         $manager->remove($user);
         $manager->flush();
