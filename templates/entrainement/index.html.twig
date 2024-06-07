@@ -23,7 +23,7 @@
                                     {% endfor %}
                                 {% else %}
                                     {% for muscle in entrainement.muscle %}
-                                        <li><a href="">{{muscle.name}}</a></li>
+                                        <li><a href="{{path('muscle_show',{'id':muscle.id})}}">{{muscle.name}}</a></li>
                                     {% endfor %}
                                 {% endif %}
                                 

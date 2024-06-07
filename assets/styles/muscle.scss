@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+.muscle{
+    .wrapper{
+        overflow: hidden;
+        /* Affichage d'un muscle */
+        .backButton {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            width: fit-content;
+            padding: 10px 20px;
+            border-radius: 10px;
+            background-color: #EE2525;
+            border: none;
+            margin-bottom: 20px;
+            font-family: "Roboto", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 22px;
+            color: white;
+            text-decoration: none;
+            margin-top:50px;
+    
+            &:hover {
+            background-color: white;
+            color: #EE2525;
+            }
+        }
+        h2{
+            margin: 30px 0;
+            font-family: "Roboto", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 32px;
+            color: white;
+        }
+        .imageMuscle{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            img{
+                width:50%;
+                margin: 35px 0;
+                object-fit: contain;
+            }
+        }
+        p{
+            margin: 30px 0;
+            font-family: "Roboto", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 16px;
+            color: white;
+        }
+    }
+}
+
+@media all and (max-width:900px){
+    .muscle{
+        .wrapper{
+            width: 90%;
+            .imageMuscle{
+                img{
+                    width: 100%;
+                }
+            }
+        }
+    }
+}

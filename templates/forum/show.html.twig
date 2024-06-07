@@ -38,7 +38,7 @@
                 {% if sujet.image %}
                     <img src="/uploads/forum/{{sujet.image}}" alt="Image de {{sujet.title}}">
                 {% endif %}
-                <p>{{sujet.description}}</p>
+                <p>{{sujet.description | raw | nl2br}}</p>
             </div>
             <h4>Réponses :</h4>
             <div class="commentaires">
@@ -56,7 +56,7 @@
                                 {% include "partials/deleteAlert.html.twig" with {'type':'','title': "Votre commentaire",'id':commentaire.id, 'route':'commentaire_delete'} %}
                             {% endif %}
                         </div>
-                        <p>{{commentaire.commentaire.message}}</p>
+                        <p>{{commentaire.commentaire.message | raw | nl2br}}</p>
                     </div>
                 {% endfor %}
                 {% else %}

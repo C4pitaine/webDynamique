@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{muscle.name}}{% endblock %}
+
+{% block body %}
+    <div class="slide muscle">
+        <div class="wrapper">
+            <a href="{{path('entrainement_index')}}" class="backButton">Retour</a>
+            <h2>{{muscle.name}}</h2>
+            <div class="imageMuscle">
+                <img src="/uploads/muscles/{{muscle.image}}" alt="Image de {{muscle.name}}">
+            </div>
+            <p>{{muscle.description | raw | nl2br}}</p>
+        </div>
+    </div>
+{% endblock %}
