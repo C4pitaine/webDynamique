@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
-class EntrainementController extends AbstractController
+class AdminEntrainementController extends AbstractController
 {
     /**
      * Permet d'ajouter un entrainement
