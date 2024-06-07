@@ -181,6 +181,7 @@ class AdminEntrainementController extends AbstractController
         return $this->render('admin/entrainement/index.html.twig', [
             'pagination' => $pagination,
             'formSearch' => $form->createView(),
+            'search' => $recherche,
         ]);
     }
 }

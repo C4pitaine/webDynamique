@@ -27,9 +27,16 @@
                             <td>{{entrainement.slug}}</td>
                             <td>{{entrainement.image}}</td>
                             <td>
-                            {% for muscle in entrainement.muscle %}
-                                {{muscle.name}} |
-                            {% endfor %}
+                            {% if search %}
+                                {% for muscle in entrainement.entrainement.muscle %}
+                                    {{muscle.name}} |
+                                {% endfor %}
+                            {% else %}
+                                {% for muscle in entrainement.muscle %}
+                                    {{muscle.name}} |
+                                {% endfor %}
+                            {% endif %}
+                            
                             </td>
                             <td class="text-center"> 
                                 <a href="{{path('admin_entrainement_update',{'id':entrainement.id})}}" class="btn btn-warning"><i class="fas fa-pen"></i></a>

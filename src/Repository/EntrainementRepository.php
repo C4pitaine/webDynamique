@@ -32,8 +32,9 @@ class EntrainementRepository extends ServiceEntityRepository
         $search = htmlspecialchars($search);
 
         return $this->createQueryBuilder('e')
-                    ->select('e as entrainement','e.id,e.title,e.slug,e.image')
-                    ->where('e.title LIKE :search')
+                    ->select('e as entrainement','e.id,e.title,e.slug,e.image,m.name')
+                    ->join('e.muscle','m')
+                    ->where('e.title LIKE :search or m.name LIKE :search')
                     ->setParameter('search','%'.$search.'%')
                     ->setMaxResults($limit)
                     ->setFirstResult($offset)

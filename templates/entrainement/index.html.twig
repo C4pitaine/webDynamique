@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Entrainements{% endblock %}
+
+{% form_theme formSearch "form/_formField.html.twig" %}
+
+{% block body %}
+    <div class="slide entrainement">
+        <div class="wrapper">
+            <h2>Entraînements</h2>
+            {% include "partials/_search.html.twig" %}
+            <div class="entrainements">
+                {% for entrainement in pagination.data %}
+                    <div class="exercice">
+                        <img src="/uploads/entrainements/{{entrainement.image}}" alt="Image de {{entrainement.title}}">
+                        <div class="exerciceBody">
+                            <h4>{{entrainement.title}}</h4>
+                            <h6>Muscles travaillés :</h6>
+                            <ul>
+                                {% if search %}
+                                    {% for muscle in entrainement.entrainement.muscle %}
+                                        <li><a href="">{{muscle.name}}</a></li>
+                                    {% endfor %}
+                                {% else %}
+                                    {% for muscle in entrainement.muscle %}
+                                        <li><a href="">{{muscle.name}}</a></li>
+                                    {% endfor %}
+                                {% endif %}
+                                
+                            </ul>
+                        </div>
+                    </div>    
+                {% endfor %}
+            </div>
+            {{pagination.display}}
+        </div>
+    </div>
+{% endblock %}

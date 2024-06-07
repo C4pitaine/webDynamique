@@ -1,0 +1,181 @@
+.entrainement{
+    .wrapper{
+        overflow: hidden;
+        h2{
+            font-size: 32px;
+            font-family: "Roboto", sans-serif;
+            font-weight: normal;
+            font-style: normal;
+            margin:50px 0 30px;
+            color: white;
+        }
+        form{
+            word-break: normal;
+            .formField{
+                width: 90%;
+                margin-right: 20px;
+                input{
+                    margin: 0;
+                }
+            }
+            .boutonSubmit{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: white;
+                height:50px;
+                width: fit-content;
+                padding: 0 20px;
+                border-radius: 10px;
+                background-color: #EE2525;
+                border: none;
+                font-family: "Roboto", sans-serif;
+                font-weight: 400;
+                font-style: normal;
+                font-size: 18px;
+                color: white;
+                text-decoration: none;
+                
+                &:hover {
+                    background-color: white;
+                    color: #EE2525;
+                }
+            }
+        }
+        .entrainements{
+            display: flex;
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+            margin-bottom: 50px;
+            .exercice{
+                width:30%;
+                background-color: black;
+                border: solid 1px #EE2525;
+                border-radius: 10px;
+                margin: 20px 10px;
+                img{
+                    width: 100%;
+                    height:30vh;
+                    object-fit: cover;
+                    border-radius: 10px;
+                }
+                .exerciceBody{
+                    width: 90%;
+                    margin: 0 auto;
+                    font-family: "Roboto", sans-serif;
+                    font-weight: 400;
+                    font-style: normal;
+                    color: white;
+                    h4{
+                        margin:20px 0;
+                        font-size: 22px;
+                    }
+                    h6{
+                        font-size: 16px;
+                    }
+                    ul{
+                        display: flex;
+                        flex-wrap: wrap;
+                        margin-bottom: 30px;
+                        li{
+                            width: 50%;
+                            font-size: 16px;
+                            a{
+                                text-decoration: none;
+                                color: white;
+                                &:hover{
+                                    color: #EE2525;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media all and (max-width:1400px){
+    .entrainement{
+        .wrapper{
+            .entrainements{
+                .exercice{
+                    width: 40%;
+                }
+            }
+        }
+    }
+}
+
+@media all and (max-width:1000px){
+    .entrainement{
+        .wrapper{
+            .entrainements{
+                .exercice{
+                    width: 50%;
+                }
+            }
+        }
+    }
+}
+
+@media all and (max-width:700px){
+    .entrainement{
+        .wrapper{
+            .entrainements{
+                .exercice{
+                    width: 70%;
+                }
+            }
+        }
+    }
+}
+
+@media all and (max-width:600px){
+    .entrainement{
+        .wrapper{
+            width: 90%;
+        }
+    }
+}
+
+@media all and (max-width:500px){
+    .entrainement{
+        .wrapper{
+            .entrainements{
+                .exercice{
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
+
+@media all and (max-width:450px){
+    .entrainement{
+        .wrapper{
+            form{
+                .formField{
+                    width: 100%;
+                    margin-right: 0;
+                }
+                .searchContainer{
+                    flex-direction: column;
+                    justify-content: center;
+                    .boutonSubmit{
+                        margin-top: 20px;
+                    }
+                }
+            }
+            .entrainements{
+                .exercice{
+                    .exerciceBody{
+                        ul{
+                            flex-direction: column;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
