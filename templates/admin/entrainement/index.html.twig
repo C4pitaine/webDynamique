@@ -26,6 +26,11 @@
                             <td>{{entrainement.title}}</td>
                             <td>{{entrainement.slug}}</td>
                             <td>{{entrainement.image}}</td>
+                            <td>
+                            {% for muscle in entrainement.muscle %}
+                                {{muscle.name}} |
+                            {% endfor %}
+                            </td>
                             <td class="text-center"> 
                                 <a href="{{path('admin_entrainement_update',{'id':entrainement.id})}}" class="btn btn-warning"><i class="fas fa-pen"></i></a>
                                 <div class="btn btn-danger deleteButton"><i class="fas fa-trash"></i></div>
