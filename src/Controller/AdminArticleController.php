@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Form\SearchType;
 use App\Form\ArticleType;
 use App\Form\ArticleModifyType;
 use App\Service\PaginationService;
@@ -15,26 +16,6 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 class AdminArticleController extends AbstractController
 {
-    /**
-     * Permet d'afficher les articles
-     *
-     * @param PaginationService $pagination
-     * @param integer $page
-     * @return Response
-     */
-    #[Route('/admin/article/{page<\d+>?1}', name: 'admin_article_index')]
-    public function index(PaginationService $pagination,int $page): Response
-    {
-        $pagination->setEntityClass(Article::class)
-                    ->setSearch("")
-                    ->setPage($page)
-                    ->setLimit(10);
-
-        return $this->render('admin/article/index.html.twig', [
-            'pagination' => $pagination,
-        ]);
-    }
-
      /**
      * Permet d'ajouter un article
      *
@@ -178,6 +159,41 @@ class AdminArticleController extends AbstractController
             'article' => $article,
             'formArticle' => $form->createView(),
             'articleImage' => $articleImage,
+        ]);
+    }
+
+    /**
+     * Permet d'afficher les articles avec une recherche sur les titres de manière paginé
+     *
+     * @param PaginationService $pagination
+     * @param integer $page
+     * @return Response
+     */
+    #[Route('/admin/article/{page<\d+>?1}/{recherche}', name: 'admin_article_index')]
+    public function index(Request $request,PaginationService $pagination,int $page,string $recherche=""): Response
+    {
+        $pagination->setEntityClass(Article::class)
+                    ->setSearch($recherche)
+                    ->setPage($page)
+                    ->setLimit(10);
+
+        $form = $this->createForm(SearchType::class);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $recherche = $form->get('search')->getData();
+            if($recherche !== null){
+                $pagination->setSearch($recherche)
+                        ->setPage(1);
+            }else{
+                $pagination->setSearch("")
+                        ->setPage(1);
+            }
+        }
+
+        return $this->render('admin/article/index.html.twig', [
+            'pagination' => $pagination,
+            'formSearch' => $form->createView(),
         ]);
     }
 }
