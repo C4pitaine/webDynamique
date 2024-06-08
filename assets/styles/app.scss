@@ -238,6 +238,7 @@ footer {
   right: 15px;
   bottom: 15px;
   cursor: pointer;
+  transition: all 0.5s;
 
   &:hover {
     background-color: white;
@@ -566,6 +567,7 @@ footer {
     font-size: 18px;
     color: white;
     text-decoration: none;
+    transition: all 0.5s;
 
     &:hover {
         background-color: white;
