@@ -592,6 +592,9 @@ tbody{
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
+    th{
+      text-align: center;
+    }
   }
 }
 
