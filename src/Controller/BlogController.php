@@ -12,19 +12,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class BlogController extends AbstractController
 {
-    /**
-     * Permet d'afficher un article côté utilisateur
-     *
-     * @param Article $article
-     * @return Response
-     */
-    #[Route('/blog/{slug}',name:'blog_show')]
-    public function show(Article $article): Response
-    {
-        return $this->render('/blog/show.html.twig',[
-            'article' => $article
-        ]);
-    }
 
     /**
      * Permet d'afficher tous les articles côté utilisateur
@@ -60,5 +47,19 @@ class BlogController extends AbstractController
            'pagination' => $pagination,
            'formSearch' => $form->createView(),
         ]); 
+    }
+    
+    /**
+     * Permet d'afficher un article côté utilisateur
+     *
+     * @param Article $article
+     * @return Response
+     */
+    #[Route('/blog/{slug}',name:'blog_show')]
+    public function show(Article $article): Response
+    {
+        return $this->render('/blog/show.html.twig',[
+            'article' => $article
+        ]);
     }
 }
