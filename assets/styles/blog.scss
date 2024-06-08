@@ -11,6 +11,39 @@
             font-size: 32px;
             color:white;
         }
+        form{
+            word-break: normal;
+            .formField{
+                width: 90%;
+                margin-right: 20px;
+                input{
+                    margin: 0;
+                }
+            }
+            .boutonSubmit{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: white;
+                height:50px;
+                width: fit-content;
+                padding: 0 20px;
+                border-radius: 10px;
+                background-color: #EE2525;
+                border: none;
+                font-family: "Roboto", sans-serif;
+                font-weight: 400;
+                font-style: normal;
+                font-size: 18px;
+                color: white;
+                text-decoration: none;
+                
+                &:hover {
+                    background-color: white;
+                    color: #EE2525;
+                }
+            }
+        }
 
         /* Affichage de tous les articles */
         .articleContainer{
@@ -173,6 +206,26 @@
     .blog{
         .wrapper{
             width:90%;
+        }
+    }
+}
+
+@media all and (max-width:450px){
+    .blog{
+        .wrapper{
+            form{
+                .formField{
+                    margin-right: 0;
+                    width: 100%;
+                }
+                .searchContainer{
+                    flex-direction: column;
+                    justify-content: center;
+                    .boutonSubmit{
+                        margin-top: 20px;
+                    }
+                }
+            }
         }
     }
 }

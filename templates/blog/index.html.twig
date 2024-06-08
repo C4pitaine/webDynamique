@@ -2,10 +2,13 @@
 
 {% block title %}Blog{% endblock %}
 
+{% form_theme formSearch "form/_formField.html.twig" %}
+
 {% block body %}
     <div class="slide blog">
         <div class="wrapper">
             <h2>Articles</h2>
+            {% include "partials/_search.html.twig" %}
             <div class="articleContainer">
                 {% for article in pagination.data %}
                     <a href="{{path('blog_show',{'slug':article.slug})}}" class="articleItem">
