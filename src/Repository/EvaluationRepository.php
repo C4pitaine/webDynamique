@@ -22,7 +22,7 @@ class EvaluationRepository extends ServiceEntityRepository
     }
 
     /**
-     * Permet de faire une recherche sur l'username pour trouver ses évaluations
+     * Permet de faire une recherche sur l'username pour trouver toutes ses évaluations
      *
      * @param string $search
      * @return array|null

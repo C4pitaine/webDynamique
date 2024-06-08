@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
+
+/* Blog */
 .blog{
     .wrapper{
         overflow: hidden;
@@ -75,11 +77,10 @@
         }
     }
 }
-
+/* Affichage d'un article */
 .blogShow{
     .wrapper{
         overflow: hidden;
-        /* Affichage d'un article */
         .backButton {
             display: flex;
             justify-content: center;
@@ -166,6 +167,7 @@
     }
 }
 
+/* Media Queries */
 
 @media all and (max-width:1500px){
     .blog{

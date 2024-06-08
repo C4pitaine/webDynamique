@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
+/* Affichage d'un muscle */
 .muscle{
     .wrapper{
         overflow: hidden;
-        /* Affichage d'un muscle */
         .backButton {
             display: flex;
             justify-content: center;
@@ -59,6 +59,7 @@
     }
 }
 
+/* Media Queries */
 @media all and (max-width:900px){
     .muscle{
         .wrapper{

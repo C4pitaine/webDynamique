@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
+/* Affichage des entrainements */
 .entrainement{
     .wrapper{
         overflow: hidden;
@@ -96,6 +97,8 @@
         }
     }
 }
+
+/* Media Queries */
 
 @media all and (max-width:1400px){
     .entrainement{

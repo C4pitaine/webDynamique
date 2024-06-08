@@ -22,7 +22,7 @@ class CommentaireRepository extends ServiceEntityRepository
     }
 
     /**
-     * Permet de trouver tous les commentaires d'un sujet
+     * Permet de trouver tous les commentaires lié à un sujet
      *
      * @param string $search
      * @return array|null
