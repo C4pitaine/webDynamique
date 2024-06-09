@@ -22,6 +22,11 @@ addExosCardio.addEventListener('click',()=>{
     handleDeleteButtons()
 })
 
+const updateCounter = () => {
+    const count = document.querySelectorAll("div.form-group").length
+    document.querySelector("#widgets-counter").value = count 
+}
+
 const handleDeleteButtons = () => {
     let deletes = document.querySelectorAll("button[data-action='delete']")
     deletes.forEach(button => {
@@ -36,6 +41,7 @@ const handleDeleteButtons = () => {
 
 }
 handleDeleteButtons()
+updateCounter()
 
 // Permet de remonter jusqu'en haut de la page
 const scrollTop = document.querySelector('.scrollTop')

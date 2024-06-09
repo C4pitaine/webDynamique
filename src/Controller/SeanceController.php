@@ -98,14 +98,14 @@ class SeanceController extends AbstractController
             {
                 $exosMuscu->setSeance($seance);
                 $manager->persist($exosMuscu);
-            } foreach($seance->getExosCardios() as $exosCardio)
+            } 
+            foreach($seance->getExosCardios() as $exosCardio)
             {
                 $exosCardio->setSeances($seance);
                 $manager->persist($exosCardio);
             }
 
             $seance->setUser($this->getUser());
-
             $manager->persist($seance);
             $manager->flush();
             $this->addFlash('success','Votre séance : '.$seance->getName().' a bien été modifiée');
