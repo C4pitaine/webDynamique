@@ -36,7 +36,7 @@
                         </div>
                     {% else %}
                         {% for seance in pagination.data %}
-                        {% set date = seance.date %} {# Crée une nouvelle date avec la date et l'heure actuelles #}
+                        {% set date = seance.date %}
                             <div class="seance">
                                 <p>{{seance.name}}</p>
                                 <p class="ligne">-</p>

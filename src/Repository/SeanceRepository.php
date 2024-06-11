@@ -34,7 +34,7 @@ class SeanceRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('s')
                     ->select('s as seance','s.id,s.name,s.date,u.id')
                     ->join('s.user','u')
-                    ->where('u.id LIKE :search')
+                    ->where('u.email LIKE :search')
                     ->setParameter('search','%'.$search.'%')
                     ->setMaxResults($limit)
                     ->setFirstResult($offset)

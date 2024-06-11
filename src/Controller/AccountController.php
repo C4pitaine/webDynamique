@@ -32,8 +32,8 @@ class AccountController extends AbstractController
                     ->setLimit(10)
                     ->setPage($page)
                     ->setTemplatePath('partials/_paginationWithoutSearch.html.twig')
-                    ->setSearch($user->getId());
-
+                    ->setSearch($user->getEmail());
+                    
        return $this->render('account/index.html.twig',[
             'user' =>$user,
             'pagination' => $pagination

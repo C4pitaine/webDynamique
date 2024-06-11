@@ -195,6 +195,7 @@ footer {
 
 #menu {
   background-color: rgba(0, 0, 0, 50%);
+  -webkit-backdrop-filter: blur(6px); /* Correction pour Safari */
   backdrop-filter: blur(6px);
   position: absolute;
   display: none;
