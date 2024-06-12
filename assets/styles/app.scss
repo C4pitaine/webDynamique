@@ -13,7 +13,6 @@ header {
   height: 100px;
   background-color: #000000;
   z-index: 199;
-
   div {
     width: 80%;
     height: 100%;
@@ -21,6 +20,12 @@ header {
     display: flex;
     align-items: center;
   }
+}
+
+.headerFront{
+  position: fixed;
+  top:0;
+  left:0;
 }
 
 .footerContainer {
@@ -189,6 +194,10 @@ footer {
   min-height: 100vh;
   background-color: #1A1717;
   width: 100%;
+  overflow: hidden;
+  .wrapper{
+    margin-top: 100px !important;
+  }
 }
 
 /* Menu */
