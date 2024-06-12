@@ -202,6 +202,7 @@ footer {
 
 /* Menu */
 
+
 #menu {
   background-color: rgba(0, 0, 0, 50%);
   -webkit-backdrop-filter: blur(6px); /* Correction pour Safari */
@@ -209,14 +210,16 @@ footer {
   position: absolute;
   display: none;
   z-index: 105;
-
+  &.menuFront{
+    position: fixed;
+  }
   &.menuOpened {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
   }
-
+ 
   a {
     text-decoration: none;
     color: white;
@@ -225,7 +228,9 @@ footer {
     font-weight: 400;
     font-style: normal;
     margin-bottom: 20px;
-
+    &:first-child{
+      margin-top: 110px;
+    }
     &:hover {
       color: #EE2525;
     }
