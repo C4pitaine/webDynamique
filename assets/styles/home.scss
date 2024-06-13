@@ -197,6 +197,11 @@
     .services, .evaluations {
       display: flex;
       flex-wrap: wrap;
+    }
+    .services{
+      justify-content: center;
+    }
+    .evaluations{
       justify-content: space-between;
     }
 
@@ -206,7 +211,7 @@
       color: white;
       text-align: center;
       width: 20%;
-
+      margin: 10px 20px;
       i {
         color: #EE2525;
         font-size: 2.6rem;
