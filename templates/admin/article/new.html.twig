@@ -24,7 +24,9 @@
         tinymce.init({
             selector: 'textarea',
             license_key: 'gpl',
-            invalid_elements: 'br'
+            invalid_elements: 'br',
+            forced_root_block: '',
+            remove_linebreaks: true, 
         });
     </script>
 {% endblock %}
