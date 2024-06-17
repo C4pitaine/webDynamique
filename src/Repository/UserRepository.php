@@ -47,10 +47,10 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     public function search(string $search,?int $limit = null,?int $offset = 0): ?array
     {
         $search = htmlspecialchars($search);
-
+        $search = trim($search);
         return $this->createQueryBuilder('u')
                     ->select('u as user','u.id,u.username,u.email,u.checked,u.roles')
-                    ->where('u.username = :search')
+                    ->where('u.username LIKE :search')
                     ->setParameter('search','%'.$search.'%')
                     ->setMaxResults($limit)
                     ->setFirstResult($offset)
