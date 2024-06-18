@@ -12,7 +12,7 @@
             {% else %}
                 <img src="/logo/logoQT.png" alt="Logo Quentin Coaching Sportif">
            {% endif %}
-            <a href="{{path('forum_index')}}" class="backButton">Retour</a>
+            <a href="{{path('forum_show',{'slug':sujet.slug})}}" class="backButton">Retour</a>
             <div class="formulaireConnexion">
                 <h2>Modifier le sujet : {{sujet.title}}</h2>
             </div>
