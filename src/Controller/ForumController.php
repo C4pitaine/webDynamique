@@ -197,7 +197,7 @@ class ForumController extends AbstractController
             $successSend = true;
             $this->addFlash('success','Votre commentaire a bien été ajouté');
             $this->redirectToRoute('forum_show',['slug'=>$sujet->getSlug()]);
-            
+            $form = $this->createForm(CommentaireType::class);
         }
 
         return $this->render('forum/show.html.twig',[
