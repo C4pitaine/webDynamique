@@ -40,6 +40,11 @@ menuA.forEach((menuA)=>{
     })
 })
 
+menu.addEventListener('click',()=>{
+    menu.classList.remove('menuOpened')
+    header.classList.remove('menuOpened')
+})
+
 // Taille de l'écran 
 
 
