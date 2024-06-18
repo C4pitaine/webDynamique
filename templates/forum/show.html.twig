@@ -24,15 +24,17 @@
                     {% endif %}
                  </div>
             </div>
-            {% for label, messages in app.flashes %}
-                <div class="container mt-3 p-0">
-                    <div class="alert alert-{{label}}">
-                        {% for message in messages %}
-                            <p>{{ message | raw }}</p>
-                        {% endfor %}
+            {% if successSend == false %}
+                {% for label, messages in app.flashes %}
+                    <div class="container mt-3 p-0">
+                        <div class="alert alert-{{label}}">
+                            {% for message in messages %}
+                                <p>{{ message | raw }}</p>
+                            {% endfor %}
+                        </div>
                     </div>
-                </div>
-            {% endfor %}
+                {% endfor %}
+            {% endif %}
             <div class="sujetBody">
                 <h3>{{sujet.user.username}} - {{date | date('d/m/Y à H:i:s')}}</h3>
                 {% if sujet.image %}
@@ -67,8 +69,18 @@
                  {{pagination.display}}
             {% endif %}
             <h4 id="commentaire">Votre commentaire :</h4>
+            {% if successSend == true %}
+                {% for label, messages in app.flashes %}
+                    <div class="container mt-3 p-0">
+                        <div class="alert alert-{{label}}">
+                            {% for message in messages %}
+                                <p>{{ message | raw }}</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
             {{form_start(formCommentaire,{"action":path('forum_show',{"_fragment":"commentaire",'slug':sujet.slug}),"method":"POST"})}}
-            {# {{form_start(formCommentaire)}} #}
                 {{form_widget(formCommentaire)}}
                 <button type="submit" class="boutonSubmit">Répondre</button>
             {{form_end(formCommentaire)}}

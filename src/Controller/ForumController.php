@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\ExpressionLanguage\Expression;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -179,7 +180,7 @@ class ForumController extends AbstractController
         $commentaire = new Commentaire();
         $form = $this->createForm(CommentaireType::class,$commentaire);
         $form->handleRequest($request);
-
+        $successSend = false;
         $pagination->setEntityClass(Commentaire::class)
                     ->setLimit(10)
                     ->setPage($page)
@@ -193,15 +194,17 @@ class ForumController extends AbstractController
 
             $manager->persist($commentaire);
             $manager->flush();
-
+            $successSend = true;
             $this->addFlash('success','Votre commentaire a bien été ajouté');
-            return $this->redirectToRoute('forum_show',['slug'=>$sujet->getSlug()]);
+            $this->redirectToRoute('forum_show',['slug'=>$sujet->getSlug()]);
+            
         }
 
         return $this->render('forum/show.html.twig',[
             'sujet' => $sujet,
             'formCommentaire' => $form->createView(),
             'pagination' => $pagination,
+            'successSend' => $successSend
         ]);
     }
 
