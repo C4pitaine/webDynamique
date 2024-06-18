@@ -617,7 +617,7 @@ tbody{
 
 /* Media queries */
 
-@media all and (max-width: 1200px) {
+@media all and (max-width:1400px){
   #burger {
     display: flex;
     flex-direction: column;
@@ -633,7 +633,9 @@ tbody{
       display: none !important;
     }
   }
+}
 
+@media all and (max-width: 1200px) {
   footer img {
     margin-top: 20px;
   }
