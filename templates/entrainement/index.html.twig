@@ -10,29 +10,38 @@
             <h2>Entraînements</h2>
             {% include "partials/_search.html.twig" %}
             <div class="entrainements">
-                {% for entrainement in pagination.data %}
-                    <div class="exercice">
-                        <img src="/uploads/entrainements/{{entrainement.image}}" alt="Image de {{entrainement.title}}">
-                        <div class="exerciceBody">
-                            <h4>{{entrainement.title}}</h4>
-                            <h6>Muscles travaillés :</h6>
-                            <ul>
-                                {% if search %}
-                                    {% for muscle in entrainement.entrainement.muscle %}
-                                        <li><a href="">{{muscle.name}}</a></li>
-                                    {% endfor %}
-                                {% else %}
-                                    {% for muscle in entrainement.muscle %}
-                                        <li><a href="{{path('muscle_show',{'id':muscle.id})}}">{{muscle.name}}</a></li>
-                                    {% endfor %}
-                                {% endif %}
-                                
-                            </ul>
-                        </div>
-                    </div>    
-                {% endfor %}
+                {% if pagination.data %}
+                    {% for entrainement in pagination.data %}
+                        <div class="exercice">
+                            <img src="/uploads/entrainements/{{entrainement.image}}" alt="Image de {{entrainement.title}}">
+                            <div class="exerciceBody">
+                                <h4>{{entrainement.title}}</h4>
+                                <h6>Muscles travaillés :</h6>
+                                <ul>
+                                    {% if search %}
+                                        {% for muscle in entrainement.entrainement.muscle %}
+                                            <li><a href="">{{muscle.name}}</a></li>
+                                        {% endfor %}
+                                    {% else %}
+                                        {% for muscle in entrainement.muscle %}
+                                            <li><a href="{{path('muscle_show',{'id':muscle.id})}}">{{muscle.name}}</a></li>
+                                        {% endfor %}
+                                    {% endif %}
+                                    
+                                </ul>
+                            </div>
+                        </div>    
+                    {% endfor %}
+                {% else %}
+                    <div class="notFound">
+                        Aucun entraînement ne correspond à votre recherche
+                    </div>
+                {% endif %}
+                
             </div>
-            {{pagination.display}}
+            {% if pagination.data %}
+                {{pagination.display}}
+            {% endif %} 
         </div>
     </div>
 {% endblock %}

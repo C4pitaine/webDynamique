@@ -20,18 +20,25 @@
                 </div>
             {% endfor %}
             <div class="sujets">
-                {% for sujet in pagination.data %}
-                {% set date = sujet.date %}
-                    <div class="sujet">
-                        <a href="{{path('forum_show',{'slug':sujet.slug})}}">{{sujet.title}}</a>
-                        {% if search %}
-                            <p>{{sujet.username}}</p>
-                        {% else %}
-                            <p>{{sujet.user.username}}</p>
-                        {% endif %}
-                        <p class="dateSujet">{{date | date('d/m/Y H:i:s')}}</p>
+                {% if pagination.data %}
+                    {% for sujet in pagination.data %}
+                    {% set date = sujet.date %}
+                        <div class="sujet">
+                            <a href="{{path('forum_show',{'slug':sujet.slug})}}">{{sujet.title}}</a>
+                            {% if search %}
+                                <p>{{sujet.username}}</p>
+                            {% else %}
+                                <p>{{sujet.user.username}}</p>
+                            {% endif %}
+                            <p class="dateSujet">{{date | date('d/m/Y H:i:s')}}</p>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="notFound">
+                        Aucun sujet du forum ne correspond à votre recherche
                     </div>
-                {% endfor %}
+                {% endif %}
+                
             </div>
             {% if pagination.data %}
                 {{pagination.display}}

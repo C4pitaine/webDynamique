@@ -10,12 +10,19 @@
             <h2>Articles</h2>
             {% include "partials/_search.html.twig" %}
             <div class="articleContainer">
-                {% for article in pagination.data %}
-                    <a href="{{path('blog_show',{'slug':article.slug})}}" class="articleItem">
-                        <img src="/uploads/articles/{{article.image}}" alt="Image de {{article.title}}">
-                        <h3>{{article.title}}</h3>
-                    </a>
-                {% endfor %}
+                {% if pagination.data %}
+                    {% for article in pagination.data %}
+                        <a href="{{path('blog_show',{'slug':article.slug})}}" class="articleItem">
+                            <img src="/uploads/articles/{{article.image}}" alt="Image de {{article.title}}">
+                            <h3>{{article.title}}</h3>
+                        </a>
+                    {% endfor %}
+                {% else %}
+                    <div class="notFound">
+                        Aucun article ne correspond à votre recherche
+                    </div>
+                {% endif %}
+                
             </div>
             {% if pagination.data %}
                 {{pagination.display}}
