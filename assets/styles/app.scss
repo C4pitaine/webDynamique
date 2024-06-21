@@ -405,6 +405,9 @@ footer {
   font-family: "Roboto", sans-serif;
   font-weight: 400;
   font-style: normal;
+  img{
+    margin-top: 30px !important;
+  }
 
   h1 {
     margin-top: 20px;
@@ -648,6 +651,14 @@ tbody{
 @media all and (max-width: 992px) {
   .alertDelete .containerDelete,.alertDeleteUser .containerDeleteUser {
     width: 90%;
+  }
+  .erreur{
+      .errorPage{
+        width: 90%;
+        img{
+          width: 50%;
+      }
+    }
   }
 }
 

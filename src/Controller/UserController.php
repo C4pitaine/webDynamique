@@ -99,7 +99,7 @@ class UserController extends AbstractController
                         ")
                         ->html('
                             <h1>Quentin Testaert - Coach sportif</h1>
-                            <p>Confirmer votre adresse email pour pouvoir vous connecter</p>
+                            <p>Confirmez votre adresse email pour pouvoir vous connecter</p>
                             <a href="https://qtcoachingsportif.alexandresacre.com/register/'.$user->getId()."/t/".$token.'">Confirmer votre email</a>
                         ');
             $mailer->send($email);
