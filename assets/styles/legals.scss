@@ -39,7 +39,9 @@
         }
         #mentions_text{
             margin-top: 30px;
-            word-break: break-all;
+            .longText{
+                word-break: break-all;
+            }
             h3{
                 font-family: "Roboto", sans-serif;
                 font-weight: normal;
@@ -60,6 +62,14 @@
                 font-style: normal;
                 font-size: 16px;
                 color:white;
+            }
+            a{
+                font-family: "Roboto", sans-serif;
+                font-weight: normal;
+                font-style: normal;
+                font-size: 18px;
+                color:white;
+                text-decoration: none;
             }
         }
     }
