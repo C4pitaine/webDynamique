@@ -18,9 +18,13 @@ class SeanceType extends ApplicationType
     {
         $builder
             ->add('name',TextType::class,$this->getConfiguration('','Nom de votre séance'))
-            ->add('date',DateType::class,$this->getConfiguration('','Date de votre séance',[
+            ->add('date', DateType::class, [
                 'widget' => 'single_text',
-            ]))
+                'html5' => true,
+                'attr' => [
+                    'placeholder' => 'Date de votre séance',
+                ],
+            ])
             ->add('exosMusculations', CollectionType::class, [
                 'entry_type' => ExosMusculationType::class,
                 'allow_add' => true,
